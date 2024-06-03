@@ -1,16 +1,16 @@
-package org.example.models;
+package org.example;
 
 public class Producto {
     private static int contador = 0;  // Variable estática para mantener el próximo ID disponible
     private int id;
     private String nombre;
-    private TipoDeProducto TipoDeProducto;
+    private Categoria Categoria;
     private double precio;
 
-    public Producto( String nombre, TipoDeProducto TipoDeProducto, double precio) {
-        this.id =contador++;
+    public Producto( String nombre, Categoria Categoria, double precio) {
+        this.id = contador++;
         this.nombre = nombre;
-        this.TipoDeProducto = TipoDeProducto;
+        this.Categoria = Categoria;
         this.precio = precio;
     }
 
@@ -22,12 +22,12 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public TipoDeProducto getTipoDeProducto() {
-        return TipoDeProducto;
+    public Categoria getCategoria() {
+        return Categoria;
     }
 
-    public void setTipoDeProducto(TipoDeProducto TipoDeProducto) {
-        this.TipoDeProducto = TipoDeProducto;
+    public void setCategoria(Categoria Categoria) {
+        this.Categoria = Categoria;
     }
 
     public double getPrecio() {

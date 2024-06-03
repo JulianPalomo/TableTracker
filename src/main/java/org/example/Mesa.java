@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example;
 
 public class Mesa {
     private int numero;
