@@ -4,7 +4,7 @@ import org.example.interfaces.Filtrable;
 
 import java.util.Objects;
 
-public class Producto extends Filtrable<Categoria> {
+public class Producto implements Filtrable<Categoria> {
 
     private static int contador = 0;  // Variable estática para mantener el próximo ID disponible
     private int id;
@@ -51,6 +51,7 @@ public class Producto extends Filtrable<Categoria> {
     public boolean cumpleFiltro(Categoria categoria) {
         return this.categoria == categoria;
     }
+
     @Override
     public int compareTo(Producto otroProducto) {
         return this.nombre.compareTo(otroProducto.getNombre());
