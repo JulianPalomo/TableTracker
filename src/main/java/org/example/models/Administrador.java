@@ -10,4 +10,20 @@ public class Administrador extends Usuario {
     public String toString() {
         return "Admin";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) {
+            return true;
+        }
+        if(o == null) {
+            return false;
+        }
+        if(!(o instanceof Administrador)) {
+            return false;
+        }
+        Administrador administrador = (Administrador) o;
+        return this.getNombreUsuario().equalsIgnoreCase(administrativo.getNombreUsuario());
+    }
+
 }
