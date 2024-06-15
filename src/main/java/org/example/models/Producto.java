@@ -1,16 +1,21 @@
 package org.example.models;
 
-public class Producto {
+import org.example.interfaces.Filtrable;
+
+import java.util.Objects;
+
+public class Producto extends Filtrable<Categoria> {
+
     private static int contador = 0;  // Variable estática para mantener el próximo ID disponible
     private int id;
     private String nombre;
-    private org.example.models.Categoria Categoria;
+    private Categoria categoria;
     private double precio;
 
     public Producto( String nombre, Categoria Categoria, double precio) {
         this.id = contador++;
         this.nombre = nombre;
-        this.Categoria = Categoria;
+        this.categoria = Categoria;
         this.precio = precio;
     }
 
@@ -23,11 +28,11 @@ public class Producto {
     }
 
     public Categoria getCategoria() {
-        return Categoria;
+        return categoria;
     }
 
     public void setCategoria(Categoria Categoria) {
-        this.Categoria = Categoria;
+        this.categoria = Categoria;
     }
 
     public double getPrecio() {
@@ -41,8 +46,29 @@ public class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
     @Override
-    public String toString() {
-        return nombre + " - $" + precio;
+    public boolean cumpleFiltro(Categoria categoria) {
+        return this.categoria == categoria;
     }
+    @Override
+    public int compareTo(Producto otroProducto) {
+        return this.nombre.compareTo(otroProducto.getNombre());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Producto producto = (Producto) o;
+        return id == producto.id && Objects.equals(nombre, producto.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre);
+    }
+
+
+
 }

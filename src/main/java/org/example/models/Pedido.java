@@ -3,6 +3,7 @@ package org.example.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Pedido {
     private ArrayList<Producto> listaProductos;
@@ -27,6 +28,7 @@ public class Pedido {
     public void setListaProductos(ArrayList<Producto> listaProductos) {
         this.listaProductos = listaProductos;
     }
+
     public void agregarProducto(Producto Producto) {
         listaProductos.add(Producto);
         total += Producto.getPrecio();
@@ -50,8 +52,11 @@ public class Pedido {
     public LocalDate getFecha() {
         return fecha;
     }
+
     @Override
     public String toString() {
         return "Pedido [listaProductos=" + listaProductos + ", total=" + total + ", fecha=" + fecha + "]";
     }
+
+
 }

@@ -1,6 +1,11 @@
 package org.example.models;
 
 
+import org.example.interfaces.Filtrable;
+
+import java.io.Serializable;
+import java.util.Objects;
+
 public abstract class Usuario {
     private String username;
     private String password;
@@ -41,4 +46,17 @@ public abstract class Usuario {
     public String getDni() {
         return dni;
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(dni, usuario.dni) && Objects.equals(password, usuario.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dni, password);
+    }
+
 }

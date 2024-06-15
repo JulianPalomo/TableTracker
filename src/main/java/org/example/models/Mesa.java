@@ -1,11 +1,15 @@
 package org.example.models;
 
+import java.util.Objects;
+
 public class Mesa {
+
     private int numero;
-    private boolean disponible;
-    public Mesa(String number, int numero, EstadoMesa disponible) {
+    private EstadoMesa estado;
+
+    public Mesa(int numero) {
         this.numero = numero;
-        this.disponible=true;
+        this.estado = EstadoMesa.DISPONIBLE;
     }
 
     public int getNumero() {
@@ -17,6 +21,30 @@ public class Mesa {
     }
 
     public boolean isDisponible() {
-        return disponible;
+        return this.estado == EstadoMesa.DISPONIBLE;
     }
+
+
+    public EstadoMesa getEstado() {
+        return this.estado;
+    }
+
+    public void ocupada() {
+        this.estado = EstadoMesa.OCUPADA;
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mesa mesa = (Mesa) o;
+        return numero == mesa.numero;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numero);
+    }
+
 }
