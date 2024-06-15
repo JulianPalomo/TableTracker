@@ -1,10 +1,11 @@
 package org.example.models;
 
+import org.example.interfaces.Buscable;
 import org.example.interfaces.Filtrable;
 
 import java.util.Objects;
 
-public class Producto implements Filtrable<Categoria> {
+public class Producto implements Filtrable<Categoria>, Buscable<String> {
 
     private static int contador = 0;  // Variable estática para mantener el próximo ID disponible
     private int id;
@@ -51,10 +52,10 @@ public class Producto implements Filtrable<Categoria> {
     public boolean cumpleFiltro(Categoria categoria) {
         return this.categoria == categoria;
     }
-
     @Override
-    public int compareTo(Producto otroProducto) {
-        return this.nombre.compareTo(otroProducto.getNombre());
+    public boolean cumpleCriterio(String criterio) {
+        // Verificar si el nombre del producto comienza con la secuencia ej: "sopa de "
+        return nombre.toLowerCase().startsWith(criterio.toLowerCase());
     }
 
     @Override

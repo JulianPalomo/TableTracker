@@ -104,6 +104,11 @@
       "nombre": "Cheesecake",
       "categoria": "POSTRE",
       "precio": 4000
+    },
+    {
+      "nombre": "Chocotorta",
+      "categoria": "POSTRE",
+      "precio": 4400
     }
   ]
 }

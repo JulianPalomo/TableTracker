@@ -7,5 +7,4 @@ public class Sistema {
    ///instancia de gestor para cada clases
     ///metodos para cada clase para buscar, eliminar, filtrar, agregar, guardar y bajar del json.
 
-
 }
