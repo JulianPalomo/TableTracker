@@ -11,7 +11,7 @@ public class Administrador extends Usuario {
         return "Admin";
     }
 
-    @Override
+   /* @Override
     public boolean equals(Object o) {
         if(this == o) {
             return true;
@@ -25,5 +25,5 @@ public class Administrador extends Usuario {
         Administrador administrador = (Administrador) o;
         return this.getNombreUsuario().equalsIgnoreCase(administrativo.getNombreUsuario());
     }
-
+*/
 }

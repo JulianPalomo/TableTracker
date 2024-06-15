@@ -51,7 +51,7 @@ public class Producto extends Filtrable<Categoria> {
     public boolean cumpleFiltro(Categoria categoria) {
         return this.categoria == categoria;
     }
-    @Override
+    //@Override
     public int compareTo(Producto otroProducto) {
         return this.nombre.compareTo(otroProducto.getNombre());
     }
