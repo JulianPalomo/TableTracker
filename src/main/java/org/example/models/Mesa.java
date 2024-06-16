@@ -6,10 +6,12 @@ public class Mesa {
 
     private int numero;
     private EstadoMesa estado;
+    private Pedido pedido;
 
     public Mesa(int numero) {
         this.numero = numero;
         this.estado = EstadoMesa.DISPONIBLE;
+        this.pedido = null;
     }
 
     public int getNumero() {

@@ -47,5 +47,6 @@ public class Sistema {
                 System.out.println(producto);
             }
         }
+    }
 }
 
