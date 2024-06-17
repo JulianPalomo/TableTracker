@@ -20,7 +20,7 @@ public class MesaService {
 
     public MesaService() {
         mesas = new ArrayList<>();
-        // cargarDatosDesdeJson();
+        //cargarDatosDesdeJson();
     }
 
     public ArrayList<Mesa> getMesas() {
