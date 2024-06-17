@@ -19,12 +19,7 @@ public class MesaButton extends MouseAdapter {
     private int mode;
     private Rectangle tamañoInicial;
 
-    @Override
     public void mousePressed(MouseEvent e) {
-        if (!((RestaurantLayout) SwingUtilities.getWindowAncestor(componente)).modoEdicion) {
-            return; // No hacer nada si el modo de edición está desactivado
-        }
-
         componente = e.getComponent();
         clickInicial = e.getPoint();
         tamañoInicial = componente.getBounds();
@@ -34,16 +29,10 @@ public class MesaButton extends MouseAdapter {
         } else {
             mode = DRAG;
         }
-
         componente.getParent().setComponentZOrder(componente, 0); // Bring the componente to the front
     }
 
-    @Override
     public void mouseDragged(MouseEvent e) {
-        if (!((RestaurantLayout) SwingUtilities.getWindowAncestor(componente)).modoEdicion) {
-            return; // No hacer nada si el modo de edición está desactivado
-        }
-
         if (mode == DRAG) {
             arrastrarMesa(e);
         } else if (mode == RESIZE) {

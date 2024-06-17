@@ -37,6 +37,15 @@ public class Mesa {
 
     }
 
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido)
+    {
+        this.pedido = pedido;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

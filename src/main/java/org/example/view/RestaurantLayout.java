@@ -44,7 +44,7 @@ public class RestaurantLayout extends JFrame {
 
         // Añadir listener para el toggle de edición
         toggleEdicionItem.addActionListener(e -> {
-            modoEdicion = !modoEdicion; // Alternar el modo de edición
+            this.modoEdicion = !modoEdicion; // Alternar el modo de edición
             String estado = modoEdicion ? "Activado" : "Desactivado";
             JOptionPane.showMessageDialog(this, "Modo de edición " + estado);
         });
@@ -83,9 +83,10 @@ public class RestaurantLayout extends JFrame {
     private JButton crearMesa(String texto, int x, int y) {
         JButton button = new JButton(texto);
         button.setBounds(x, y, 100, 50); // Tamaño y posición inicial
-        MesaButton adapter = new MesaButton();
-        button.addMouseListener(adapter);
-        button.addMouseMotionListener(adapter);
+
+            MesaButton adapter = new MesaButton();
+            button.addMouseListener(adapter);
+            button.addMouseMotionListener(adapter);
 
         return button;
     }
