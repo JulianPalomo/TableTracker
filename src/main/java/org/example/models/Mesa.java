@@ -4,12 +4,13 @@ import java.util.Objects;
 
 public class Mesa {
 
+    public static int numeroAuto = 0;
     private int numero;
     private EstadoMesa estado;
     private Pedido pedido;
 
-    public Mesa(int numero) {
-        this.numero = numero;
+    public Mesa() {
+        this.numero = numeroAuto++;
         this.estado = EstadoMesa.DISPONIBLE;
         this.pedido = null;
     }
