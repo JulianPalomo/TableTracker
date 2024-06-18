@@ -3,22 +3,26 @@ package org.example.view;
 import org.example.models.Administrador;
 import org.example.models.Mesero;
 import org.example.models.Usuario;
+import org.example.services.UsuarioService;
+import org.example.utils.JsonUtil;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class Registration extends JDialog {
     private JTextField tfNombre;
     private JTextField tfEmail;
-    private JTextField tfContraseña;
-    private JTextField tfDNI;
-    private JTextField tfConfirmarContraseña;
+    private JPasswordField tfContraseña;
+    private JTextField tfApellido;
+    private JPasswordField tfConfirmarContraseña;
     private JButton btnRegistrar;
     private JButton btnCancel;
-    private JComboBox cbTipoCuenta;
+    private JComboBox<String> cbTipoCuenta;
     private JPanel registerPanel;
+    private JTextField tfNombreUsuario;
 
     public Registration(JFrame parent) {
         super(parent);
@@ -29,7 +33,6 @@ public class Registration extends JDialog {
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        // Rellenar JComboBox
         cbTipoCuenta.addItem("Administrador");
         cbTipoCuenta.addItem("Mesero");
 
@@ -53,33 +56,31 @@ public class Registration extends JDialog {
     private void registrarUsuario() {
         String nombre = tfNombre.getText();
         String email = tfEmail.getText();
-        String contraseña = new String(String.valueOf(tfContraseña));
-        String confirmarContraseña = new String(String.valueOf(tfConfirmarContraseña));
-        String dni = tfDNI.getText();
+        String contrasena = new String(tfContraseña.getPassword());
+        String confirmarContraseña = new String(tfConfirmarContraseña.getPassword());
+        String apellido = tfApellido.getText();
         String tipoCuenta = (String) cbTipoCuenta.getSelectedItem();
-
-        if (nombre.isEmpty() || email.isEmpty() || contraseña.isEmpty() || confirmarContraseña.isEmpty() || dni.isEmpty() || tipoCuenta == null) {
+        String nombreUsuario = tfNombreUsuario.getText();
+        if (nombre.isEmpty() || email.isEmpty() || contrasena.isEmpty() || confirmarContraseña.isEmpty() || apellido.isEmpty() || tipoCuenta == null) {
             JOptionPane.showMessageDialog(this, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (!contraseña.equals(confirmarContraseña)) {
+        if (!contrasena.equals(confirmarContraseña)) {
             JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Aquí podrías añadir la lógica para crear el usuario en tu sistema.
-        // Dependiendo del tipo de cuenta, creas un Administrador o Mesero.
-
         Usuario usuario;
         if (tipoCuenta.equals("Administrador")) {
-            usuario = new Administrador(nombre, contraseña, nombre, dni);
+            usuario = new Administrador(nombreUsuario,contrasena,nombre,apellido, email);
         } else {
-            usuario = new Mesero(nombre, contraseña, nombre, dni);
+            usuario = new Mesero(nombreUsuario,contrasena,nombre,apellido,email);
         }
 
-        // Aquí deberías guardar el usuario en tu base de datos o sistema de almacenamiento
-        // ...
+        List<Usuario> usuarios = UsuarioService.readUsuarios();
+        usuarios.add(usuario);
+        UsuarioService.writeUsuarios(usuarios);
 
         JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         dispose();
@@ -89,4 +90,3 @@ public class Registration extends JDialog {
         Registration dialog = new Registration(null);
     }
 }
-
