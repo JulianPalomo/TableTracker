@@ -1,24 +1,19 @@
-package org.example.view;
+package org.example.view.panels;
 
 
-import org.example.models.Mesa;
-import org.example.models.Producto;
 import org.example.service.MesaService;
+import org.example.service.ProductoService;
 import org.example.view.buttons.MesaButton;
-import org.example.view.controllers.MesaController;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.List;
-import java.util.Map;
-
-import static java.awt.SystemColor.menu;
 
 public class RestaurantLayout extends JFrame {
 
     // aca se deberian crear las instancias de todos los controladores
     private final MesaService mesaService = new MesaService();
     public boolean modoEdicion = false; // Flag para el modo de edición
+    private PedidoPanel currentPedidoPanel;
+    private ProductoService productoService = new ProductoService();
 
     public RestaurantLayout(String nombreComercio) {
         setTitle(nombreComercio);
@@ -79,14 +74,49 @@ public class RestaurantLayout extends JFrame {
         add(nuevaMesa);
         nuevaMesa.repaint();
     }
-
+/*
     private JButton crearMesa(String texto, int x, int y) {
         JButton button = new JButton(texto);
         button.setBounds(x, y, 100, 50); // Tamaño y posición inicial
 
-            MesaButton adapter = new MesaButton();
-            button.addMouseListener(adapter);
-            button.addMouseMotionListener(adapter);
+        MesaButton adapter = new MesaButton();
+        button.addMouseListener(adapter);
+        button.addMouseMotionListener(adapter);
+
+        button.addActionListener(e -> {
+
+            int numeroMesa = Integer.parseInt(texto.split(" ")[1]);
+            PedidoPanel pedidoPanel = new PedidoPanel(mesaService.buscarMesa(numeroMesa));
+            pedidoPanel.setVisible(true);
+
+        });
+
+        return button;
+    }
+*/
+    private JButton crearMesa(String texto, int x, int y) {
+        JButton button = new JButton(texto);
+        button.setBounds(x, y, 100, 50); // Tamaño y posición inicial
+
+        MesaButton adapter = new MesaButton();
+        button.addMouseListener(adapter);
+        button.addMouseMotionListener(adapter);
+
+        button.addActionListener(e -> {
+            int numeroMesa = Integer.parseInt(texto.split(" ")[1]);
+            PedidoPanel pedidoPanel = new PedidoPanel(mesaService.buscarMesa(numeroMesa), productoService);;
+
+            //Cerrar el panel de pedido actual si existe
+            if (currentPedidoPanel != null) {
+                currentPedidoPanel.setVisible(false);
+                currentPedidoPanel.dispose(); // Liberar recursos del panel anterior
+            }
+
+            //Actualizar la referencia al panel actual
+            currentPedidoPanel = pedidoPanel;
+
+            pedidoPanel.setVisible(true);
+        });
 
         return button;
     }

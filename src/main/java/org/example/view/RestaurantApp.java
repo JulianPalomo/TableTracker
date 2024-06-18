@@ -1,9 +1,9 @@
 package org.example.view;
 
 
+import org.example.view.panels.RestaurantLayout;
+
 import javax.swing.SwingUtilities;
-import java.util.List;
-import java.util.Map;
 
 public class RestaurantApp {
 

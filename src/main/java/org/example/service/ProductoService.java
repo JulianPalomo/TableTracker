@@ -16,22 +16,24 @@ import java.util.List;
 
 public class ProductoService {
 
-    private static final String RUTA_JSON = "src/main/resources/json/productos.json";
-    private final Map<String, List<Producto>> productos = new HashMap<>();
+    private static final String RUTA_JSON = "src/main/java/org/example/resource/productos.json";
+    private final Map<Categoria, List<Producto>> productos = new LinkedHashMap<>();
 
 
     public ProductoService() {
         cargarMenu();
     }
-
-
+/*
     public void agregarProducto(Producto producto) {
-        String categoria = String.valueOf(producto.getCategoria());
+        Categoria categoria = String.valueOf(producto.getCategoria());
         List<Producto> productosCategoria = productos.getOrDefault(categoria, List.of());
         productosCategoria.add(producto);
         productos.put(categoria, productosCategoria);
         guardarProductosJson(productos);
     }
+
+
+
 
     public void eliminarProducto(Producto producto) {
         String categoria = String.valueOf(producto.getCategoria());
@@ -41,6 +43,8 @@ public class ProductoService {
         guardarProductosJson(productos);
     }
 
+ */
+
     public Producto buscarProductoPorNombre(String nombre) {
         return productos.values().stream()
                 .flatMap(List::stream)
@@ -48,7 +52,6 @@ public class ProductoService {
                 .findFirst()
                 .orElse(null);
     }
-
 
     public List<Producto> buscarProductosPorNombre(String nombre) {
         List<Producto> productosEncontrados = new ArrayList<>();
@@ -66,25 +69,21 @@ public class ProductoService {
         return productos.getOrDefault(categoria, List.of());
     }
 
+    public <K, V> List<V> searchInLinkedHashMap(LinkedHashMap<K, V> map, K key) {
+        List<V> resultList = new ArrayList<>();
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            if (entry.getKey().equals(key)) {
+                resultList.add(entry.getValue());
+            }
+        }
+        return resultList;
+    }
+
     public List<Producto> obtenerTodosLosProductos() {
         return productos.values().stream()
                 .flatMap(List::stream)
                 .toList();
     }
-    
-
-    /*
-    public static Map<String, List<Producto>> cargarProductosDesdeJson() {
-        Gson gson = new Gson();
-        try (FileReader reader = new FileReader(RUTA_JSON)) {
-            Type tipo = new TypeToken<Map<String, List<Producto>>>() {}.getType();
-            return gson.fromJson(reader, tipo);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    */
 
     public Map<String, List<Producto>> cargarMenu() {
         try (FileReader reader = new FileReader(RUTA_JSON)) {
@@ -115,6 +114,5 @@ public class ProductoService {
             e.printStackTrace();
         }
     }
-
 
 }
