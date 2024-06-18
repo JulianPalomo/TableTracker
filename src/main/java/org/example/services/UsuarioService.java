@@ -1,16 +1,21 @@
 package org.example.services;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.example.models.Usuario;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioService {
     private static final String FILE_PATH = "usuarios.json";
-    private static ObjectMapper objectMapper = new ObjectMapper();
+    private static final Gson gson = new Gson();
 
     // Método para leer usuarios desde el archivo JSON
     public static List<Usuario> readUsuarios() throws IOException {
@@ -21,12 +26,17 @@ public class UsuarioService {
         }
 
         // Leer el archivo y convertirlo en una lista de usuarios
-        return objectMapper.readValue(file, new TypeReference<List<Usuario>>() {});
+        try (FileReader reader = new FileReader(file)) {
+            Type userListType = new TypeToken<List<Usuario>>() {}.getType();
+            return gson.fromJson(reader, userListType);
+        }
     }
 
     // Método para escribir usuarios en el archivo JSON
     public static void writeUsuarios(List<Usuario> usuarios) throws IOException {
         // Convertir la lista de usuarios a JSON y escribirla en el archivo
-        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(FILE_PATH), usuarios);
+        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+            gson.toJson(usuarios, writer);
+        }
     }
 }
