@@ -69,7 +69,7 @@ public class ProductoService {
         return productos.getOrDefault(categoria, List.of());
     }
 
-    public <K, V> List<V> searchInLinkedHashMap(LinkedHashMap<K, V> map, K key) {
+    public <K, V> List<V> searchInLinkedHashMap(@org.jetbrains.annotations.NotNull LinkedHashMap<K, V> map, K key) {
         List<V> resultList = new ArrayList<>();
         for (Map.Entry<K, V> entry : map.entrySet()) {
             if (entry.getKey().equals(key)) {

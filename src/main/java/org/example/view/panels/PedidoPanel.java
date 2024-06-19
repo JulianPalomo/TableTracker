@@ -1,5 +1,6 @@
 package org.example.view.panels;
 
+import org.example.interfaces.PedidoListener;
 import org.example.models.Categoria;
 import org.example.models.Mesa;
 import org.example.models.Producto;
@@ -15,16 +16,15 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 ///Esta clase que es un PANEL se instancia cuando se presiona el boton mesa
-public class PedidoPanel extends JFrame {
+public class PedidoPanel extends JFrame implements PedidoListener {
     private int numero;
-    private ArrayList<Producto> productos = new ArrayList<>();
+    private ArrayList<Producto> pedido;
     private DefaultListModel<String> listModel;
     private final ProductoService productoService;
 
     public PedidoPanel(Mesa mesa, ProductoService productoService) {
-
         this.numero = mesa.getNumero();
-        this.productos = mesa.getPedido().getListaProductos();
+        this.pedido = mesa.getPedido().getListaProductos();
         this.productoService = productoService;
         this.listModel = new DefaultListModel<>();
 
@@ -41,13 +41,13 @@ public class PedidoPanel extends JFrame {
         JButton addProductButton = new JButton("Agregar Producto");
         JButton billButton = new JButton("Facturar");
 
-
         billButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 facturar();
             }
         });
+
         addProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,41 +58,35 @@ public class PedidoPanel extends JFrame {
         buttonPanel.add(addProductButton);
         buttonPanel.add(billButton);
         add(buttonPanel, BorderLayout.SOUTH);
+
+        // Populate the initial list
+        updateOrderList();
     }
 
     private void agregarProducto(Map<String, List<Producto>> menu) {
-        AgregarPedido agregarPedido = new AgregarPedido(menu);
+        AgregarPedido agregarPedido = new AgregarPedido(menu, this);
         agregarPedido.setVisible(true);
     }
 
     private void updateOrderList() {
-        // Update the listModel based on the productos list
         listModel.clear();
-        for (Producto producto : productos) {
+        for (Producto producto : pedido) {
             listModel.addElement(producto.getNombre() + " - $" + producto.getPrecio());
         }
     }
 
-    private void agregarProductoButton() {
-        String nombre = JOptionPane.showInputDialog(this, "Nombre del Producto:");
-        if (nombre != null && !nombre.trim().isEmpty()) {
-            String precioStr = JOptionPane.showInputDialog(this, "Precio del Producto:");
-            try {
-                double precio = Double.parseDouble(precioStr.trim());
-                Producto producto = new Producto(nombre, Categoria.BEBIDA, precio);
-                productos.add(producto);
-                listModel.addElement(nombre + " - $" + precio);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Precio inválido", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+    @Override
+    public void onPedidoActualizado(List<Producto> nuevosProductos) {
+        pedido.addAll(nuevosProductos);
+        updateOrderList();
     }
 
     private void facturar() {
         double total = 0;
-        for (Producto producto : productos) {
+        for (Producto producto : pedido) {
             total += producto.getPrecio();
         }
         JOptionPane.showMessageDialog(this, "Total a facturar: $" + total, "Factura", JOptionPane.INFORMATION_MESSAGE);
     }
 }
+
