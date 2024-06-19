@@ -12,7 +12,7 @@ public class Mesa {
     public Mesa() {
         this.numero = numeroAuto;
         this.estado = EstadoMesa.DISPONIBLE;
-        this.pedido = new Pedido();
+        this.pedido = null;
         numeroAuto++;
     }
 
@@ -20,22 +20,16 @@ public class Mesa {
         return numero;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
+    //metodos para DETERMINAR COLOR EN EL BOTTON
     public boolean isDisponible() {
         return this.estado == EstadoMesa.DISPONIBLE;
     }
-
-
     public EstadoMesa getEstado() {
         return this.estado;
     }
 
-    public void ocupada() {
+    public void ocuparMesa() {
         this.estado = EstadoMesa.OCUPADA;
-
     }
 
     public Pedido getPedido() {
@@ -45,6 +39,11 @@ public class Mesa {
     public void setPedido(Pedido pedido)
     {
         this.pedido = pedido;
+    }
+
+    public void liberarMesa() {
+        this.pedido = null;
+        this.estado = EstadoMesa.DISPONIBLE;
     }
 
     @Override
