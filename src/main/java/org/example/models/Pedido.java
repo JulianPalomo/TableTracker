@@ -18,7 +18,6 @@ public class Pedido {
         this.listaProductos = new ArrayList<>();
         this.total = 0;
         this.fecha = LocalDate.now();
-
     }
 
     public ArrayList<Producto> getListaProductos() {
