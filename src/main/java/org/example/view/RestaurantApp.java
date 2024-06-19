@@ -1,7 +1,7 @@
 package org.example.view;
 
 
-import org.example.view.panels.RestaurantLayout;
+import org.example.view.panels.MesasPanel;
 
 import javax.swing.SwingUtilities;
 
@@ -9,7 +9,7 @@ public class RestaurantApp {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            RestaurantLayout layout = new RestaurantLayout("LOGIN lucre");
+            MesasPanel layout = new MesasPanel("LOGIN lucre");
             layout.setVisible(true);
         });
     }

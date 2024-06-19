@@ -7,15 +7,14 @@ import org.example.view.buttons.MesaButton;
 
 import javax.swing.*;
 
-public class RestaurantLayout extends JFrame {
+public class MesasPanel extends JFrame {
 
-    // aca se deberian crear las instancias de todos los controladores
     private final MesaService mesaService = new MesaService();
-    public boolean modoEdicion = false; // Flag para el modo de edición
+    public boolean modoEdicion = false;
     private PedidoPanel currentPedidoPanel;
     private ProductoService productoService = new ProductoService();
 
-    public RestaurantLayout(String nombreComercio) {
+    public MesasPanel(String nombreComercio, Usuario ) {
         setTitle(nombreComercio);
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -78,7 +78,6 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         }
     }
 
-
     @Override
     public void onPedidoActualizado(ArrayList<Producto> nuevosProductos) {
         this.pedido.agregarProducto(nuevosProductos);
@@ -86,14 +85,8 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     }
 
     private void facturar(Pedido pedido) {
-        //FacturaPanel facturaPanel = new FacturaPanel(pedido);
-
-
-        /*double total = 0;
-        for (Producto producto : pedido.getListaProductos()) {
-            total += producto.getPrecio();
-        }*/
-        //JOptionPane.showMessageDialog(this, "Total a facturar: $" + total, "Factura", JOptionPane.INFORMATION_MESSAGE);
+        FacturaPanel facturaPanel = new FacturaPanel(pedido);
     }
+
 }
 

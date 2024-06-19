@@ -3,10 +3,9 @@ package org.example.models;
 public class Factura {
     private static int contador = 0;  // Variable estática para mantener el próximo ID disponible
     private final int id;
-
     private MetodosDePago metodoDePago;
-
     private Pedido pedido;
+    private double total;
 
     public Factura(MetodosDePago metodoDePago,Pedido pedido) {
         synchronized (Factura.class) {

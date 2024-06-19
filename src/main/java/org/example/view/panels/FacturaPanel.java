@@ -18,8 +18,9 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Document;
-/*
-    public class FacturaPanel extends JFrame {
+import org.example.service.FacturaService;
+
+public class FacturaPanel extends JFrame {
 
         private JPanel panel1;
         private JList<Producto> listaProductos;
@@ -28,6 +29,8 @@ import com.itextpdf.text.Document;
         private JButton BotonFactura;
         private DefaultListModel<Producto> listaModel;
         private ArrayList<Producto> productos;
+
+        private FacturaService facturaService = new FacturaService();
 
         public FacturaPanel(Pedido pedido) {
             this.productos = pedido.getListaProductos();
@@ -68,8 +71,8 @@ import com.itextpdf.text.Document;
             // Añadir el panel principal al frame
             add(panel1);
 
-            // Calcular el subtotal inicial
-            //subtotalLabel.setText("Subtotal: $" + factura.getPedido().getTotal());
+            //Calcular el subtotal inicial
+            subtotalLabel.setText("Subtotal: $" + factura.getPedido().getTotal());
 
             // Añadir listener para el botón de generar factura
             BotonFactura.addActionListener(e -> {
@@ -84,8 +87,9 @@ import com.itextpdf.text.Document;
         }
 
         private void generarFactura(Pedido pedido) throws DocumentException, FileNotFoundException {
-            //Factura nuevaFactura = new Factura()
-            //JOptionPane.showMessageDialog(this, "Factura generada correctamente: " + nombreArchivo);
+            Factura nuevaFactura = new Factura()
+            JOptionPane.showMessageDialog(this, "Factura generada correctamente: " + nombreArchivo);
+            facturaService.generarFactura(factura);
         }
 
         private void abrirArchivoPDF(String filePath) {
@@ -106,4 +110,3 @@ import com.itextpdf.text.Document;
             }
         }
     }
-*/
