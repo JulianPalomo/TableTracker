@@ -23,7 +23,7 @@ public class Administrador extends Usuario {
             return false;
         }
         Administrador administrador = (Administrador) o;
-        return this.getNombreUsuario().equalsIgnoreCase(administrativo.getNombreUsuario());
+        return this.getNombreCompleto().equalsIgnoreCase(administrador.getNombreCompleto());
     }
 */
 }

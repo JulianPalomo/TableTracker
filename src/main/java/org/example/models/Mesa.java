@@ -4,34 +4,46 @@ import java.util.Objects;
 
 public class Mesa {
 
+    public static int numeroAuto = 1;
     private int numero;
     private EstadoMesa estado;
+    private Pedido pedido;
 
-    public Mesa(int numero) {
-        this.numero = numero;
+    public Mesa() {
+        this.numero = numeroAuto;
         this.estado = EstadoMesa.DISPONIBLE;
+        this.pedido = null;
+        numeroAuto++;
     }
 
     public int getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
+    //metodos para DETERMINAR COLOR EN EL BOTTON
     public boolean isDisponible() {
         return this.estado == EstadoMesa.DISPONIBLE;
     }
-
-
     public EstadoMesa getEstado() {
         return this.estado;
     }
 
-    public void ocupada() {
+    public void ocuparMesa() {
         this.estado = EstadoMesa.OCUPADA;
+    }
 
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido)
+    {
+        this.pedido = pedido;
+    }
+
+    public void liberarMesa() {
+        this.pedido = null;
+        this.estado = EstadoMesa.DISPONIBLE;
     }
 
     @Override
