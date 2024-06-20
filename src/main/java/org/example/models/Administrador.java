@@ -2,15 +2,21 @@ package org.example.models;
 
 public class Administrador extends Usuario {
 
-    public Administrador(String username, String password, String nombreCompleto, String dni) {
-        super(username, password, nombreCompleto, dni);
+
+    // Constructor por defecto
+    public Administrador() {
+        super();
     }
 
+    // Constructor con argumentos
+    public Administrador(String nombreUsuario, String contrasena, String nombre, String apellido, String email, TipoCuenta tipoCuenta) {
+        super(nombreUsuario, contrasena, nombre, apellido, email, tipoCuenta);
+    }
     @Override
     public String toString() {
         return "Admin";
     }
-
+/**
     @Override
     public boolean equals(Object o) {
         if(this == o) {
@@ -24,4 +30,6 @@ public class Administrador extends Usuario {
         }
         return this.getNombreCompleto().equalsIgnoreCase(administrador.getNombreCompleto());
     }
-}
+    **/
+    }
+

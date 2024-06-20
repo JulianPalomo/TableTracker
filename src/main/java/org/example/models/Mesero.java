@@ -6,10 +6,17 @@ public class Mesero extends Usuario {
 
     private List<Mesa> listaMesasAsignadas;
 
-    public Mesero(String username, String password, String nombreApellido, String dni) {
-        super(username, password, nombreApellido, dni);
-        this.listaMesasAsignadas = new ArrayList<Mesa>();
+    // Constructor por defecto
+    public Mesero() {
+        super();
     }
+
+    // Constructor con argumentos
+    public Mesero(String nombreUsuario, String contrasena, String nombre, String apellido, String email, TipoCuenta tipoCuenta) {
+        super(nombreUsuario, contrasena, nombre, apellido, email, tipoCuenta);
+        this.listaMesasAsignadas=new ArrayList<>();
+    }
+
 
     public List<Mesa> getListaMesasAsignadas() {
         return listaMesasAsignadas;
