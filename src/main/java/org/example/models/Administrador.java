@@ -1,9 +1,11 @@
 package org.example.models;
 
+import org.example.services.TipoCuenta;
+
 public class Administrador extends Usuario {
 
-    public Administrador(String username, String password, String nombreCompleto, String dni) {
-        super(username, password, nombreCompleto, dni);
+    public Administrador(String nombreUsuario, String contrasena, String nombre, String apellido, String email,TipoCuenta tipoCuenta) {
+        super(nombreUsuario,contrasena,nombre,apellido,email,tipoCuenta);
     }
 
     @Override
@@ -23,7 +25,7 @@ public class Administrador extends Usuario {
             return false;
         }
         Administrador administrador = (Administrador) o;
-        return this.getNombreUsuario().equalsIgnoreCase(administrativo.getNombreUsuario());
+        return this.getNombreUsuario().equalsIgnoreCase(administrador.getNombreUsuario());
     }
 
 }

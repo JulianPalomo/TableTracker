@@ -47,6 +47,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         billButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 facturar(mesa.getPedido());
             }
         });
@@ -83,10 +84,13 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         this.pedido.agregarProducto(nuevosProductos);
         updateOrderList();
     }
-
+/**
     private void facturar(Pedido pedido) {
         FacturaPanel facturaPanel = new FacturaPanel(pedido);
     }
+
+}
+ **/
 
 }
 

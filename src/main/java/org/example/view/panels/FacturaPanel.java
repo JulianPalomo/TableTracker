@@ -1,3 +1,4 @@
+/**
 package org.example.view.panels;
 
 import org.example.models.Factura;
@@ -19,7 +20,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Document;
 import org.example.service.FacturaService;
-/**
+
 public class FacturaPanel extends JFrame {
 
         private JPanel panel1;
