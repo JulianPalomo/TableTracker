@@ -1,11 +1,13 @@
 package org.example.models;
 
+import org.example.services.TipoCuenta;
+
 public class Administrador extends Usuario{
     public Administrador() {
     }
 
-    public Administrador(String nombreUsuario, String contrasena, String nombre, String apellido, String email) {
-        super(nombreUsuario, contrasena, nombre, apellido, email);
+    public Administrador(String nombreUsuario, String contrasena, String nombre, String apellido, String email, TipoCuenta tipoCuenta) {
+        super(nombreUsuario, contrasena, nombre, apellido, email,tipoCuenta);
     }
 
     @Override

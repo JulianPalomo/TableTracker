@@ -1,4 +1,6 @@
 package org.example.models;
+import org.example.services.TipoCuenta;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -6,8 +8,8 @@ public class Mesero extends Usuario {
 
     private List<Mesa> listaMesasAsignadas;
 
-    public Mesero(String nombreUsuario, String contrasena, String nombre, String apellido, String email) {
-        super(nombreUsuario, contrasena, nombre, apellido, email);
+    public Mesero(String nombreUsuario, String contrasena, String nombre, String apellido, String email, TipoCuenta tipoCuenta) {
+        super(nombreUsuario, contrasena, nombre, apellido, email,tipoCuenta);
         this.listaMesasAsignadas=new ArrayList<>();
     }
 

@@ -22,10 +22,8 @@ public class Login extends JDialog {
         super(parent);
         setTitle("Inicio de Sesión");
 
-        // Inicialización del panel de login
         initLoginPanel();
 
-        // Verificar que loginPanel no es null antes de establecerlo como contentPane
         if (loginPanel == null) {
             System.err.println("El panel de login no se ha inicializado correctamente.");
             return;
@@ -59,30 +57,25 @@ public class Login extends JDialog {
     }
 
     private void initLoginPanel() {
-        // Crear el panel de login
         loginPanel = new JPanel();
         loginPanel.setLayout(new BorderLayout());
 
-        // Componentes del panel de login
         tfEmail = new JTextField(20);
         tfContrasena = new JPasswordField(20);
         OKButton = new JButton("OK");
         cancelarButton = new JButton("Cancelar");
         lblEmail = new JLabel("Email:");
 
-        // Panel para los campos de texto
         JPanel inputPanel = new JPanel(new GridLayout(2, 2));
         inputPanel.add(lblEmail);
         inputPanel.add(tfEmail);
         inputPanel.add(new JLabel("Contraseña:"));
         inputPanel.add(tfContrasena);
 
-        // Panel para los botones
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(OKButton);
         buttonPanel.add(cancelarButton);
 
-        // Agregar componentes al panel de login
         loginPanel.add(inputPanel, BorderLayout.CENTER);
         loginPanel.add(buttonPanel, BorderLayout.SOUTH);
     }
@@ -96,6 +89,7 @@ public class Login extends JDialog {
             if (usuario.getNombreUsuario().equals(email) && usuario.getContrasena().equals(contraseña)) {
                 JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
+                new Menu(usuario.getTipoCuenta()); // Abrir menú principal según el rol
                 return;
             }
         }

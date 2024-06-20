@@ -3,6 +3,7 @@ package org.example.view;
 import org.example.models.Administrador;
 import org.example.models.Mesero;
 import org.example.models.Usuario;
+import org.example.services.TipoCuenta;
 import org.example.services.UsuarioService;
 
 
@@ -78,9 +79,9 @@ public class Registration extends JDialog {
 
         Usuario usuario;
         if (tipoCuenta.equals("Administrador")) {
-            usuario = new Administrador(nombreUsuario,contrasena,nombre,apellido, email);
+            usuario = new Administrador(nombreUsuario,contrasena,nombre,apellido, email, TipoCuenta.ADMINISTRADOR);
         } else {
-            usuario = new Mesero(nombreUsuario,contrasena,nombre,apellido,email);
+            usuario = new Mesero(nombreUsuario,contrasena,nombre,apellido,email,TipoCuenta.MESERO);
         }
 
         List<Usuario> usuarios = UsuarioService.readUsuarios();

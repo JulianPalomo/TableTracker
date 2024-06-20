@@ -2,6 +2,7 @@ package org.example.models;
 
 
 import org.example.interfaces.Filtrable;
+import org.example.services.TipoCuenta;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,10 +14,11 @@ public abstract class Usuario implements Serializable {
     private String apellido;
     private String email;
     private Boolean isActivo;
+    private TipoCuenta tipoCuenta;
     public Usuario() {
     }
 
-    public Usuario(String nombreUsuario, String contrasena, String nombre, String apellido, String email) {
+    public Usuario(String nombreUsuario, String contrasena, String nombre, String apellido, String email,TipoCuenta tipoCuenta) {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
         this.nombre = nombre;
@@ -74,7 +76,21 @@ public abstract class Usuario implements Serializable {
         isActivo = activo;
     }
 
+    public TipoCuenta getTipoCuenta() {
+        return tipoCuenta;
+    }
 
+    public void setTipoCuenta(TipoCuenta tipoCuenta) {
+        this.tipoCuenta = tipoCuenta;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Override
     public boolean equals(Object o) {
