@@ -1,0 +1,114 @@
+{
+  "productos": [
+    {
+      "nombre": "Coca-Cola",
+      "categoria": "BEBIDA",
+      "precio": 1500
+    },
+    {
+      "nombre": "Pepsi",
+      "categoria": "BEBIDA",
+      "precio": 1500
+    },
+    {
+      "nombre": "Cerveza",
+      "categoria": "BEBIDA_ALCOHOLICA",
+      "precio": 2500
+    },
+    {
+      "nombre": "Vino Tinto",
+      "categoria": "BEBIDA_ALCOHOLICA",
+      "precio": 7000
+    },
+    {
+      "nombre": "Ensalada César",
+      "categoria": "ENTRADA",
+      "precio": 6000
+    },
+    {
+      "nombre": "Sopa de Zapallo",
+      "categoria": "ENTRADA",
+      "precio": 4700
+    },
+    {
+      "nombre": "Pizza Margarita",
+      "categoria": "PLATO_PRINCIPAL",
+      "precio": 9000
+    },
+    {
+      "nombre": "Hamburguesa con Queso",
+      "categoria": "PLATO_PRINCIPAL",
+      "precio": 9500
+    },
+    {
+      "nombre": "Spaghetti Bolognese",
+      "categoria": "PLATO_PRINCIPAL",
+      "precio": 8000
+    },
+    {
+      "nombre": "Helado de Vainilla",
+      "categoria": "POSTRE",
+      "precio": 3000
+    },
+    {
+      "nombre": "Pastel de Chocolate",
+      "categoria": "POSTRE",
+      "precio": 4000
+    },
+    {
+      "nombre": "Café Espresso",
+      "categoria": "BEBIDA",
+      "precio": 2000
+    },
+    {
+      "nombre": "Té Verde",
+      "categoria": "BEBIDA",
+      "precio": 1800
+    },
+    {
+      "nombre": "Whisky",
+      "categoria": "BEBIDA_ALCOHOLICA",
+      "precio": 5000
+    },
+    {
+      "nombre": "Gin Tonic",
+      "categoria": "BEBIDA_ALCOHOLICA",
+      "precio": 4500
+    },
+    {
+      "nombre": "Bruschetta",
+      "categoria": "ENTRADA",
+      "precio": 4000
+    },
+    {
+      "nombre": "Calamares Fritos",
+      "categoria": "ENTRADA",
+      "precio": 7000
+    },
+    {
+      "nombre": "Lasaña",
+      "categoria": "PLATO_PRINCIPAL",
+      "precio": 9500
+    },
+    {
+      "nombre": "Salmón a la Parrilla",
+      "categoria": "PLATO_PRINCIPAL",
+      "precio": 12000
+    },
+    {
+      "nombre": "Tiramisú",
+      "categoria": "POSTRE",
+      "precio": 4500
+    },
+    {
+      "nombre": "Cheesecake",
+      "categoria": "POSTRE",
+      "precio": 4000
+    },
+    {
+      "nombre": "Chocotorta",
+      "categoria": "POSTRE",
+      "precio": 4400
+    }
+  ]
+}
