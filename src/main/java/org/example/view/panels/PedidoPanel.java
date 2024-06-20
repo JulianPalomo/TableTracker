@@ -44,12 +44,29 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         JButton addProductButton = new JButton("Agregar Producto");
         JButton billButton = new JButton("Facturar");
 
+
+
+
+
+
+
+
+        /***************************************************************************************/
+            //Aca es donde tengo que agregar mis funcionalidad LEANDRO
         billButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                facturar(mesa.getPedido());
+               facturar(mesa);
+
+
             }
         });
+
+        /***************************************************************************************/
+
+
+
+
 
         addProductButton.addActionListener(new ActionListener() {
             @Override
@@ -66,7 +83,6 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     }
 
     private void agregarProducto(Map<String, List<Producto>> menu) {
-
         AgregarPedido agregarPedido = new AgregarPedido(menu, this);
         agregarPedido.setVisible(true);
     }
@@ -85,8 +101,9 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         updateOrderList();
     }
 
-    private void facturar(Pedido pedido) {
+    private void facturar(Mesa mesa) {
         //FacturaPanel facturaPanel = new FacturaPanel(pedido);
+        new FacturaPanel(mesa);
 
 
         /*double total = 0;
