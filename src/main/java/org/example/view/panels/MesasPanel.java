@@ -1,6 +1,7 @@
 package org.example.view.panels;
 
 
+import org.example.models.Usuario;
 import org.example.service.MesaService;
 import org.example.service.ProductoService;
 import org.example.view.buttons.MesaButton;
@@ -14,7 +15,8 @@ public class MesasPanel extends JFrame {
     private PedidoPanel currentPedidoPanel;
     private ProductoService productoService = new ProductoService();
 
-    public MesasPanel(String nombreComercio, Usuario ) {
+    public MesasPanel(String nombreComercio)
+    {
         setTitle(nombreComercio);
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

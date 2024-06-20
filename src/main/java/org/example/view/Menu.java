@@ -28,7 +28,7 @@ public class Menu extends JFrame {
 
         if (tipoCuenta == TipoCuenta.ADMINISTRADOR) {
             meserosButton = new JButton("Meseros");
-            anadirUsuarioButton= new JButton("Historial");
+            anadirUsuarioButton= new JButton("Añadir usuario");
             mainPanel.add(meserosButton);
             mainPanel.add(anadirUsuarioButton);
         }
