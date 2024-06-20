@@ -19,11 +19,9 @@ public class Administrador extends Usuario {
         if(o == null) {
             return false;
         }
-        if(!(o instanceof Administrador)) {
+        if(!(o instanceof Administrador administrador)) {
             return false;
         }
-        Administrador administrador = (Administrador) o;
         return this.getNombreCompleto().equalsIgnoreCase(administrador.getNombreCompleto());
     }
-
 }

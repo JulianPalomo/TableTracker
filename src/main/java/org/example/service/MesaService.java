@@ -1,59 +1,73 @@
 package org.example.service;
 
-
-import com.google.gson.Gson;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import org.example.Utils.LocalDateAdapter;
 import org.example.models.Mesa;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import javax.swing.*;
+import java.io.*;
 import java.lang.reflect.Type;
-import java.util.*;
-
-///Esta clase proporciona todos los metodos necesarios para la gestion de las mesas. Metodos que seran llamados en los botones del sistema
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MesaService {
 
-    private static final String RUTA_JSON = "src/main/resources/mesas.json";
+    private static final String RUTA_JSON = "src/main/java/org/example/resource/mesas.json";
     private ArrayList<Mesa> mesas = new ArrayList<>();
 
-    public MesaService() {
-        mesas = new ArrayList<>();
-        //cargarDatosDesdeJson();
-    }
-
     public ArrayList<Mesa> getMesas() {
-        return mesas;
+        return this.mesas;
     }
 
-    public void cargarDatosDesdeJson() {
-        Gson gson = new Gson(); // Inicializa el objeto Gson para trabajar con JSON
+    private Gson createGson() {
+        return new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .setPrettyPrinting()
+                .create();
+    }
+
+    public void guardarMesasEnJson() {
+        Gson gson = createGson();
+        try (FileWriter writer = new FileWriter(RUTA_JSON)) {
+            gson.toJson(mesas, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void cargarMesasJson() {
+        Gson gson = createGson();
         try (BufferedReader reader = new BufferedReader(new FileReader(RUTA_JSON))) {
-            // Define el tipo de la lista de Mesas
             Type tipoLista = new TypeToken<List<Mesa>>() {}.getType();
-            // Lee y convierte el JSON a una lista de objetos Mesa
             List<Mesa> listaMesas = gson.fromJson(reader, tipoLista);
-            // Recorre la lista y añade todas
+            mesas.clear();
             mesas.addAll(listaMesas);
         } catch (IOException e) {
-            e.printStackTrace(); // Manejo de excepciones en caso de error de lectura
+            e.printStackTrace();
         }
     }
 
-    ///Esta funcion es la que se llama en el panel de mesas (boton que agrega mesa)
-    public int agregarMesa ()
-    {
-        this.mesas.add(new Mesa());
-        return this.mesas.size(); //para retornar el numero de la mesa agregada
+
+    public Mesa agregarMesa() {
+        Mesa nueva = new Mesa();
+        this.mesas.add(nueva);
+        return nueva;
     }
 
-    ///Funcion que sera llamada al tocar el boton de una mesa
-    public Mesa buscarMesa(int numeroMesa)
-    {
-        if(this.mesas != null) {
-            return mesas.get(numeroMesa - 1); // va a ser la mesa
+    public Mesa buscarMesa(int numeroMesa) {
+        if (this.mesas != null && numeroMesa <= this.mesas.size()) {
+            return mesas.get(numeroMesa - 1);
         }
         return null;
+    }
+
+    public void eliminarUltimaMesa() {
+        if (!mesas.isEmpty()) {
+            mesas.remove(mesas.size() - 1);
+            Mesa.decrementarNumeroAuto();
+        } else {
+            throw new IllegalStateException("No hay mesas para eliminar");
+        }
     }
 }

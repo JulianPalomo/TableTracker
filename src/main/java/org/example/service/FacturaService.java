@@ -12,7 +12,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Document;
 import org.example.models.Producto;
-
+/*
 public class FacturaService {
 
 
@@ -48,3 +48,6 @@ public class FacturaService {
         return facturasGeneradas;
     }
 }
+
+
+ */

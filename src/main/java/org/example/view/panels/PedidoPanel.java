@@ -22,7 +22,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     private final ProductoService productoService;
 
     public PedidoPanel(Mesa mesa, ProductoService productoService) {
-        this.numero = mesa.getNumero();
+        this.numero = mesa.getId();
         if(mesa.getPedido() == null)
         {
             mesa.setPedido(new Pedido());
@@ -43,13 +43,15 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         JPanel buttonPanel = new JPanel();
         JButton addProductButton = new JButton("Agregar Producto");
         JButton billButton = new JButton("Facturar");
-
+/*
         billButton.addActionListener(new ActionListener() {
-            @Override
+           /@Override
             public void actionPerformed(ActionEvent e) {
                 facturar(mesa.getPedido());
             }
         });
+        */
+
 
         addProductButton.addActionListener(new ActionListener() {
             @Override
@@ -83,10 +85,12 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         this.pedido.agregarProducto(nuevosProductos);
         updateOrderList();
     }
-
+/*
     private void facturar(Pedido pedido) {
         FacturaPanel facturaPanel = new FacturaPanel(pedido);
     }
+
+ */
 
 }
 

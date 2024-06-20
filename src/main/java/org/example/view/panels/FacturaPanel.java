@@ -18,8 +18,9 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Document;
-import org.example.service.FacturaService;
 
+///import org.example.service.FacturaService;
+/*
 public class FacturaPanel extends JFrame {
 
         private JPanel panel1;
@@ -87,7 +88,7 @@ public class FacturaPanel extends JFrame {
         }
 
         private void generarFactura(Pedido pedido) throws DocumentException, FileNotFoundException {
-            Factura nuevaFactura = new Factura()
+            Factura nuevaFactura = new Factura();
             JOptionPane.showMessageDialog(this, "Factura generada correctamente: " + nombreArchivo);
             facturaService.generarFactura(factura);
         }
@@ -110,3 +111,5 @@ public class FacturaPanel extends JFrame {
             }
         }
     }
+
+ */
