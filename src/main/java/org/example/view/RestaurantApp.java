@@ -14,7 +14,6 @@ public class RestaurantApp {
         SwingUtilities.invokeLater(() -> {
             MesasPanel layout = new MesasPanel("Juli's",true);
             layout.setVisible(true);
-
         });
         /*
         MesaService mesaService = new MesaService();

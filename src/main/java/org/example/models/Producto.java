@@ -71,6 +71,17 @@ public class Producto implements Filtrable<Categoria>, Buscable<String> {
         return Objects.hash(id, nombre);
     }
 
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", categoria=" + categoria +
+                ", precio=" + precio +
+                '}';
+    }
+
+
 
 
 }

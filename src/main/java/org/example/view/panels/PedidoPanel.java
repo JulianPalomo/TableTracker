@@ -56,7 +56,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         addProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                agregarProducto(productoService.cargarMenu());
+                agregarProducto(productoService.cargarCarta());
             }
         });
 
@@ -67,7 +67,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         updateOrderList();
     }
 
-    private void agregarProducto(Map<String, List<Producto>> menu) {
+    private void agregarProducto(Map<Categoria, List<Producto>> menu) {
 
         AgregarPedido agregarPedido = new AgregarPedido(menu, this);
         agregarPedido.setVisible(true);
