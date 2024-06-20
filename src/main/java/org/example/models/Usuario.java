@@ -1,44 +1,133 @@
 package org.example.models;
 
 
-public abstract class Usuario {
-    private String username;
-    private String password;
-    private final String dni;
-    private String nombreCompleto;
+import org.example.interfaces.Filtrable;
+import org.example.services.TipoCuenta;
 
-    public Usuario(String username, String password, String nombreCompleto, String dni) {
-        this.username = username;
-        this.password = password;
-        this.nombreCompleto = nombreCompleto;
-        this.dni = dni;
+import java.io.Serializable;
+import java.util.Objects;
+
+public abstract class Usuario implements Serializable {
+    private String nombreUsuario;
+    private String contrasena;
+    private String nombre;
+    private String apellido;
+    private String email;
+    private Boolean isActivo;
+    private TipoCuenta tipoCuenta;
+    public Usuario() {
     }
 
-    public String getUsername() {
-        return username;
+    public Usuario(String nombreUsuario, String contrasena, String nombre, String apellido, String email,TipoCuenta tipoCuenta) {
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.isActivo = true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public String getPassword() {
-        return password;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getDni() {
-        return dni;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getMail() {
+        return email;
+    }
+
+    public void setMail(String mail) {
+        this.email = mail;
+    }
+
+    public Boolean getActivo() {
+        return isActivo;
+    }
+
+    public void setActivo(Boolean activo) {
+        isActivo = activo;
+    }
+
+    public TipoCuenta getTipoCuenta() {
+        return tipoCuenta;
+    }
+
+    public void setTipoCuenta(TipoCuenta tipoCuenta) {
+        this.tipoCuenta = tipoCuenta;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) {
+            return true;
+        }
+        if(o == null) {
+            return false;
+        }
+        if(!(o instanceof Usuario)) {
+            return false;
+        }
+        Usuario usuario = (Usuario) o;
+        return this.getNombreUsuario().equalsIgnoreCase(usuario.getNombreUsuario());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombreUsuario);
+    }
+
+    @Override
+    public String toString() {
+        return "Nombre de usuario: " + nombreUsuario + "\n" +
+                "Contraseña: " + contrasena + "\n" +
+                "Nombre: " + nombre + "\n" +
+                "Apellido: " + apellido + "\n" +
+                "Correo electrónico: " + email + "\n" +
+                "Activo: " + isActivo + "\n";
+    }
+
+    public void cambiarEstado() {
+        if(isActivo) {
+            isActivo = false;
+        }
+        else{
+            isActivo = true;
+        }
     }
 }
