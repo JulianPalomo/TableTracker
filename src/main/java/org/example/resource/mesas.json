@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "estado": "DISPONIBLE",
+    "x": 120,
+    "y": 259,
+    "ancho": 100,
+    "alto": 50
+  },
+  {
+    "id": 2,
+    "estado": "DISPONIBLE",
+    "x": 685,
+    "y": 101,
+    "ancho": 102,
+    "alto": 169
+  },
+  {
+    "id": 3,
+    "estado": "DISPONIBLE",
+    "x": 33,
+    "y": 52,
+    "ancho": 100,
+    "alto": 50
+  }
+]
