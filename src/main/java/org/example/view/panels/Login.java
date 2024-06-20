@@ -11,29 +11,29 @@ import java.io.IOException;
 import java.util.List;
 
 public class Login extends JDialog {
-    private JTextField tfEmail;
+    private JTextField tfEmailOrUsername;
     private JPasswordField tfContrasena;
     private JButton OKButton;
     private JButton cancelarButton;
     private JPanel loginPanel;
-    private JLabel lblEmail;
+    private JLabel lblEmailOrUsername;
 
     public Login(JFrame parent) {
         super(parent);
         setTitle("Inicio de Sesión");
 
-        // Inicializar el loginPanel
+        // Inicializar el loginPanel (IntelliJ IDEA debería generar este código automáticamente si usas su diseñador GUI)
         loginPanel = new JPanel();
         loginPanel.setLayout(new GridLayout(3, 2));
-        lblEmail = new JLabel("Email:");
-        tfEmail = new JTextField();
+        lblEmailOrUsername = new JLabel("Email o Nombre de Usuario:");
+        tfEmailOrUsername = new JTextField();
         JLabel lblContrasena = new JLabel("Contraseña:");
         tfContrasena = new JPasswordField();
         OKButton = new JButton("OK");
         cancelarButton = new JButton("Cancelar");
 
-        loginPanel.add(lblEmail);
-        loginPanel.add(tfEmail);
+        loginPanel.add(lblEmailOrUsername);
+        loginPanel.add(tfEmailOrUsername);
         loginPanel.add(lblContrasena);
         loginPanel.add(tfContrasena);
         loginPanel.add(OKButton);
@@ -68,12 +68,13 @@ public class Login extends JDialog {
     }
 
     private void autenticarUsuario() throws IOException {
-        String email = tfEmail.getText();
-        String contraseña = tfContrasena.getText();
+        String emailOrUsername = tfEmailOrUsername.getText();
+        String contraseña = new String(tfContrasena.getPassword());
 
         List<Usuario> usuarios = UsuarioService.readUsuarios();
         for (Usuario usuario : usuarios) {
-            if (usuario.getEmail().equals(email) && usuario.getContrasena().equals(contraseña)) {
+            if ((usuario.getEmail().equals(emailOrUsername) || usuario.getNombreUsuario().equals(emailOrUsername))
+                    && usuario.getContrasena().equals(contraseña)) {
                 JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 new Menu(usuario.getTipoCuenta());
                 dispose();
