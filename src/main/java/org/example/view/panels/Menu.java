@@ -26,12 +26,12 @@ public class Menu extends JFrame {
             JButton anadirUsuarioButton = new JButton("Añadir usuario");
             mainPanel.add(meserosButton);
             mainPanel.add(anadirUsuarioButton);
+
+            anadirUsuarioButton.addActionListener(e -> new Registration(this));
         }
 
         setContentPane(mainPanel);
         setVisible(true);
-
-        // Action Listeners for buttons can be added here
     }
 
     public static void main(String[] args) {
