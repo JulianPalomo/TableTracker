@@ -18,7 +18,7 @@ public class AgregarPedido extends JFrame {
     private ArrayList<Producto> pedido;
     private PedidoListener listener;
 
-    public AgregarPedido(Map<Categoria, List<Producto>> menu, PedidoListener listener) {
+    public AgregarPedido(Map<String, List<Producto>> menu, PedidoListener listener) {
         this.listener = listener;
         setTitle("Menú del Restaurante");
         setSize(800, 600);
@@ -28,8 +28,8 @@ public class AgregarPedido extends JFrame {
         pedido = new ArrayList<Producto>();
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        for (Map.Entry<Categoria, List<Producto>> entry : menu.entrySet()) {
-            String categoria = entry.getKey().toString();
+        for (Map.Entry<String, List<Producto>> entry : menu.entrySet()) {
+            String categoria = entry.getKey();
             List<Producto> productos = entry.getValue();
 
             JPanel panel = new JPanel(new GridLayout(0, 4, 10, 10)); // 4 columns: Nombre, Precio, Spinner, Botón

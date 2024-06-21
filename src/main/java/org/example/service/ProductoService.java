@@ -17,7 +17,8 @@ import java.util.List;
 public class ProductoService {
 
     private static final String RUTA_JSON = "src/main/java/org/example/resource/carta.json";
-    private Map<Categoria, List<Producto>> carta = new LinkedHashMap<>();
+    private Map<String, List<Producto>> carta = new LinkedHashMap<>();
+    private final CategoriaService categoriaService = new CategoriaService();
 
 
     public ProductoService() {
@@ -30,13 +31,15 @@ public class ProductoService {
         productosCategoria.add(producto);
         guardarCartaJson();
     }
+
     public void eliminarProducto(Producto producto) {
-        List<Producto> productosCategoria = carta.get(producto.getCategoria());
-        if (productosCategoria != null) {
-            productosCategoria.remove(producto);
+        List<Producto> productos = carta.get(producto.getCategoria());
+        if (productos != null) {
+            productos.remove(producto);
             guardarCartaJson();
         }
     }
+
     public void guardarCartaJson() {
         Gson gson = new Gson();
         try (FileWriter writer = new FileWriter(RUTA_JSON)) {
@@ -45,6 +48,7 @@ public class ProductoService {
             e.printStackTrace();
         }
     }
+
     public void aplicarAumento(double porcentaje) {
         for (List<Producto> productosCategoria : carta.values()) {
             for (Producto producto : productosCategoria) {
@@ -68,8 +72,44 @@ public class ProductoService {
         }
     }
 
-    /////
+    public List<Producto> obtenerTodosLosProductos() {
+        return carta.values().stream()
+                .flatMap(List::stream)
+                .toList();
+    }
 
+    public Map<String, List<Producto>> cargarCarta() {
+        Map<String, List<Producto>> cartaCargada = new LinkedHashMap<>();
+        try (FileReader reader = new FileReader(RUTA_JSON)) {
+            Gson gson = new Gson();
+            Type cartaType = new TypeToken<Map<String, List<Producto>>>() {}.getType();
+            cartaCargada = gson.fromJson(reader, cartaType);
+            for (String categoria : cartaCargada.keySet()) {
+                categoriaService.agregarCategoria(categoria);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return cartaCargada;
+    }
+
+    public void agregarCategoria(String categoria) {
+        categoriaService.agregarCategoria(categoria);
+        carta.put(categoria,new ArrayList<>());
+        guardarCartaJson();
+    }
+
+    public List<String>obtenerCategorias(){
+        return categoriaService.getCategorias().stream().toList();
+    }
+    public void eliminarCategoria(String categoria) {
+        carta.remove(categoria);
+        guardarCartaJson();
+    }
+
+
+
+    /////
     public Producto buscarProductoPorNombre(String nombre) {
         return carta.values().stream()
                 .flatMap(List::stream)
@@ -90,82 +130,7 @@ public class ProductoService {
         return productosEncontrados;
     }
 
-    public List<Producto> filtrarProductosPorCategoria(Categoria categoria) {
-        return carta.getOrDefault(categoria, List.of());
+    public List<Producto> filtrarProductosPorCategoria(String categoria) {
+        return new ArrayList<>(carta.getOrDefault(categoria, new ArrayList<>()));
     }
-
-    public <K, V> List<V> searchInLinkedHashMap(@org.jetbrains.annotations.NotNull LinkedHashMap<K, V> map, K key) {
-        List<V> resultList = new ArrayList<>();
-        for (Map.Entry<K, V> entry : map.entrySet()) {
-            if (entry.getKey().equals(key)) {
-                resultList.add(entry.getValue());
-            }
-        }
-        return resultList;
-    }
-
-    public List<Producto> obtenerTodosLosProductos() {
-        return carta.values().stream()
-                .flatMap(List::stream)
-                .toList();
-    }
-
-
-    public Map<Categoria, List<Producto>> cargarCarta() {
-        Map<Categoria, List<Producto>> cartaCargada = new LinkedHashMap<>();
-        try (FileReader reader = new FileReader(RUTA_JSON)) {
-            Gson gson = new Gson();
-            Type cartaType = new TypeToken<Map<Categoria, List<Producto>>>() {}.getType();
-            cartaCargada = gson.fromJson(reader, cartaType);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return cartaCargada;
-    }
-
-
-    public Map<Categoria, List<Producto>> cargarMenu() {
-        try (FileReader reader = new FileReader(RUTA_JSON)) {
-            Gson gson = new Gson();
-            JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
-            Type productoListType = new TypeToken<List<Producto>>() {}.getType();
-            List<Producto> carta = gson.fromJson(jsonObject.get("carta"), productoListType);
-            return organizarPorCategoria(carta);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private Map<Categoria, List<Producto>> organizarPorCategoria(List<Producto> carta) {
-        Map<Categoria, List<Producto>> menu = new LinkedHashMap<>();
-        for (Producto producto : carta) {
-            menu.computeIfAbsent(Categoria.valueOf(String.valueOf(producto.getCategoria())), k -> new ArrayList<>()).add(producto);
-        }
-        return menu;
-    }
-
-
-    /*
-    public void agregarProducto(Producto producto) {
-        Categoria categoria = String.valueOf(producto.getCategoria());
-        List<Producto> productosCategoria = carta.getOrDefault(categoria, List.of());
-        productosCategoria.add(producto);
-        carta.put(categoria, productosCategoria);
-        guardarProductosJson(carta);
-    }
-
-
-
-
-    public void eliminarProducto(Producto producto) {
-        String categoria = String.valueOf(producto.getCategoria());
-        List<Producto> productosCategoria = carta.getOrDefault(categoria, List.of());
-        productosCategoria.remove(producto);
-        carta.put(categoria, productosCategoria);
-        guardarProductosJson(carta);
-    }
-
- */
-
 }

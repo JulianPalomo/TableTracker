@@ -67,7 +67,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         updateOrderList();
     }
 
-    private void agregarProducto(Map<Categoria, List<Producto>> menu) {
+    private void agregarProducto(Map<String, List<Producto>> menu) {
 
         AgregarPedido agregarPedido = new AgregarPedido(menu, this);
         agregarPedido.setVisible(true);

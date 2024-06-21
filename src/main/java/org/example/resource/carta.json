@@ -1,1 +1,27 @@
-{"null":[{"id":0,"nombre":"Coca-Cola","categoria":"BEBIDA","precio":1650.0000000000002},{"id":0,"nombre":"Pepsi","categoria":"BEBIDA","precio":1650.0000000000002},{"id":0,"nombre":"Cerveza","categoria":"BEBIDA_ALCOHOLICA","precio":2750.0},{"id":0,"nombre":"Vino Tinto","categoria":"BEBIDA_ALCOHOLICA","precio":7700.000000000001},{"id":0,"nombre":"Ensalada César","categoria":"ENTRADA","precio":6600.000000000001},{"id":0,"nombre":"Sopa de Zapallo","categoria":"ENTRADA","precio":5170.0},{"id":0,"nombre":"Pizza Margarita","categoria":"PLATO_PRINCIPAL","precio":9900.0},{"id":0,"nombre":"Hamburguesa con Queso","categoria":"PLATO_PRINCIPAL","precio":10450.0},{"id":0,"nombre":"Spaghetti Bolognese","categoria":"PLATO_PRINCIPAL","precio":8800.0},{"id":0,"nombre":"Helado de Vainilla","categoria":"POSTRE","precio":3300.0000000000005},{"id":0,"nombre":"Pastel de Chocolate","categoria":"POSTRE","precio":4400.0},{"id":0,"nombre":"Café Espresso","categoria":"BEBIDA","precio":2200.0},{"id":0,"nombre":"Té Verde","categoria":"BEBIDA","precio":1980.0000000000002},{"id":0,"nombre":"Whisky","categoria":"BEBIDA_ALCOHOLICA","precio":5500.0},{"id":0,"nombre":"Gin Tonic","categoria":"BEBIDA_ALCOHOLICA","precio":4950.0},{"id":0,"nombre":"Bruschetta","categoria":"ENTRADA","precio":4400.0},{"id":0,"nombre":"Calamares Fritos","categoria":"ENTRADA","precio":7700.000000000001},{"id":0,"nombre":"Lasaña","categoria":"PLATO_PRINCIPAL","precio":10450.0},{"id":0,"nombre":"Salmón a la Parrilla","categoria":"PLATO_PRINCIPAL","precio":13200.000000000002},{"id":0,"nombre":"Tiramisú","categoria":"POSTRE","precio":4950.0},{"id":0,"nombre":"Cheesecake","categoria":"POSTRE","precio":4400.0},{"id":0,"nombre":"Chocotorta","categoria":"POSTRE","precio":4840.0}],"PLATO_PRINCIPAL":[{"id":0,"nombre":"milanesa","categoria":"PLATO_PRINCIPAL","precio":22000.0}]}
+{
+  "BEBIDAS_ALCOHOLICAS": [
+    {"id": 0, "nombre": "Cerveza", "categoria": "BEBIDAS_ALCOHOLICAS", "precio": 2000.00},
+    {"id": 1, "nombre": "Vino Tinto", "categoria": "BEBIDAS_ALCOHOLICAS", "precio": 5000.00},
+    {"id": 2, "nombre": "Whisky", "categoria": "BEBIDAS_ALCOHOLICAS", "precio": 8000.00}
+  ],
+  "POSTRES": [
+    {"id": 3, "nombre": "Tarta de Chocolate", "categoria": "POSTRES", "precio": 1500.00},
+    {"id": 4, "nombre": "Helado", "categoria": "POSTRES", "precio": 1200.50},
+    {"id": 5, "nombre": "Flan", "categoria": "POSTRES", "precio": 1000.00}
+  ],
+  "ENTRADAS": [
+    {"id": 6, "nombre": "Ensalada César", "categoria": "ENTRADAS", "precio": 2500.00},
+    {"id": 7, "nombre": "Sopa de Cebolla", "categoria": "ENTRADAS", "precio": 1800.75},
+    {"id": 8, "nombre": "Bruschettas", "categoria": "ENTRADAS", "precio": 2000.50}
+  ],
+  "PLATOS_PRINCIPALES": [
+    {"id": 9, "nombre": "Bistec con Papas", "categoria": "PLATOS_PRINCIPALES", "precio": 6000.00},
+    {"id": 10, "nombre": "Pollo al Curry", "categoria": "PLATOS_PRINCIPALES", "precio": 5500.75},
+    {"id": 11, "nombre": "Pasta Alfredo", "categoria": "PLATOS_PRINCIPALES", "precio": 5000.50}
+  ],
+  "BEBIDAS_NO_ALCOHOLICAS": [
+    {"id": 12, "nombre": "Agua Mineral", "categoria": "BEBIDAS_NO_ALCOHOLICAS", "precio": 1000.00},
+    {"id": 13, "nombre": "Jugo de Naranja", "categoria": "BEBIDAS_NO_ALCOHOLICAS", "precio": 1500.25},
+    {"id": 14, "nombre": "Limonada", "categoria": "BEBIDAS_NO_ALCOHOLICAS", "precio": 1300.50}
+  ]
+}
