@@ -75,7 +75,6 @@ public class AgregarPedido extends JFrame {
 
                 ///Envia informacion a mesasPanel de que el pedido fue actualizado
                 listener.onPedidoActualizado(pedido);
-
                 StringBuilder resumen = new StringBuilder("Pedido confirmado:\n");
                 for (Producto producto : pedido) {
                     resumen.append(producto.getNombre()).append(" - ").append(producto.getPrecio()).append(" - Observación: ").append(producto.getObservacion()).append("\n");

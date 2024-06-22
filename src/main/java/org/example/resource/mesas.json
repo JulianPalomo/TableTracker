@@ -2,48 +2,71 @@
   {
     "id": 1,
     "estado": "DISPONIBLE",
-    "x": 63,
-    "y": 313,
+    "pedido": {
+      "listaProductos": [
+        {
+          "id": 2,
+          "nombre": "Whisky",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 8000.0
+        },
+        {
+          "id": 2,
+          "nombre": "Whisky",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 8000.0
+        },
+        {
+          "id": 2,
+          "nombre": "Whisky",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 8000.0
+        }
+      ],
+      "fecha": "2024-06-22"
+    },
+    "x": 30,
+    "y": 22,
     "ancho": 100,
     "alto": 50
   },
   {
     "id": 2,
     "estado": "DISPONIBLE",
-    "x": 222,
-    "y": 314,
+    "x": 157,
+    "y": 23,
     "ancho": 100,
     "alto": 50
   },
   {
     "id": 3,
     "estado": "DISPONIBLE",
-    "x": 345,
-    "y": 313,
+    "x": 278,
+    "y": 22,
     "ancho": 100,
     "alto": 50
   },
   {
     "id": 4,
     "estado": "DISPONIBLE",
-    "x": 59,
-    "y": 173,
-    "ancho": 100,
-    "alto": 50
+    "x": 407,
+    "y": 23,
+    "ancho": 102,
+    "alto": 89
   },
   {
     "id": 5,
     "estado": "DISPONIBLE",
-    "x": 221,
-    "y": 168,
-    "ancho": 232,
-    "alto": 56
+    "x": 649,
+    "y": 18,
+    "ancho": 111,
+    "alto": 91
   },
   {
     "id": 6,
     "estado": "DISPONIBLE",
-    "x": 474,
-    "y": 313,
+    "x": 520,
+    "y": 319,
     "ancho": 100,
     "alto": 50
   },
@@ -84,14 +107,6 @@
     "estado": "DISPONIBLE",
     "x": 725,
     "y": 619,
-    "ancho": 100,
-    "alto": 50
-  },
-  {
-    "id": 12,
-    "estado": "DISPONIBLE",
-    "x": 476,
-    "y": 174,
     "ancho": 100,
     "alto": 50
   }

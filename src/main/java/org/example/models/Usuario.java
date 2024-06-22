@@ -6,57 +6,130 @@ import org.example.interfaces.Filtrable;
 import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Usuario {
-    private String username;
-    private String password;
-    private final String dni;
-    private String nombreCompleto;
+public abstract class Usuario implements Serializable {
+    private String nombreUsuario;
+    private String contrasena;
+    private String nombre;
+    private String apellido;
+    private String email;
+    private TipoCuenta tipoCuenta;
+    private Boolean isActivo;
+    // Constructor por defecto
+    public Usuario() {}
 
-    public Usuario(String username, String password, String nombreCompleto, String dni) {
-        this.username = username;
-        this.password = password;
-        this.nombreCompleto = nombreCompleto;
-        this.dni = dni;
+    // Constructor con argumentos
+    public Usuario(String nombreUsuario, String contrasena, String nombre, String apellido, String email, TipoCuenta tipoCuenta) {
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.tipoCuenta = tipoCuenta;
+        this.isActivo=true;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public TipoCuenta getTipoCuenta() {
+        return tipoCuenta;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setTipoCuenta(TipoCuenta tipoCuenta) {
+        this.tipoCuenta = tipoCuenta;
     }
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public String getDni() {
-        return dni;
+    public String getContrasena() {
+        return contrasena;
     }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getMail() {
+        return email;
+    }
+
+    public void setMail(String mail) {
+        this.email = mail;
+    }
+
+    public Boolean getActivo() {
+        return isActivo;
+    }
+
+    public void setActivo(Boolean activo) {
+        isActivo = activo;
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if(this == o) {
+            return true;
+        }
+        if(o == null) {
+            return false;
+        }
+        if(!(o instanceof Usuario)) {
+            return false;
+        }
         Usuario usuario = (Usuario) o;
-        return Objects.equals(dni, usuario.dni) && Objects.equals(password, usuario.password);
+        return this.getNombreUsuario().equalsIgnoreCase(usuario.getNombreUsuario());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dni, password);
+        return Objects.hash(nombreUsuario);
     }
 
+    @Override
+    public String toString() {
+        return "Nombre de usuario: " + nombreUsuario + "\n" +
+                "Contraseña: " + contrasena + "\n" +
+                "Nombre: " + nombre + "\n" +
+                "Apellido: " + apellido + "\n" +
+                "Correo electrónico: " + email + "\n" +
+                "Activo: " + isActivo + "\n";
+    }
+
+    public void cambiarEstado() {
+        if(isActivo) {
+            isActivo = false;
+        }
+        else{
+            isActivo = true;
+        }
+    }
 }
