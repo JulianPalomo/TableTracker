@@ -1,5 +1,6 @@
 package org.example.view.panels;
 
+import org.example.models.EstadoMesa;
 import org.example.models.Mesa;
 import org.example.service.MesaService;
 import org.example.service.ProductoService;
@@ -93,7 +94,6 @@ public class MesasPanel extends JFrame {
         verMenuCompleto.addActionListener(e ->
                 {
                     cargarCartaPanel();
-
                 }
                 );
 
@@ -106,7 +106,31 @@ public class MesasPanel extends JFrame {
 
         // Establecer la barra de menú
         setJMenuBar(menuBar);
+
+
+        getContentPane().setBackground(Color.DARK_GRAY);
+        actualizarColorMesas();
     }
+
+    public void actualizarColorMesas() {
+        for (Component comp : getContentPane().getComponents()) {
+            if (comp instanceof JButton) {
+                JButton button = (JButton) comp;
+                String buttonText = button.getText();
+                int mesaId = Integer.parseInt(buttonText.split(" ")[1]);
+                Mesa mesa = mesaService.buscarMesa(mesaId);
+                if (mesa != null) {
+                    if (mesa.getEstado() == EstadoMesa.DISPONIBLE) {
+                        button.setBackground(Color.GREEN);
+                    } else {
+                        button.setBackground(Color.RED);
+                    }
+                    button.repaint();
+                }
+            }
+        }
+    }
+
 
 
     private void actualizarModoEdicion() {
@@ -177,6 +201,7 @@ public class MesasPanel extends JFrame {
         JButton nuevaMesa = crearMesa(nueva);
         add(nuevaMesa);
         nuevaMesa.repaint();
+        actualizarColorMesas();
     }
 
     ///CONVIERTE CADA MESA EN JBUTTON Y LAS AGREGA AL PANEL QUE SE LE PASA POR PARAMETRO
@@ -200,7 +225,7 @@ public class MesasPanel extends JFrame {
         button.addActionListener(e -> {
             if (!modoEdicion) { // Solo abrir PedidoPanel si no estamos en modo edición
                 int numeroMesa = Integer.parseInt(texto.split(" ")[1]);
-                PedidoPanel pedidoPanel = new PedidoPanel(mesaService.buscarMesa(numeroMesa), productoService);
+                PedidoPanel pedidoPanel = new PedidoPanel(mesaService.buscarMesa(numeroMesa), productoService,this);
 
                 // Cerrar el panel de pedido actual si existe
                 if (currentPedidoPanel != null) {
@@ -217,7 +242,6 @@ public class MesasPanel extends JFrame {
 
         return button;
     }
-
 }
 
 /*
