@@ -93,7 +93,8 @@ public class ProductoService {
         Map<String, List<Producto>> cartaCargada = new LinkedHashMap<>();
         try (FileReader reader = new FileReader(RUTA_JSON)) {
             Gson gson = new Gson();
-            Type cartaType = new TypeToken<Map<String, List<Producto>>>() {}.getType();
+            Type cartaType = new TypeToken<Map<String, List<Producto>>>() {
+            }.getType();
             cartaCargada = gson.fromJson(reader, cartaType);
             for (String categoria : cartaCargada.keySet()) {
                 categoriaService.agregarCategoria(categoria);
@@ -106,18 +107,18 @@ public class ProductoService {
 
     public void agregarCategoria(String categoria) {
         categoriaService.agregarCategoria(categoria);
-        carta.put(categoria,new ArrayList<>());
+        carta.put(categoria, new ArrayList<>());
         guardarCartaJson();
     }
 
-    public List<String>obtenerCategorias(){
+    public List<String> obtenerCategorias() {
         return categoriaService.getCategorias().stream().toList();
     }
+
     public void eliminarCategoria(String categoria) {
         carta.remove(categoria);
         guardarCartaJson();
     }
-
 
 
     /////
@@ -146,15 +147,18 @@ public class ProductoService {
     }
 
     public void imprimirComandaConCantidades(Map<Producto, Integer> nuevosProductosConCantidades, int numeroMesa) {
-        Document document = new Document();
+        // Configurar tamaño de página personalizado
+        Rectangle pageSize = new Rectangle(216, 720); // Tamaño personalizado (por ejemplo, recibo pequeño)
+        Document document = new Document(pageSize, 10, 10, 10, 10);
+
         try {
             // Crear un escritor de PDF
             PdfWriter.getInstance(document, new FileOutputStream("comanda" + numeroMesa + ".pdf"));
             document.open();
 
             // Agregar el título
-            Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20);
-            Paragraph title = new Paragraph("Comanda", font);
+            Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12);
+            Paragraph title = new Paragraph("Comanda", titleFont);
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
 
@@ -163,37 +167,57 @@ public class ProductoService {
             Date date = new Date();
             String fechaHora = formatter.format(date);
 
-            Paragraph mesaInfo = new Paragraph("Mesa: " + numeroMesa + "\nFecha y Hora: " + fechaHora);
+            Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 10);
+            Paragraph mesaInfo = new Paragraph("Mesa: " + numeroMesa + "\nFecha y Hora: " + fechaHora, normalFont);
             mesaInfo.setAlignment(Element.ALIGN_LEFT);
-            mesaInfo.setSpacingBefore(20);
+            mesaInfo.setSpacingBefore(10);
             document.add(mesaInfo);
 
             // Crear una tabla para los productos
-            PdfPTable table = new PdfPTable(2);
+            PdfPTable table = new PdfPTable(3); // Añadimos una columna más para observaciones
             table.setWidthPercentage(100);
-            table.setSpacingBefore(20);
-            table.setSpacingAfter(20);
+            table.setSpacingBefore(10);
+            table.setSpacingAfter(10);
 
             // Añadir encabezados de la tabla
-            PdfPCell header1 = new PdfPCell(new Phrase("Producto"));
+            PdfPCell header1 = new PdfPCell(new Phrase("Producto", normalFont));
             header1.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(header1);
 
-            PdfPCell header2 = new PdfPCell(new Phrase("Cantidad"));
+            PdfPCell header2 = new PdfPCell(new Phrase("Cantidad", normalFont));
             header2.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(header2);
 
-            // Añadir productos y sus cantidades a la tabla
+            PdfPCell header3 = new PdfPCell(new Phrase("Observaciones", normalFont));
+            header3.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(header3);
+
+            // Añadir productos, cantidades y observaciones a la tabla
             for (Map.Entry<Producto, Integer> entry : nuevosProductosConCantidades.entrySet()) {
                 Producto producto = entry.getKey();
                 Integer cantidad = entry.getValue();
 
-                table.addCell(producto.getNombre());
-                table.addCell(cantidad.toString());
+                PdfPCell productCell = new PdfPCell(new Phrase(producto.getNombre(), normalFont));
+                productCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                table.addCell(productCell);
+
+                PdfPCell quantityCell = new PdfPCell(new Phrase(cantidad.toString(), normalFont));
+                quantityCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(quantityCell);
+
+                PdfPCell observationCell = new PdfPCell(new Phrase(producto.getObservacion(), normalFont));
+                observationCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                table.addCell(observationCell);
             }
 
             // Añadir la tabla al documento
             document.add(table);
+
+            // Añadir total de artículos
+            int totalArticulos = nuevosProductosConCantidades.values().stream().mapToInt(Integer::intValue).sum();
+            Paragraph totalArticulosParagraph = new Paragraph("Total de artículos: " + totalArticulos, normalFont);
+            totalArticulosParagraph.setAlignment(Element.ALIGN_RIGHT);
+            document.add(totalArticulosParagraph);
 
             document.close();
             System.out.println("Comanda generada correctamente.");

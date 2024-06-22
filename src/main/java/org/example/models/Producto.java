@@ -84,12 +84,10 @@ public class Producto implements Cloneable {
 
     @Override
     public String toString() {
-        return "Producto{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", categoria=" + categoria +
-                ", precio=" + precio +
-                '}';
+        return
+                nombre + "     " +
+                 " $" + precio ;
+
     }
 
 }

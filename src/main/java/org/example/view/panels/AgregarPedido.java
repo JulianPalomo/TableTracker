@@ -48,8 +48,6 @@ public class AgregarPedido extends JFrame {
                             productoClonado.setObservacion(observacion); // Setea observación en el clon
                             pedido.add(productoClonado); // Añade el clon a la lista de pedidos
                         }
-
-                        JOptionPane.showMessageDialog(null, cantidad + " " + producto.getNombre() + "(s) añadido(s) al pedido con observación: " + observacion);
                     }
                 });
 

@@ -8,9 +8,7 @@ public class Factura {
     private double total;
 
     public Factura(Pedido pedido, MetodosDePago metodoDePago) {
-        synchronized (Factura.class) {
-            this.id = contador++;  // Incrementa y asigna el ID
-        }
+        this.id = contador++;  // Incrementa y asigna el ID
         this.metodoDePago = metodoDePago;
         this.pedido = pedido;
         this.total = pedido.getTotal();
