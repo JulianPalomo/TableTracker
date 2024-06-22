@@ -81,6 +81,7 @@ public class Mesa {
     public boolean isDisponible() {
         return this.estado == EstadoMesa.DISPONIBLE;
     }
+
     public EstadoMesa getEstado() {
         return this.estado;
     }

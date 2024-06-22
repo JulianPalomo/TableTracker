@@ -1,16 +1,27 @@
 package org.example.service;
 
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import org.example.models.Categoria;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import org.example.models.Producto;
+
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import com.google.gson.Gson;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Document;
+import org.example.models.Producto;
 
 ///Esta clase proporciona todos los metodos necesarios para la gestion la lista de carta. Metodos que seran llamados en los botones del sistema
 
@@ -19,7 +30,7 @@ public class ProductoService {
     private static final String RUTA_JSON = "src/main/java/org/example/resource/carta.json";
     private Map<String, List<Producto>> carta = new LinkedHashMap<>();
     private final CategoriaService categoriaService = new CategoriaService();
-
+    private Document documentoSwing;
 
     public ProductoService() {
         carta = cargarCarta();
@@ -132,5 +143,62 @@ public class ProductoService {
 
     public List<Producto> filtrarProductosPorCategoria(String categoria) {
         return new ArrayList<>(carta.getOrDefault(categoria, new ArrayList<>()));
+    }
+
+    public void imprimirComandaConCantidades(Map<Producto, Integer> nuevosProductosConCantidades, int numeroMesa) {
+        Document document = new Document();
+        try {
+            // Crear un escritor de PDF
+            PdfWriter.getInstance(document, new FileOutputStream("comanda" + numeroMesa + ".pdf"));
+            document.open();
+
+            // Agregar el título
+            Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20);
+            Paragraph title = new Paragraph("Comanda", font);
+            title.setAlignment(Element.ALIGN_CENTER);
+            document.add(title);
+
+            // Agregar número de mesa y horario
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date date = new Date();
+            String fechaHora = formatter.format(date);
+
+            Paragraph mesaInfo = new Paragraph("Mesa: " + numeroMesa + "\nFecha y Hora: " + fechaHora);
+            mesaInfo.setAlignment(Element.ALIGN_LEFT);
+            mesaInfo.setSpacingBefore(20);
+            document.add(mesaInfo);
+
+            // Crear una tabla para los productos
+            PdfPTable table = new PdfPTable(2);
+            table.setWidthPercentage(100);
+            table.setSpacingBefore(20);
+            table.setSpacingAfter(20);
+
+            // Añadir encabezados de la tabla
+            PdfPCell header1 = new PdfPCell(new Phrase("Producto"));
+            header1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(header1);
+
+            PdfPCell header2 = new PdfPCell(new Phrase("Cantidad"));
+            header2.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(header2);
+
+            // Añadir productos y sus cantidades a la tabla
+            for (Map.Entry<Producto, Integer> entry : nuevosProductosConCantidades.entrySet()) {
+                Producto producto = entry.getKey();
+                Integer cantidad = entry.getValue();
+
+                table.addCell(producto.getNombre());
+                table.addCell(cantidad.toString());
+            }
+
+            // Añadir la tabla al documento
+            document.add(table);
+
+            document.close();
+            System.out.println("Comanda generada correctamente.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

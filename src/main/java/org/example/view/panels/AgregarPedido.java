@@ -69,7 +69,6 @@ public class AgregarPedido extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 listener.onPedidoActualizado(pedido);
-
                 StringBuilder resumen = new StringBuilder("Pedido confirmado:\n");
                 for (Producto producto : pedido) {
                     resumen.append(producto.getNombre()).append(" - ").append(producto.getPrecio()).append("\n");

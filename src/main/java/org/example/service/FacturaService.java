@@ -12,6 +12,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Document;
 import org.example.models.Producto;
+
 public class FacturaService {
     private ArrayList<Factura> facturasGeneradas = new ArrayList<>();
 
@@ -24,6 +25,7 @@ public class FacturaService {
         // Add invoice to ArrayList
         facturasGeneradas.add(factura);
     }
+
 
     private void crearPDF(Factura factura, String nombreArchivo) throws DocumentException, FileNotFoundException {
         Document document = new Document();
