@@ -23,8 +23,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
 
     public PedidoPanel(Mesa mesa, ProductoService productoService) {
         this.numero = mesa.getId();
-        if(mesa.getPedido() == null)
-        {
+        if(mesa.getPedido() == null) {
             mesa.setPedido(new Pedido());
         }
         this.pedido = mesa.getPedido();
@@ -43,15 +42,13 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         JPanel buttonPanel = new JPanel();
         JButton addProductButton = new JButton("Agregar Producto");
         JButton billButton = new JButton("Facturar");
-/*
+
         billButton.addActionListener(new ActionListener() {
-           /@Override
+            @Override
             public void actionPerformed(ActionEvent e) {
-                facturar(mesa.getPedido());
+                new FacturaPanel(pedido);
             }
         });
-        */
-
 
         addProductButton.addActionListener(new ActionListener() {
             @Override
@@ -68,7 +65,6 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     }
 
     private void agregarProducto(Map<String, List<Producto>> menu) {
-
         AgregarPedido agregarPedido = new AgregarPedido(menu, this);
         agregarPedido.setVisible(true);
     }
@@ -85,12 +81,4 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         this.pedido.agregarProducto(nuevosProductos);
         updateOrderList();
     }
-/*
-    private void facturar(Pedido pedido) {
-        FacturaPanel facturaPanel = new FacturaPanel(pedido);
-    }
-
- */
-
 }
-

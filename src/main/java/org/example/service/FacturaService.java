@@ -12,13 +12,11 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Document;
 import org.example.models.Producto;
-/*
 public class FacturaService {
-
+    private ArrayList<Factura> facturasGeneradas = new ArrayList<>();
 
     public void generarFactura(Factura factura) throws DocumentException, FileNotFoundException {
-        //String medioDePago = String.valueOf(factura.getMetodoDePago());
-        String nombreArchivo = "F" + factura.getId() + ".pdf";
+        String nombreArchivo = factura.getNombreArchivo();
 
         // Create PDF file
         crearPDF(factura, nombreArchivo);
@@ -38,8 +36,7 @@ public class FacturaService {
             document.add(new Paragraph(producto.getNombre() + ": $" + producto.getPrecio()));
         }
 
-        Label subtotalLabel = null; //me lo pide el IDE
-        document.add(new Paragraph(subtotalLabel.getText()));
+        document.add(new Paragraph("Subtotal: $" + factura.getPedido().getTotal()));
         document.add(new Paragraph("Medio de Pago: " + factura.getMetodoDePago()));
         document.close();
     }
@@ -48,6 +45,3 @@ public class FacturaService {
         return facturasGeneradas;
     }
 }
-
-
- */

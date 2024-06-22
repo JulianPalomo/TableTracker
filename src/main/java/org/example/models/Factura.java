@@ -7,15 +7,17 @@ public class Factura {
     private Pedido pedido;
     private double total;
 
-    public Factura(MetodosDePago metodoDePago,Pedido pedido) {
+    public Factura(Pedido pedido, MetodosDePago metodoDePago) {
         synchronized (Factura.class) {
             this.id = contador++;  // Incrementa y asigna el ID
         }
         this.metodoDePago = metodoDePago;
         this.pedido = pedido;
+        this.total = pedido.getTotal();
     }
-    public Pedido getPedido(){
-        return this.pedido;
+
+    public Pedido getPedido() {
+        return pedido;
     }
 
     public MetodosDePago getMetodoDePago() {
@@ -30,12 +32,17 @@ public class Factura {
         return id;
     }
 
+    public String getNombreArchivo() {
+        return "F" + id + ".pdf";
+    }
+
     @Override
     public String toString() {
         return "*************************************************" +
                 "GestorFactura.Factura " +
                 "N°==>" + id +
                 "\n Metodo de Pago=" + metodoDePago +
+                "\n Total: $" + total +
                 "\n*************************************************";
     }
 }
