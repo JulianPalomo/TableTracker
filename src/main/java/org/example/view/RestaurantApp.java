@@ -12,7 +12,7 @@ public class RestaurantApp {
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(() -> {
-            MesasPanel layout = new MesasPanel("Juli's",true);
+            MesasPanel layout = new MesasPanel("Juli's", true);
             layout.setVisible(true);
 
         });
@@ -27,7 +27,7 @@ public class RestaurantApp {
 
     }
 
-/*
+/**
     public static void main(String[] args) {
         MenuLoader loader = new MenuLoader();
         Map<String, List<Producto>> menu = loader.cargarMenu("src/main/java/org/example/productos.json");

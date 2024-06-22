@@ -37,6 +37,13 @@ public class Pedido implements Filtrable<LocalDate> {
     public LocalDate getFecha() {
         return fecha;
     }
+    public double getTotal() {
+        double total = 0.0;
+        for (Producto producto : listaProductos) {
+            total += producto.getPrecio();
+        }
+        return total;
+    }
 
     @Override
     public boolean cumpleFiltro(LocalDate criterio) {

@@ -1,5 +1,6 @@
 package org.example.view.panels;
 
+import com.itextpdf.text.DocumentException;
 import org.example.interfaces.PedidoListener;
 import org.example.models.*;
 import org.example.service.ProductoService;
@@ -8,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +25,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
 
     public PedidoPanel(Mesa mesa, ProductoService productoService) {
         this.numero = mesa.getId();
-        if(mesa.getPedido() == null)
-        {
+        if(mesa.getPedido() == null) {
             mesa.setPedido(new Pedido());
         }
         this.pedido = mesa.getPedido();
@@ -43,15 +44,13 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         JPanel buttonPanel = new JPanel();
         JButton addProductButton = new JButton("Agregar Producto");
         JButton billButton = new JButton("Facturar");
-/*
+
         billButton.addActionListener(new ActionListener() {
-           /@Override
+            @Override
             public void actionPerformed(ActionEvent e) {
-                facturar(mesa.getPedido());
+                new FacturaPanel(pedido);
             }
         });
-        */
-
 
         addProductButton.addActionListener(new ActionListener() {
             @Override
@@ -68,7 +67,6 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     }
 
     private void agregarProducto(Map<String, List<Producto>> menu) {
-
         AgregarPedido agregarPedido = new AgregarPedido(menu, this);
         agregarPedido.setVisible(true);
     }
@@ -85,12 +83,4 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         this.pedido.agregarProducto(nuevosProductos);
         updateOrderList();
     }
-/*
-    private void facturar(Pedido pedido) {
-        FacturaPanel facturaPanel = new FacturaPanel(pedido);
-    }
-
- */
-
 }
-

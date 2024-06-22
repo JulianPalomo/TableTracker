@@ -29,7 +29,12 @@ public class Menu extends JFrame {
 
             anadirUsuarioButton.addActionListener(e -> new Registration(this));
         }
-
+        mesasButton.addActionListener(e -> {
+            SwingUtilities.invokeLater(() -> {
+                MesasPanel layout = new MesasPanel("Juli's", true);
+                layout.setVisible(true);
+            });
+        });
         setContentPane(mainPanel);
         setVisible(true);
     }
