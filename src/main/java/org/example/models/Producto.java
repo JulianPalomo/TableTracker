@@ -5,15 +5,15 @@ import org.example.interfaces.Filtrable;
 
 import java.util.Objects;
 
-public class Producto implements Filtrable<Categoria>, Buscable<String> {
+public class Producto{
 
     private static int contador = 0;  // Variable estática para mantener el próximo ID disponible
     private int id;
     private String nombre;
-    private Categoria categoria;
+    private String categoria;
     private double precio;
 
-    public Producto( String nombre, Categoria Categoria, double precio) {
+    public Producto( String nombre, String Categoria, double precio) {
         this.id = contador++;
         this.nombre = nombre;
         this.categoria = Categoria;
@@ -28,11 +28,11 @@ public class Producto implements Filtrable<Categoria>, Buscable<String> {
         this.nombre = nombre;
     }
 
-    public Categoria getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria Categoria) {
+    public void setCategoria(String Categoria) {
         this.categoria = Categoria;
     }
 
@@ -48,15 +48,6 @@ public class Producto implements Filtrable<Categoria>, Buscable<String> {
         this.precio = precio;
     }
 
-    @Override
-    public boolean cumpleFiltro(Categoria categoria) {
-        return this.categoria == categoria;
-    }
-    @Override
-    public boolean cumpleCriterio(String criterio) {
-        // Verificar si el nombre del producto comienza con la secuencia ej: "sopa de "
-        return nombre.toLowerCase().startsWith(criterio.toLowerCase());
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -70,6 +61,17 @@ public class Producto implements Filtrable<Categoria>, Buscable<String> {
     public int hashCode() {
         return Objects.hash(id, nombre);
     }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", categoria=" + categoria +
+                ", precio=" + precio +
+                '}';
+    }
+
 
 
 

@@ -56,7 +56,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         addProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                agregarProducto(productoService.cargarMenu());
+                agregarProducto(productoService.cargarCarta());
             }
         });
 

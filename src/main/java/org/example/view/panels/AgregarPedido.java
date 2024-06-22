@@ -1,6 +1,7 @@
 package org.example.view.panels;
 
 import org.example.interfaces.PedidoListener;
+import org.example.models.Categoria;
 import org.example.models.Producto;
 
 import javax.swing.*;

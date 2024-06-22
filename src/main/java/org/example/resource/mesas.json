@@ -2,24 +2,88 @@
   {
     "id": 1,
     "estado": "DISPONIBLE",
-    "x": 120,
-    "y": 259,
+    "x": 63,
+    "y": 313,
     "ancho": 100,
     "alto": 50
   },
   {
     "id": 2,
     "estado": "DISPONIBLE",
-    "x": 685,
-    "y": 101,
-    "ancho": 102,
-    "alto": 169
+    "x": 229,
+    "y": 315,
+    "ancho": 100,
+    "alto": 50
   },
   {
     "id": 3,
     "estado": "DISPONIBLE",
-    "x": 33,
-    "y": 52,
+    "x": 350,
+    "y": 316,
+    "ancho": 100,
+    "alto": 50
+  },
+  {
+    "id": 4,
+    "estado": "DISPONIBLE",
+    "x": 344,
+    "y": 171,
+    "ancho": 100,
+    "alto": 50
+  },
+  {
+    "id": 5,
+    "estado": "DISPONIBLE",
+    "x": 518,
+    "y": 169,
+    "ancho": 232,
+    "alto": 56
+  },
+  {
+    "id": 6,
+    "estado": "DISPONIBLE",
+    "x": 520,
+    "y": 319,
+    "ancho": 100,
+    "alto": 50
+  },
+  {
+    "id": 7,
+    "estado": "DISPONIBLE",
+    "x": 860,
+    "y": 320,
+    "ancho": 100,
+    "alto": 50
+  },
+  {
+    "id": 8,
+    "estado": "DISPONIBLE",
+    "x": 1111,
+    "y": 151,
+    "ancho": 248,
+    "alto": 226
+  },
+  {
+    "id": 9,
+    "estado": "DISPONIBLE",
+    "x": 323,
+    "y": 618,
+    "ancho": 100,
+    "alto": 50
+  },
+  {
+    "id": 10,
+    "estado": "DISPONIBLE",
+    "x": 520,
+    "y": 618,
+    "ancho": 100,
+    "alto": 50
+  },
+  {
+    "id": 11,
+    "estado": "DISPONIBLE",
+    "x": 725,
+    "y": 619,
     "ancho": 100,
     "alto": 50
   }

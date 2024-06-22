@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.MouseListener;
 import java.util.List;
 
+import static java.awt.SystemColor.menu;
+
 public class MesasPanel extends JFrame {
 
     private final MesaService mesaService = new MesaService();
@@ -20,6 +22,7 @@ public class MesasPanel extends JFrame {
     private JButton agregarMesaButton;
     private JButton eliminarMesaButton;
     private JMenuBar menuBar;
+    private CartaPanel cartaPanel = new CartaPanel();
 
     public MesasPanel(String nombreComercio, boolean admin) {
 
@@ -87,6 +90,12 @@ public class MesasPanel extends JFrame {
         menuMesas.add(toggleEdicionItem); // Añadir el toggle de edición al menú
         menuAyuda.add(aboutItem);
         verMenu.add(verMenuCompleto);
+        verMenuCompleto.addActionListener(e ->
+                {
+                    cargarCartaPanel();
+
+                }
+                );
 
         // Agregar menús a la barra de menú
         if (admin) {
@@ -129,6 +138,10 @@ public class MesasPanel extends JFrame {
                 }
             }
         }
+    }
+
+    public void cargarCartaPanel(){
+        cartaPanel.setVisible(true);
     }
 
     public void eliminarMesa() {
@@ -228,8 +241,8 @@ public class MesasPanel extends JFrame {
     }
 */
 
-    /*
 
+/*
     private void irAlMenu(){
         MenuLoader loader = new MenuLoader();
 

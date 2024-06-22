@@ -12,41 +12,106 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
-///Esta clase proporciona todos los metodos necesarios para la gestion la lista de productos. Metodos que seran llamados en los botones del sistema
+///Esta clase proporciona todos los metodos necesarios para la gestion la lista de carta. Metodos que seran llamados en los botones del sistema
 
 public class ProductoService {
 
-    private static final String RUTA_JSON = "src/main/java/org/example/resource/productos.json";
-    private final Map<Categoria, List<Producto>> productos = new LinkedHashMap<>();
+    private static final String RUTA_JSON = "src/main/java/org/example/resource/carta.json";
+    private Map<String, List<Producto>> carta = new LinkedHashMap<>();
+    private final CategoriaService categoriaService = new CategoriaService();
 
 
     public ProductoService() {
-        cargarMenu();
+        carta = cargarCarta();
     }
-/*
+
+    ///NUEVAS FUNCIONES PARA CARTA PANEL
     public void agregarProducto(Producto producto) {
-        Categoria categoria = String.valueOf(producto.getCategoria());
-        List<Producto> productosCategoria = productos.getOrDefault(categoria, List.of());
+        List<Producto> productosCategoria = carta.computeIfAbsent(producto.getCategoria(), k -> new ArrayList<>());
         productosCategoria.add(producto);
-        productos.put(categoria, productosCategoria);
-        guardarProductosJson(productos);
+        guardarCartaJson();
     }
-
-
-
 
     public void eliminarProducto(Producto producto) {
-        String categoria = String.valueOf(producto.getCategoria());
-        List<Producto> productosCategoria = productos.getOrDefault(categoria, List.of());
-        productosCategoria.remove(producto);
-        productos.put(categoria, productosCategoria);
-        guardarProductosJson(productos);
+        List<Producto> productos = carta.get(producto.getCategoria());
+        if (productos != null) {
+            productos.remove(producto);
+            guardarCartaJson();
+        }
     }
 
- */
+    public void guardarCartaJson() {
+        Gson gson = new Gson();
+        try (FileWriter writer = new FileWriter(RUTA_JSON)) {
+            gson.toJson(carta, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void aplicarAumento(double porcentaje) {
+        for (List<Producto> productosCategoria : carta.values()) {
+            for (Producto producto : productosCategoria) {
+                double nuevoPrecio = producto.getPrecio() * (1 + porcentaje / 100);
+                producto.setPrecio(nuevoPrecio);
+            }
+        }
+        guardarCartaJson();
+    }
+
+    public void actualizarProducto(Producto producto) {
+        List<Producto> productosCategoria = carta.get(producto.getCategoria());
+        if (productosCategoria != null) {
+            for (int i = 0; i < productosCategoria.size(); i++) {
+                if (productosCategoria.get(i).getId() == producto.getId()) {
+                    productosCategoria.set(i, producto);
+                    guardarCartaJson();
+                    break;
+                }
+            }
+        }
+    }
+
+    public List<Producto> obtenerTodosLosProductos() {
+        return carta.values().stream()
+                .flatMap(List::stream)
+                .toList();
+    }
+
+    public Map<String, List<Producto>> cargarCarta() {
+        Map<String, List<Producto>> cartaCargada = new LinkedHashMap<>();
+        try (FileReader reader = new FileReader(RUTA_JSON)) {
+            Gson gson = new Gson();
+            Type cartaType = new TypeToken<Map<String, List<Producto>>>() {}.getType();
+            cartaCargada = gson.fromJson(reader, cartaType);
+            for (String categoria : cartaCargada.keySet()) {
+                categoriaService.agregarCategoria(categoria);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return cartaCargada;
+    }
+
+    public void agregarCategoria(String categoria) {
+        categoriaService.agregarCategoria(categoria);
+        carta.put(categoria,new ArrayList<>());
+        guardarCartaJson();
+    }
+
+    public List<String>obtenerCategorias(){
+        return categoriaService.getCategorias().stream().toList();
+    }
+    public void eliminarCategoria(String categoria) {
+        carta.remove(categoria);
+        guardarCartaJson();
+    }
+
+
+
+    /////
     public Producto buscarProductoPorNombre(String nombre) {
-        return productos.values().stream()
+        return carta.values().stream()
                 .flatMap(List::stream)
                 .filter(p -> p.getNombre().equalsIgnoreCase(nombre))
                 .findFirst()
@@ -55,8 +120,8 @@ public class ProductoService {
 
     public List<Producto> buscarProductosPorNombre(String nombre) {
         List<Producto> productosEncontrados = new ArrayList<>();
-        for (List<Producto> productos : productos.values()) {
-            for (Producto producto : productos) {
+        for (List<Producto> carta : carta.values()) {
+            for (Producto producto : carta) {
                 if (producto.getNombre().toLowerCase().contains(nombre.toLowerCase())) {
                     productosEncontrados.add(producto);
                 }
@@ -65,54 +130,7 @@ public class ProductoService {
         return productosEncontrados;
     }
 
-    public List<Producto> filtrarProductosPorCategoria(Categoria categoria) {
-        return productos.getOrDefault(categoria, List.of());
+    public List<Producto> filtrarProductosPorCategoria(String categoria) {
+        return new ArrayList<>(carta.getOrDefault(categoria, new ArrayList<>()));
     }
-
-    public <K, V> List<V> searchInLinkedHashMap(@org.jetbrains.annotations.NotNull LinkedHashMap<K, V> map, K key) {
-        List<V> resultList = new ArrayList<>();
-        for (Map.Entry<K, V> entry : map.entrySet()) {
-            if (entry.getKey().equals(key)) {
-                resultList.add(entry.getValue());
-            }
-        }
-        return resultList;
-    }
-
-    public List<Producto> obtenerTodosLosProductos() {
-        return productos.values().stream()
-                .flatMap(List::stream)
-                .toList();
-    }
-
-    public Map<String, List<Producto>> cargarMenu() {
-        try (FileReader reader = new FileReader(RUTA_JSON)) {
-            Gson gson = new Gson();
-            JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
-            Type productoListType = new TypeToken<List<Producto>>() {}.getType();
-            List<Producto> productos = gson.fromJson(jsonObject.get("productos"), productoListType);
-            return organizarPorCategoria(productos);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private Map<String, List<Producto>> organizarPorCategoria(List<Producto> productos) {
-        Map<String, List<Producto>> menu = new LinkedHashMap<>();
-        for (Producto producto : productos) {
-            menu.computeIfAbsent(String.valueOf(producto.getCategoria()), k -> new ArrayList<>()).add(producto);
-        }
-        return menu;
-    }
-
-    public void guardarProductosJson(Map<String, List<Producto>> productos) {
-        Gson gson = new Gson();
-        try (FileWriter writer = new FileWriter(RUTA_JSON)) {
-            gson.toJson(productos, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
