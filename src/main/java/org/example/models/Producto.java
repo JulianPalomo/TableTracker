@@ -1,23 +1,24 @@
 package org.example.models;
 
-import org.example.interfaces.Buscable;
-import org.example.interfaces.Filtrable;
-
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicLongArray;
 
-public class Producto{
+public class Producto implements Cloneable {
 
     private static int contador = 0;  // Variable estática para mantener el próximo ID disponible
     private int id;
     private String nombre;
     private String categoria;
     private double precio;
+    private String observacion; // nuevo campo
+
 
     public Producto( String nombre, String Categoria, double precio) {
         this.id = contador++;
         this.nombre = nombre;
         this.categoria = Categoria;
         this.precio = precio;
+        this.observacion = "";
     }
 
     public String getNombre() {
@@ -47,9 +48,25 @@ public class Producto{
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+    public String getObservacion() {
+        return observacion;
+    }
 
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+
+    }
 
     @Override
+    public Producto clone() {
+        try {
+            return (Producto) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Error al clonar el producto", e);
+        }
+    }
+
+        @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -64,15 +81,10 @@ public class Producto{
 
     @Override
     public String toString() {
-        return "Producto{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", categoria=" + categoria +
-                ", precio=" + precio +
-                '}';
+        return
+                nombre + "     " +
+                 " $" + precio ;
+
     }
-
-
-
 
 }

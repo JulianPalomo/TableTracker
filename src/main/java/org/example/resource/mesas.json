@@ -2,42 +2,42 @@
   {
     "id": 1,
     "estado": "DISPONIBLE",
-    "x": 63,
-    "y": 313,
+    "x": 30,
+    "y": 22,
     "ancho": 100,
     "alto": 50
   },
   {
     "id": 2,
     "estado": "DISPONIBLE",
-    "x": 229,
-    "y": 315,
+    "x": 157,
+    "y": 23,
     "ancho": 100,
     "alto": 50
   },
   {
     "id": 3,
     "estado": "DISPONIBLE",
-    "x": 350,
-    "y": 316,
+    "x": 278,
+    "y": 22,
     "ancho": 100,
     "alto": 50
   },
   {
     "id": 4,
     "estado": "DISPONIBLE",
-    "x": 344,
-    "y": 171,
-    "ancho": 100,
-    "alto": 50
+    "x": 407,
+    "y": 23,
+    "ancho": 102,
+    "alto": 89
   },
   {
     "id": 5,
     "estado": "DISPONIBLE",
-    "x": 518,
-    "y": 169,
-    "ancho": 232,
-    "alto": 56
+    "x": 649,
+    "y": 18,
+    "ancho": 111,
+    "alto": 91
   },
   {
     "id": 6,

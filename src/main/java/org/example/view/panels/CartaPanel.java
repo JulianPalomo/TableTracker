@@ -29,14 +29,12 @@ public class CartaPanel extends JFrame {
         buttonPanel.setLayout(new FlowLayout());
 
         JButton addButton = new JButton("Agregar Producto");
-        JButton addCategoryButton = new JButton("Agregar Categoría");
         JButton deleteCategoryButton = new JButton("Eliminar Categoría");
         JButton editButton = new JButton("Editar Producto");
         JButton deleteButton = new JButton("Eliminar Producto");
         JButton increaseButton = new JButton("Aumentar Precios");
 
         buttonPanel.add(addButton);
-        buttonPanel.add(addCategoryButton);
         buttonPanel.add(deleteCategoryButton);
         buttonPanel.add(editButton);
         buttonPanel.add(deleteButton);
@@ -47,7 +45,6 @@ public class CartaPanel extends JFrame {
 
         // Listeners
         addButton.addActionListener(e -> agregarProducto());
-        addCategoryButton.addActionListener(e -> agregarCategoria());
         deleteCategoryButton.addActionListener(e -> eliminarCategoria());
         editButton.addActionListener(e -> editarProducto());
         deleteButton.addActionListener(e -> eliminarProducto());
@@ -56,16 +53,6 @@ public class CartaPanel extends JFrame {
         setVisible(true);
     }
 
-    private void agregarCategoria() {
-        String nuevaCategoria = JOptionPane.showInputDialog(this,
-                "Ingrese el nombre de la nueva categoría:",
-                "Agregar Categoría", JOptionPane.PLAIN_MESSAGE);
-        if (nuevaCategoria != null && !nuevaCategoria.isEmpty()) {
-            productoService.agregarCategoria(nuevaCategoria.toUpperCase());
-            // Actualizar el tabbedPane con la nueva categoría
-            agregarNuevaCategoriaAlTabbedPane(nuevaCategoria.toUpperCase());
-        }
-    }
 
     private void eliminarCategoria() {
         String categoriaAEliminar = (String) JOptionPane.showInputDialog(

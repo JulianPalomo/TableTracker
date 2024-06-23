@@ -1,6 +1,5 @@
 package org.example.view;
 
-
 import org.example.models.Mesa;
 import org.example.service.MesaService;
 import org.example.view.panels.MesasPanel;
@@ -23,9 +22,7 @@ public class RestaurantApp {
         }
 
         */
-
     }
-
 /*
     public static void main(String[] args) {
         MenuLoader loader = new MenuLoader();

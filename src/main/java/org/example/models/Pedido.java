@@ -1,14 +1,13 @@
 package org.example.models;
 
 
-import org.example.interfaces.Filtrable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Pedido implements Filtrable<LocalDate> {
+public class Pedido{
     private ArrayList<Producto> listaProductos;
     private LocalDate fecha;
 
@@ -44,10 +43,5 @@ public class Pedido implements Filtrable<LocalDate> {
             total += producto.getPrecio();
         }
         return total;
-    }
-
-    @Override
-    public boolean cumpleFiltro(LocalDate criterio) {
-        return this.fecha.equals(fecha);
     }
 }
