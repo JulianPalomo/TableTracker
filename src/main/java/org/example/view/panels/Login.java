@@ -1,5 +1,6 @@
 package org.example.view.panels;
 
+import org.example.models.TipoCuenta;
 import org.example.models.Usuario;
 import org.example.service.UsuarioService;
 
@@ -16,32 +17,55 @@ public class Login extends JDialog {
     private JButton OKButton;
     private JButton cancelarButton;
     private JPanel loginPanel;
-    private JLabel lblEmailOrUsername;
 
     public Login(JFrame parent) {
         super(parent);
         setTitle("Inicio de Sesión");
 
-        // Inicializar el loginPanel (IntelliJ IDEA debería generar este código automáticamente si usas su diseñador GUI)
-        loginPanel = new JPanel();
-        loginPanel.setLayout(new GridLayout(3, 2));
-        lblEmailOrUsername = new JLabel("Email o Nombre de Usuario:");
-        tfEmailOrUsername = new JTextField();
-        JLabel lblContrasena = new JLabel("Contraseña:");
-        tfContrasena = new JPasswordField();
-        OKButton = new JButton("OK");
-        cancelarButton = new JButton("Cancelar");
+        // Inicializar el loginPanel con GridBagLayout
+        loginPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        loginPanel.add(lblEmailOrUsername);
-        loginPanel.add(tfEmailOrUsername);
-        loginPanel.add(lblContrasena);
-        loginPanel.add(tfContrasena);
-        loginPanel.add(OKButton);
-        loginPanel.add(cancelarButton);
+        // Crear y añadir componentes
+        JLabel lblEmailOrUsername = new JLabel("Email o Nombre de Usuario:");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        loginPanel.add(lblEmailOrUsername, gbc);
+
+        tfEmailOrUsername = new JTextField();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        loginPanel.add(tfEmailOrUsername, gbc);
+
+        JLabel lblContrasena = new JLabel("Contraseña:");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        loginPanel.add(lblContrasena, gbc);
+
+        tfContrasena = new JPasswordField();
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        loginPanel.add(tfContrasena, gbc);
+
+        OKButton = new JButton("OK");
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        loginPanel.add(OKButton, gbc);
+
+        cancelarButton = new JButton("Cancelar");
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        loginPanel.add(cancelarButton, gbc);
 
         // Configurar la ventana de diálogo
         setContentPane(loginPanel);
-        setMinimumSize(new Dimension(400, 300));
+        setMinimumSize(new Dimension(400, 200));
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -76,7 +100,8 @@ public class Login extends JDialog {
             if ((usuario.getEmail().equals(emailOrUsername) || usuario.getNombreUsuario().equals(emailOrUsername))
                     && usuario.getContrasena().equals(contraseña)) {
                 JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                new Menu(usuario.getTipoCuenta());
+                MesasPanel mesasPanel = new MesasPanel("TableTracker", usuario.getTipoCuenta() == TipoCuenta.ADMINISTRADOR);
+                mesasPanel.setVisible(true);
                 dispose();
                 return;
             }

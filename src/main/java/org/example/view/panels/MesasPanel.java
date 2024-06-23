@@ -52,7 +52,7 @@ public class MesasPanel extends JFrame {
         JButton toggleEdicionButton = new JButton("Editar Mesas");
         JButton verMenuCompletoButton = new JButton("Carta");
         JButton aboutButton = new JButton("Acerca De");
-
+        JButton addUserButton = new JButton("Añadir Usuario");
 
         toggleEdicionButton.addActionListener(e -> {
             this.modoEdicion = !modoEdicion; // Alternar el modo de edición
@@ -65,14 +65,16 @@ public class MesasPanel extends JFrame {
         verMenuCompletoButton.addActionListener(e -> cargarCartaPanel());
 
         aboutButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Software de Gestión para Restaurante.\nVersión 1.0"));
-
+        addUserButton.addActionListener(e -> new Registration(this));
         // Agregar botones a la toolbar
         if (admin) {
             toolBar.add(toggleEdicionButton);
         }
         toolBar.add(verMenuCompletoButton);
         toolBar.add(aboutButton);
-
+        if (admin){
+            toolBar.add(addUserButton);
+        }
         // Botón de confirmar edición
         confirmarCambios = new JButton("Confirmar Cambios");
         confirmarCambios.setVisible(false); // Inicialmente invisible

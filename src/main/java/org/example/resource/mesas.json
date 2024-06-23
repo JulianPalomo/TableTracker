@@ -26,6 +26,10 @@
   {
     "id": 4,
     "estado": "DISPONIBLE",
+    "pedido": {
+      "listaProductos": [],
+      "fecha": "2024-06-22"
+    },
     "x": 407,
     "y": 23,
     "ancho": 102,
@@ -42,48 +46,8 @@
   {
     "id": 6,
     "estado": "DISPONIBLE",
-    "x": 520,
-    "y": 319,
-    "ancho": 100,
-    "alto": 50
-  },
-  {
-    "id": 7,
-    "estado": "DISPONIBLE",
-    "x": 860,
-    "y": 320,
-    "ancho": 100,
-    "alto": 50
-  },
-  {
-    "id": 8,
-    "estado": "DISPONIBLE",
-    "x": 1111,
-    "y": 151,
-    "ancho": 248,
-    "alto": 226
-  },
-  {
-    "id": 9,
-    "estado": "DISPONIBLE",
-    "x": 323,
-    "y": 618,
-    "ancho": 100,
-    "alto": 50
-  },
-  {
-    "id": 10,
-    "estado": "DISPONIBLE",
-    "x": 520,
-    "y": 618,
-    "ancho": 100,
-    "alto": 50
-  },
-  {
-    "id": 11,
-    "estado": "DISPONIBLE",
-    "x": 725,
-    "y": 619,
+    "x": 178,
+    "y": 187,
     "ancho": 100,
     "alto": 50
   }
