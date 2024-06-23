@@ -1,8 +1,5 @@
 package org.example.models;
 
-
-import org.example.interfaces.Filtrable;
-
 import java.io.Serializable;
 import java.util.Objects;
 

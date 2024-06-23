@@ -55,13 +55,14 @@ public class PedidoPanel extends JFrame implements PedidoListener {
             public void actionPerformed(ActionEvent e) {
                 new FacturaPanel(pedido);
                 mesa.liberarMesa();
+                mesasPanel.actualizarColorMesas();
             }
         });
 
         addProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                agregarProducto(productoService.cargarCarta());
+                agregarProducto(productoService.cargarCarta(),mesa.getId());
                 if(pedido != null){
                     mesa.ocuparMesa();
                     mesasPanel.actualizarColorMesas(); // Notificar al MesasPanel para actualizar el color
@@ -94,13 +95,11 @@ public class PedidoPanel extends JFrame implements PedidoListener {
                         mesa.liberarMesa();
                         mesasPanel.actualizarColorMesas();
                     }
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecciona un producto para eliminar.");
                 }
-                if(pedido.getListaProductos() != null) {
-                    mesa.ocuparMesa();
-                    mesasPanel.actualizarColorMesas();
-                }
+
             }
         });
 
@@ -175,9 +174,9 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         }
     }
 
-    private void agregarProducto(Map<String, List<Producto>> menu) {
+    private void agregarProducto(Map<String, List<Producto>> menu,int nroMesa) {
 
-        AgregarPedido agregarPedido = new AgregarPedido(menu, this);
+        AgregarPedido agregarPedido = new AgregarPedido(menu, this,nroMesa);
         agregarPedido.setVisible(true);
     }
 

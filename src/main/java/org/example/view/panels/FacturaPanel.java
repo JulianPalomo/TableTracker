@@ -10,26 +10,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.Document;
+
 import org.example.service.FacturaService;
 
-///import org.example.service.FacturaService;
+import javax.swing.table.DefaultTableModel;
+
 
 public class FacturaPanel extends JFrame {
 
     private JPanel panel1;
-    private JList<Producto> listaProductos;
+    private JTable tablaProductos;
     private JComboBox<MetodosDePago> mediosDePago;
     private JLabel subtotalLabel;
     private JButton botonFactura;
-    private DefaultListModel<Producto> listaModel;
+    private DefaultTableModel tablaModel;
     private ArrayList<Producto> productos;
 
     private FacturaService facturaService = new FacturaService();
@@ -43,20 +41,26 @@ public class FacturaPanel extends JFrame {
         setLocationRelativeTo(null);
 
         panel1 = new JPanel();
-        listaModel = new DefaultListModel<>();
-        listaProductos = new JList<>(listaModel);
+        tablaModel = new DefaultTableModel();
+        tablaModel.addColumn("ID");
+        tablaModel.addColumn("Nombre");
+        tablaModel.addColumn("Categoría");
+        tablaModel.addColumn("Precio");
+
+        tablaProductos = new JTable(tablaModel);
+        JScrollPane scrollPane = new JScrollPane(tablaProductos);
+
         subtotalLabel = new JLabel("Subtotal: $0.0");
-
         mediosDePago = new JComboBox<>(MetodosDePago.values());
-
         botonFactura = new JButton("Imprimir Factura");
 
         for (Producto producto : productos) {
-            listaModel.addElement(producto);
+            Object[] row = {producto.getId(), producto.getNombre(), producto.getCategoria(), producto.getPrecio()};
+            tablaModel.addRow(row);
         }
 
         panel1.setLayout(new BorderLayout());
-        panel1.add(new JScrollPane(listaProductos), BorderLayout.CENTER);
+        panel1.add(scrollPane, BorderLayout.CENTER);
 
         JPanel panelInferior = new JPanel();
         panelInferior.setLayout(new GridLayout(3, 1));

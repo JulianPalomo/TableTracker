@@ -2,29 +2,6 @@
   {
     "id": 1,
     "estado": "DISPONIBLE",
-    "pedido": {
-      "listaProductos": [
-        {
-          "id": 2,
-          "nombre": "Whisky",
-          "categoria": "BEBIDAS_ALCOHOLICAS",
-          "precio": 8000.0
-        },
-        {
-          "id": 2,
-          "nombre": "Whisky",
-          "categoria": "BEBIDAS_ALCOHOLICAS",
-          "precio": 8000.0
-        },
-        {
-          "id": 2,
-          "nombre": "Whisky",
-          "categoria": "BEBIDAS_ALCOHOLICAS",
-          "precio": 8000.0
-        }
-      ],
-      "fecha": "2024-06-22"
-    },
     "x": 30,
     "y": 22,
     "ancho": 100,

@@ -1,8 +1,5 @@
 package org.example.models;
 
-import org.example.interfaces.Buscable;
-import org.example.interfaces.Filtrable;
-
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLongArray;
 

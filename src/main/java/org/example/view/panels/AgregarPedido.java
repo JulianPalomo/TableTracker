@@ -15,10 +15,10 @@ public class AgregarPedido extends JFrame {
     private ArrayList<Producto> pedido;
     private PedidoListener listener;
 
-    public AgregarPedido(Map<String, List<Producto>> menu, PedidoListener listener) {
+    public AgregarPedido(Map<String, List<Producto>> menu, PedidoListener listener, int nroMesa) {
         this.listener = listener;
-        setTitle("Menú del Restaurante");
-        setSize(800, 600);
+        setTitle("Agregar productos a Mesa " + nroMesa);
+        setSize(700, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -50,7 +50,6 @@ public class AgregarPedido extends JFrame {
                         }
                     }
                 });
-
 
                 panel.add(nameLabel);
                 panel.add(priceLabel);
