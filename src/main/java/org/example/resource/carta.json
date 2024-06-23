@@ -1,1 +1,316 @@
-{"BEBIDAS_ALCOHOLICAS":[{"id":0,"nombre":"Cerveza","categoria":"BEBIDAS_ALCOHOLICAS","precio":2000.0},{"id":1,"nombre":"Vino Tinto","categoria":"BEBIDAS_ALCOHOLICAS","precio":5000.0},{"id":2,"nombre":"Whisky","categoria":"BEBIDAS_ALCOHOLICAS","precio":8000.0}],"POSTRES":[{"id":3,"nombre":"Tarta de Chocolate","categoria":"POSTRES","precio":1500.0},{"id":4,"nombre":"Helado","categoria":"POSTRES","precio":1200.5},{"id":5,"nombre":"Flan","categoria":"POSTRES","precio":1000.0}],"ENTRADAS":[{"id":6,"nombre":"Ensalada César","categoria":"ENTRADAS","precio":2500.0},{"id":7,"nombre":"Sopa de Cebolla","categoria":"ENTRADAS","precio":1800.75},{"id":8,"nombre":"Bruschettas","categoria":"ENTRADAS","precio":2000.5}],"PLATOS_PRINCIPALES":[{"id":9,"nombre":"Bistec con Papas","categoria":"PLATOS_PRINCIPALES","precio":6000.0},{"id":10,"nombre":"Pollo al Curry","categoria":"PLATOS_PRINCIPALES","precio":5500.75},{"id":11,"nombre":"Pasta Alfredo","categoria":"PLATOS_PRINCIPALES","precio":5000.5}],"BEBIDAS_NO_ALCOHOLICAS":[{"id":12,"nombre":"Agua Mineral","categoria":"BEBIDAS_NO_ALCOHOLICAS","precio":1000.0},{"id":13,"nombre":"Jugo de Naranja","categoria":"BEBIDAS_NO_ALCOHOLICAS","precio":1500.25},{"id":14,"nombre":"Limonada","categoria":"BEBIDAS_NO_ALCOHOLICAS","precio":1300.5}],"FACTURAS":[{"id":0,"nombre":"Torta negra","categoria":"FACTURAS","precio":2000.0,"observacion":""}]}
+{
+  "BEBIDAS ALCOHOLICAS": [
+    {
+      "id": 0,
+      "nombre": "Cerveza clasica",
+      "categoria": "BEBIDAS ALCOHOLICAS",
+      "precio": 2500.0
+    },
+    {
+      "id": 1,
+      "nombre": "Vino Tinto",
+      "categoria": "BEBIDAS ALCOHOLICAS",
+      "precio": 5000.0
+    },
+    {
+      "id": 3,
+      "nombre": "Whisky",
+      "categoria": "BEBIDAS ALCOHOLICAS",
+      "precio": 8000.0
+    },
+    {
+      "id": 4,
+      "nombre": "Cuba Libre",
+      "categoria": "BEBIDAS ALCOHOLICAS",
+      "precio": 8000.0
+    },
+    {
+      "id": 5,
+      "nombre": "Fernet",
+      "categoria": "BEBIDAS ALCOHOLICAS",
+      "precio": 8000.0
+    },
+    {
+      "id": 6,
+      "nombre": "Campari",
+      "categoria": "BEBIDAS ALCOHOLICAS",
+      "precio": 6000.0
+    },
+    {
+      "id": 7,
+      "nombre": "Cerveza amber",
+      "categoria": "BEBIDAS ALCOHOLICAS",
+      "precio": 2500.0
+    },
+    {
+      "id": 8,
+      "nombre": "Cerveza stout",
+      "categoria": "BEBIDAS ALCOHOLICAS",
+      "precio": 2500.0
+    },
+    {
+      "id": 9,
+      "nombre": "Vino blanco",
+      "categoria": "BEBIDAS ALCOHOLICAS",
+      "precio": 5000.0
+    }
+  ],
+  "POSTRES": [
+    {
+      "id": 10,
+      "nombre": "Torta de Chocolate",
+      "categoria": "POSTRES",
+      "precio": 2500.0
+    },
+    {
+      "id": 11,
+      "nombre": "Helado",
+      "categoria": "POSTRES",
+      "precio": 3200.0
+    },
+    {
+      "id": 12,
+      "nombre": "Flan mixto",
+      "categoria": "POSTRES",
+      "precio": 4000.0
+    },
+    {
+      "id": 13,
+      "nombre": "Ensalada de frutas",
+      "categoria": "POSTRES",
+      "precio": 2600.0
+    },
+    {
+      "id": 14,
+      "nombre": "Crema Catalana",
+      "categoria": "POSTRES",
+      "precio": 3300.0
+    },
+    {
+      "id": 15,
+      "nombre": "Cheesecake",
+      "categoria": "POSTRES",
+      "precio": 4400.0
+    },
+    {
+      "id": 16,
+      "nombre": "Mousse de Chocolate",
+      "categoria": "POSTRES",
+      "precio": 3250.0
+    },
+    {
+      "id": 17,
+      "nombre": "Chocotorta",
+      "categoria": "POSTRES",
+      "precio": 3100.0
+    }
+  ],
+  "ENTRADAS": [
+    {
+      "id": 18,
+      "nombre": "Ensalada César",
+      "categoria": "ENTRADAS",
+      "precio": 2500.0
+    },
+    {
+      "id": 19,
+      "nombre": "Sopa de Cebolla",
+      "categoria": "ENTRADAS",
+      "precio": 1800.75
+    },
+    {
+      "id": 20,
+      "nombre": "Bruschettas",
+      "categoria": "ENTRADAS",
+      "precio": 2000.5
+    },
+    {
+      "id": 21,
+      "nombre": "Empanada de carne",
+      "categoria": "ENTRADAS",
+      "precio": 2000.0
+    },
+    {
+      "id": 22,
+      "nombre": "Empanada de jamon y queso",
+      "categoria": "ENTRADAS",
+      "precio": 2000.0
+    },
+    {
+      "id": 23,
+      "nombre": "Tarta de Atún",
+      "categoria": "ENTRADAS",
+      "precio": 2900.0
+    },
+    {
+      "id": 24,
+      "nombre": "Provoleta",
+      "categoria": "ENTRADAS",
+      "precio": 4400.0
+    },
+    {
+      "id": 25,
+      "nombre": "Papas fritas",
+      "categoria": "ENTRADAS",
+      "precio": 2600.0
+    },
+    {
+      "id": 26,
+      "nombre": "Humita",
+      "categoria": "ENTRADAS",
+      "precio": 3300.0
+    },
+    {
+      "id": 27,
+      "nombre": "Choripán",
+      "categoria": "ENTRADAS",
+      "precio": 4100.0
+    },
+    {
+      "id": 28,
+      "nombre": "Vitel Toné",
+      "categoria": "ENTRADAS",
+      "precio": 4800.0
+    },
+    {
+      "id": 29,
+      "nombre": "Ensalada Rusa",
+      "categoria": "ENTRADAS",
+      "precio": 2900.0
+    },
+    {
+      "id": 30,
+      "nombre": "Escabeche",
+      "categoria": "ENTRADAS",
+      "precio": 2500.0
+    },
+    {
+      "id": 31,
+      "nombre": "Tomates Rellenos",
+      "categoria": "ENTRADAS",
+      "precio": 3200.0
+    }
+  ],
+  "PLATOS PRINCIPALES": [
+    {
+      "id": 32,
+      "nombre": "Bistec con Papas",
+      "categoria": "PLATOS PRINCIPALES",
+      "precio": 9000.0
+    },
+    {
+      "id": 33,
+      "nombre": "Pollo al Curry",
+      "categoria": "PLATOS PRINCIPALES",
+      "precio": 5500.75
+    },
+    {
+      "id": 34,
+      "nombre": "Pasta con fileto",
+      "categoria": "PLATOS PRINCIPALES",
+      "precio": 5000.5
+    },
+    {
+      "id": 35,
+      "nombre": "Asado",
+      "categoria": "PLATOS PRINCIPALES",
+      "precio": 6500.0
+    },
+    {
+      "id": 36,
+      "nombre": "Milanesa",
+      "categoria": "PLATOS PRINCIPALES",
+      "precio": 5800.0
+    },
+    {
+      "id": 37,
+      "nombre": "Trucha a la Parrilla",
+      "categoria": "PLATOS PRINCIPALES",
+      "precio": 6800.0
+    },
+    {
+      "id": 38,
+      "nombre": "Ñoquis con salsa de hongos",
+      "categoria": "PLATOS PRINCIPALES",
+      "precio": 9200.0
+    },
+    {
+      "id": 39,
+      "nombre": "Gambas al Ajillo",
+      "categoria": "PLATOS PRINCIPALES",
+      "precio": 9800.0
+    },
+    {
+      "id": 40,
+      "nombre": "Pollo al Horno",
+      "categoria": "PLATOS PRINCIPALES",
+      "precio": 7400.0
+    }
+  ],
+  "BEBIDAS NO ALCOHOLICAS": [
+    {
+      "id": 41,
+      "nombre": "Agua Mineral",
+      "categoria": "BEBIDAS NO ALCOHOLICAS",
+      "precio": 1000.0
+    },
+    {
+      "id": 42,
+      "nombre": "Jugo de Naranja",
+      "categoria": "BEBIDAS NO ALCOHOLICAS",
+      "precio": 1500.25
+    },
+    {
+      "id": 43,
+      "nombre": "Limonada",
+      "categoria": "BEBIDAS NO ALCOHOLICAS",
+      "precio": 1300.5
+    },
+    {
+      "id": 44,
+      "nombre": "Limonada de Coco",
+      "categoria": "BEBIDAS NO ALCOHOLICAS",
+      "precio": 1400.0
+    },
+    {
+      "id": 45,
+      "nombre": "Té Helado",
+      "categoria": "BEBIDAS NO ALCOHOLICAS",
+      "precio": 1200.0
+    },
+    {
+      "id": 46,
+      "nombre": "Mate",
+      "categoria": "BEBIDAS NO ALCOHOLICAS",
+      "precio": 1100.0
+    },
+    {
+      "id": 47,
+      "nombre": "Coca-Cola",
+      "categoria": "BEBIDAS NO ALCOHOLICAS",
+      "precio": 1200.0
+    },
+    {
+      "id": 48,
+      "nombre": "Fanta",
+      "categoria": "BEBIDAS NO ALCOHOLICAS",
+      "precio": 1200.0
+    },
+    {
+      "id": 49,
+      "nombre": "Seven Up",
+      "categoria": "BEBIDAS NO ALCOHOLICAS",
+      "precio": 1200.0
+    },
+    {
+      "id": 50,
+      "nombre": "Agua con Gas",
+      "categoria": "BEBIDAS NO ALCOHOLICAS",
+      "precio": 1000.0
+    }
+  ]
+}
+
+
+
+
