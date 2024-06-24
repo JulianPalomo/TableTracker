@@ -95,7 +95,6 @@ public class PedidoPanel extends JFrame implements PedidoListener {
                         mesa.liberarMesa();
                         mesasPanel.actualizarColorMesas();
                     }
-
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecciona un producto para eliminar.");
                 }

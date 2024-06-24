@@ -10,7 +10,11 @@ import org.example.view.buttons.MesaButton;
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class MesasPanel extends JFrame {
@@ -68,12 +72,16 @@ public class MesasPanel extends JFrame {
         closeButton.setContentAreaFilled(false); // Hace que el área de contenido del botón sea transparente
         closeButton.setBorderPainted(false); // Elimina el borde del botón
         closeButton.addActionListener(e -> {
-            dispose();
-            System.exit(0); // Termina la ejecución del programa
+            int confirmDialog = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que quieres salir?", "Confirmar salida", JOptionPane.YES_NO_OPTION);
+            if (confirmDialog == JOptionPane.YES_OPTION) {
+                dispose(); // Cierra la ventana
+                System.exit(0); // Termina la ejecución del programa
+            }
         });
 
 
-        JButton toggleEdicionButton = new JButton("Editar Mesas");
+
+        JButton toggleEdicionButton = new JButton("Editar Salón");
         JButton verMenuCompletoButton = new JButton("Carta");
         JButton aboutButton = new JButton("Acerca De");
         JButton addUserButton = new JButton("Añadir Usuario");
@@ -89,6 +97,7 @@ public class MesasPanel extends JFrame {
         verMenuCompletoButton.addActionListener(e -> cargarCartaPanel());
 
         aboutButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Software de Gestión para Restaurante.\nVersión 1.0"));
+
         addUserButton.addActionListener(e -> new Registration(this));
 
         Dimension buttonSize = new Dimension(150, 40); // Ancho x Alto
