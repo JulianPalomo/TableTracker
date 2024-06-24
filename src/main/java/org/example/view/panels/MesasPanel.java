@@ -69,8 +69,8 @@ public class MesasPanel extends JFrame {
         closeButton.setBorderPainted(false); // Elimina el borde del botón
         closeButton.addActionListener(e -> {
             dispose();
+            System.exit(0); // Termina la ejecución del programa
         });
-
 
 
         JButton toggleEdicionButton = new JButton("Editar Mesas");
