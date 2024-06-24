@@ -122,15 +122,15 @@
   {
     "estado": "DISPONIBLE",
     "nroMesa": 16,
-    "x": 138,
-    "y": 679,
+    "x": 142,
+    "y": 677,
     "ancho": 220,
     "alto": 195
   },
   {
     "estado": "DISPONIBLE",
     "nroMesa": 17,
-    "x": 455,
+    "x": 488,
     "y": 677,
     "ancho": 212,
     "alto": 192
@@ -138,23 +138,23 @@
   {
     "estado": "DISPONIBLE",
     "nroMesa": 18,
-    "x": 773,
-    "y": 685,
+    "x": 811,
+    "y": 676,
     "ancho": 220,
     "alto": 185
   },
   {
     "estado": "DISPONIBLE",
     "nroMesa": 19,
-    "x": 1088,
-    "y": 681,
-    "ancho": 234,
-    "alto": 180
+    "x": 1178,
+    "y": 682,
+    "ancho": 218,
+    "alto": 179
   },
   {
     "estado": "DISPONIBLE",
     "nroMesa": 20,
-    "x": 1403,
+    "x": 1489,
     "y": 676,
     "ancho": 227,
     "alto": 183

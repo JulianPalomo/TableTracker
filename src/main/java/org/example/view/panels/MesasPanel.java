@@ -87,11 +87,19 @@ public class MesasPanel extends JFrame {
         JButton addUserButton = new JButton("Añadir Usuario");
 
         toggleEdicionButton.addActionListener(e -> {
-            this.modoEdicion = !modoEdicion; // Alternar el modo de edición
-            String estado = modoEdicion ? "Activado" : "Desactivado";
-            JOptionPane.showMessageDialog(this, "Modo de edición " + estado);
-            actualizarModoEdicion();
-            edicionBar.setVisible(modoEdicion); // Mostrar/ocultar edicionBar según el modo de edición
+            // Mostrar el cuadro de diálogo de inicio de sesión
+            Login loginDialog = new Login(this);
+
+            // Verificar si el inicio de sesión fue exitoso
+            if (loginDialog.isLoginSuccessful()) {
+                this.modoEdicion = !modoEdicion; // Alternar el modo de edición
+                String estado = modoEdicion ? "Activado" : "Desactivado";
+                JOptionPane.showMessageDialog(this, "Modo de edición " + estado);
+                actualizarModoEdicion();
+                edicionBar.setVisible(modoEdicion); // Mostrar/ocultar edicionBar según el modo de edición
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo activar el modo de edición. Inicio de sesión fallido.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         verMenuCompletoButton.addActionListener(e -> cargarCartaPanel());

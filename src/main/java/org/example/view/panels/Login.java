@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-
 public class Login extends JDialog {
     private JTextField tfDni;
     private JPasswordField tfContrasena;
@@ -25,6 +24,9 @@ public class Login extends JDialog {
     public Login(JFrame parent) {
         super(parent);
         setTitle("Inicio de Sesión");
+
+        // Inicializar loginSuccessful
+        loginSuccessful = false;
 
         // Inicializar el loginPanel
         loginPanel = new JPanel();
@@ -54,7 +56,6 @@ public class Login extends JDialog {
         personaService = new PersonaService();
 
         personaService.loadFromJson();
-
 
         OKButton.addActionListener(new ActionListener() {
             @Override
@@ -88,7 +89,7 @@ public class Login extends JDialog {
         if (isLoggedIn) {
             JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             loginSuccessful = true;
-
+            dispose();  // Cerrar el diálogo de login
             return true;
         } else {
             throw new LoginFailedException("Usuario o contraseña inválido.");
@@ -97,12 +98,5 @@ public class Login extends JDialog {
 
     public boolean isLoginSuccessful() {
         return loginSuccessful;
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        Login loginDialog = new Login(frame);
-        boolean loggedIn = loginDialog.isLoginSuccessful();
-        System.out.println("Login successful: " + loggedIn);
     }
 }

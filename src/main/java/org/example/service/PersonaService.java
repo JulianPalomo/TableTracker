@@ -18,7 +18,7 @@ import java.util.TreeSet;
 public class PersonaService {
 
     private static final String RUTA_JSON_PERSONAS = "src/main/java/org/example/resource/personas.json";
-    private Set<Persona> personas;
+    private final Set<Persona> personas;
     private Gson gson;
 
     public PersonaService() {
