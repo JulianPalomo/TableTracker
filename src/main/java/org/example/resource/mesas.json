@@ -1,54 +1,162 @@
 [
   {
-    "id": 1,
     "estado": "DISPONIBLE",
-    "x": 30,
-    "y": 22,
-    "ancho": 100,
+    "nroMesa": 1,
+    "x": 116,
+    "y": 189,
+    "ancho": 200,
     "alto": 50
   },
   {
-    "id": 2,
     "estado": "DISPONIBLE",
-    "x": 157,
-    "y": 23,
-    "ancho": 100,
+    "nroMesa": 2,
+    "x": 471,
+    "y": 190,
+    "ancho": 200,
     "alto": 50
   },
   {
-    "id": 3,
     "estado": "DISPONIBLE",
-    "x": 278,
-    "y": 22,
-    "ancho": 100,
-    "alto": 50
+    "nroMesa": 3,
+    "x": 110,
+    "y": 305,
+    "ancho": 106,
+    "alto": 54
   },
   {
-    "id": 4,
     "estado": "DISPONIBLE",
-    "pedido": {
-      "listaProductos": [],
-      "fecha": "2024-06-22"
-    },
-    "x": 407,
-    "y": 23,
-    "ancho": 102,
-    "alto": 89
+    "nroMesa": 4,
+    "x": 255,
+    "y": 305,
+    "ancho": 109,
+    "alto": 55
   },
   {
-    "id": 5,
     "estado": "DISPONIBLE",
-    "x": 649,
-    "y": 18,
+    "nroMesa": 5,
+    "x": 403,
+    "y": 305,
+    "ancho": 114,
+    "alto": 55
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 6,
+    "x": 542,
+    "y": 304,
+    "ancho": 119,
+    "alto": 55
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 7,
+    "x": 591,
+    "y": 58,
+    "ancho": 107,
+    "alto": 57
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 8,
+    "x": 277,
+    "y": 54,
     "ancho": 111,
-    "alto": 91
+    "alto": 58
   },
   {
-    "id": 6,
     "estado": "DISPONIBLE",
-    "x": 178,
-    "y": 187,
-    "ancho": 100,
+    "nroMesa": 9,
+    "x": 438,
+    "y": 55,
+    "ancho": 116,
+    "alto": 59
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 10,
+    "x": 119,
+    "y": 55,
+    "ancho": 110,
+    "alto": 62
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 11,
+    "x": 1032,
+    "y": 60,
+    "ancho": 200,
     "alto": 50
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 12,
+    "x": 1309,
+    "y": 62,
+    "ancho": 200,
+    "alto": 50
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 13,
+    "x": 1039,
+    "y": 307,
+    "ancho": 200,
+    "alto": 50
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 14,
+    "x": 1318,
+    "y": 310,
+    "ancho": 200,
+    "alto": 50
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 15,
+    "x": 1180,
+    "y": 173,
+    "ancho": 200,
+    "alto": 50
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 16,
+    "x": 138,
+    "y": 679,
+    "ancho": 220,
+    "alto": 195
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 17,
+    "x": 455,
+    "y": 677,
+    "ancho": 212,
+    "alto": 192
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 18,
+    "x": 773,
+    "y": 685,
+    "ancho": 220,
+    "alto": 185
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 19,
+    "x": 1088,
+    "y": 681,
+    "ancho": 234,
+    "alto": 180
+  },
+  {
+    "estado": "DISPONIBLE",
+    "nroMesa": 20,
+    "x": 1403,
+    "y": 676,
+    "ancho": 227,
+    "alto": 183
   }
 ]

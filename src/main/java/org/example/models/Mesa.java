@@ -2,79 +2,33 @@ package org.example.models;
 
 import java.util.Objects;
 
-public class Mesa {
+public class Mesa extends Objeto {
 
-    public static void decrementarNumeroAuto() {
-        Mesa.numeroAuto--;
-    }
-
-    public static int numeroAuto = 1;
-    private int id;
     private EstadoMesa estado;
     private Pedido pedido;
-
-    private int x;
-    private int y;
-    private int ancho;
-    private int alto;
+    private int nroMesa;
+    private static int nroMesaAuto = 1;
 
     public Mesa() {
-        this.id = numeroAuto;
+        super();
         this.estado = EstadoMesa.DISPONIBLE;
         this.pedido = null;
-        this.x = 50;
-        this.y = 50;
-        this.alto = 50;
-        this.ancho = 100;
-        numeroAuto++;
+        this.nroMesa = nroMesaAuto;
+        nroMesaAuto++;
     }
 
     public Mesa(int x,int y, int ancho, int alto) {
-        this.id = numeroAuto;
+        super(x,y,ancho,alto);
         this.estado = EstadoMesa.DISPONIBLE;
         this.pedido = null;
-        numeroAuto++;
-
-        this.x = x;
-        this.y = y;
-        this.alto = alto;
-        this.ancho = ancho;
     }
 
-    public int getX() {
-        return x;
+    public int getNroMesa(){
+        return this.nroMesa;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getAncho() {
-        return ancho;
-    }
-
-    public void setAncho(int ancho) {
-        this.ancho = ancho;
-    }
-
-    public int getAlto() {
-        return alto;
-    }
-
-    public void setAlto(int alto) {
-        this.alto = alto;
-    }
-
-    public int getId() {
-        return id;
+    public static void decrementarNumeroAuto() {
+        Mesa.nroMesaAuto--;
     }
 
     //metodos para DETERMINAR COLOR EN EL BOTTON
@@ -109,12 +63,12 @@ public class Mesa {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Mesa mesa = (Mesa) o;
-        return id == mesa.id;
+        return nroMesa == mesa.nroMesa;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(nroMesa);
     }
 
 }

@@ -7,8 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
 
 public class CartaPanel extends JFrame {
     private final ProductoService productoService = new ProductoService();
@@ -22,6 +21,7 @@ public class CartaPanel extends JFrame {
 
         // Inicializar componentes
         tabbedPane = new JTabbedPane();
+//        tabbedPane.setTabPlacement(JTabbedPane. LEFT);
         cargarProductosEnTabs();
 
         // Botones
@@ -107,7 +107,6 @@ public class CartaPanel extends JFrame {
 
             repaint();
 //            // Check if the category tab exists, if not, add it
-            boolean tabExists = false;
             List<String> categorias = productoService.obtenerCategorias();
             if(!categorias.contains(categoria)){
                 agregarNuevaCategoriaAlTabbedPane(categoria);

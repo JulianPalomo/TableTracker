@@ -26,7 +26,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     private ArrayList<Producto> comanda = new ArrayList<>();
 
     public PedidoPanel(Mesa mesa, ProductoService productoService,MesasPanel mesasPanel) {
-        this.numero = mesa.getId();
+        this.numero = mesa.getNroMesa();
         if (mesa.getPedido() == null) {
             mesa.setPedido(new Pedido());
         }
@@ -62,7 +62,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         addProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                agregarProducto(productoService.cargarCarta(),mesa.getId());
+                agregarProducto(productoService.cargarCarta(),mesa.getNroMesa());
                 if(pedido != null){
                     mesa.ocuparMesa();
                     mesasPanel.actualizarColorMesas(); // Notificar al MesasPanel para actualizar el color
@@ -107,7 +107,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    comandar(comanda, mesa.getId());
+                    comandar(comanda, mesa.getNroMesa());
                     JOptionPane.showMessageDialog(null, "Pedido comandado");
                 } catch (ProductosYaComandadosException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());

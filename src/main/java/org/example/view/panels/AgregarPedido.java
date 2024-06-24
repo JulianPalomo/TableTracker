@@ -2,6 +2,7 @@ package org.example.view.panels;
 
 import org.example.interfaces.PedidoListener;
 import org.example.models.Producto;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,17 +14,16 @@ import java.util.Map;
 
 public class AgregarPedido extends JFrame {
     private ArrayList<Producto> pedido;
-    private PedidoListener listener;
 
     public AgregarPedido(Map<String, List<Producto>> menu, PedidoListener listener, int nroMesa) {
-        this.listener = listener;
         setTitle("Agregar productos a Mesa " + nroMesa);
         setSize(700, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        pedido = new ArrayList<Producto>();
+        pedido = new ArrayList<>();
         JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.setTabPlacement(JTabbedPane. LEFT);
 
         for (Map.Entry<String, List<Producto>> entry : menu.entrySet()) {
             String categoria = entry.getKey();
@@ -35,21 +35,7 @@ public class AgregarPedido extends JFrame {
                 JLabel priceLabel = new JLabel(String.valueOf(producto.getPrecio()));
                 JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1)); // Default 1, min 1, max 100, step 1
                 JTextField observacionField = new JTextField(); // Campo para agregar observación
-                JButton addButton = new JButton("Añadir");
-
-                addButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        int cantidad = (int) spinner.getValue();
-                        String observacion = observacionField.getText(); // Obtiene la observación
-
-                        for (int i = 0; i < cantidad; i++) {
-                            Producto productoClonado = producto.clone(); // Clona el producto
-                            productoClonado.setObservacion(observacion); // Setea observación en el clon
-                            pedido.add(productoClonado); // Añade el clon a la lista de pedidos
-                        }
-                    }
-                });
+                JButton addButton = getAddButton(producto, spinner, observacionField);
 
                 panel.add(nameLabel);
                 panel.add(priceLabel);
@@ -65,22 +51,39 @@ public class AgregarPedido extends JFrame {
         add(tabbedPane, BorderLayout.CENTER);
 
         // Add a button to confirm the order
-        JButton confirmButton = new JButton("Confirmar Pedido");
-        confirmButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        JButton confirmButton = getConfirmButton(listener);
+        add(confirmButton, BorderLayout.SOUTH);
+    }
 
-                ///Envia informacion a mesasPanel de que el pedido fue actualizado
-                listener.onPedidoActualizado(pedido);
-                StringBuilder resumen = new StringBuilder("Pedido confirmado:\n");
-                for (Producto producto : pedido) {
-                    resumen.append(producto.getNombre()).append(" - ").append(producto.getPrecio()).append(" - Observación: ").append(producto.getObservacion()).append("\n");
-                }
-                JOptionPane.showMessageDialog(null, resumen.toString());
-                dispose();
+    private @NotNull JButton getConfirmButton(PedidoListener listener) {
+        JButton confirmButton = new JButton("Confirmar Pedido");
+
+        confirmButton.addActionListener(e -> {
+            ///Envia informacion a mesasPanel de que el pedido fue actualizado
+            listener.onPedidoActualizado(pedido);
+            StringBuilder resumen = new StringBuilder("Pedido confirmado:\n");
+            for (Producto producto : pedido) {
+                resumen.append(producto.getNombre()).append(" - ").append(producto.getPrecio()).append(" - Observación: ").append(producto.getObservacion()).append("\n");
+            }
+            JOptionPane.showMessageDialog(null, resumen.toString());
+            dispose();
+        });
+        return confirmButton;
+    }
+
+    private @NotNull JButton getAddButton(Producto producto, JSpinner spinner, JTextField observacionField) {
+        JButton addButton = new JButton("Añadir");
+
+        addButton.addActionListener(e -> {
+            int cantidad = (int) spinner.getValue();
+            String observacion = observacionField.getText(); // Obtiene la observación
+
+            for (int i = 0; i < cantidad; i++) {
+                Producto productoClonado = producto.clone(); // Clona el producto
+                productoClonado.setObservacion(observacion); // Setea observación en el clon
+                pedido.add(productoClonado); // Añade el clon a la lista de pedidos
             }
         });
-
-        add(confirmButton, BorderLayout.SOUTH);
+        return addButton;
     }
 }

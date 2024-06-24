@@ -2,11 +2,13 @@ package org.example.view.panels;
 
 import org.example.models.EstadoMesa;
 import org.example.models.Mesa;
+import org.example.models.Pared;
 import org.example.service.MesaService;
 import org.example.service.ProductoService;
 import org.example.view.buttons.MesaButton;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -20,8 +22,9 @@ public class MesasPanel extends JFrame {
     private JButton confirmarCambios;
     private JButton agregarMesaButton;
     private JButton eliminarMesaButton;
-    private JToolBar toolBar;
-    private JToolBar edicionBar;
+    private JButton agregarParedButton;
+    private JButton eliminarParedButton;
+    private JPanel edicionBar;
     private CartaPanel cartaPanel = new CartaPanel();
     private JPanel mainPanel;
 
@@ -31,24 +34,45 @@ public class MesasPanel extends JFrame {
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout()); // Cambiar a BorderLayout para el JFrame
+        // Oculta la barra de título y otros elementos de decoración
+        setUndecorated(true);
 
+        // Opcional: Si deseas abrir la ventana maximizada al iniciar
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // Establecer la posición de la ventana
+        setLocationRelativeTo(null);
         cartaPanel.setVisible(false);
 
         mainPanel = new JPanel(null); // Panel principal con null layout
         mainPanel.setBackground(Color.DARK_GRAY);
 
-        mesaService.cargarMesasJson();
-        crearBotonesDeMesas(mesaService.getMesas());
+        mesaService.cargarMesasYParedesJSON();
 
-        // Crear JToolBar
-        toolBar = new JToolBar();
-        toolBar.setFloatable(false); // Para que no se pueda mover
+        crearBotonesDeMesas(mesaService.getMesas(), mesaService.getParedes());
 
-        edicionBar = new JToolBar();
-        edicionBar.setFloatable(false);
+        // Crear ToolBar en un Panel
+        JPanel toolBar = new JPanel(new FlowLayout(FlowLayout.CENTER,50,5));
+
+        // Crea ToolBar para las opciones de administrador
+        edicionBar = new JPanel(new FlowLayout(FlowLayout.CENTER,50,5));
         edicionBar.setVisible(false);
 
+        JPanel toolBarPanel = new JPanel(new BorderLayout());
+        toolBarPanel.add(toolBar, BorderLayout.NORTH);
+        toolBarPanel.add(edicionBar, BorderLayout.SOUTH); // Agregar edicionBar en el sur
+
+
         // Crear botones para la toolbar
+        // Agregar un botón personalizado para cerrar la ventana
+        JButton closeButton = new JButton();
+        closeButton.setContentAreaFilled(false); // Hace que el área de contenido del botón sea transparente
+        closeButton.setBorderPainted(false); // Elimina el borde del botón
+        closeButton.addActionListener(e -> {
+            dispose();
+        });
+
+
+
         JButton toggleEdicionButton = new JButton("Editar Mesas");
         JButton verMenuCompletoButton = new JButton("Carta");
         JButton aboutButton = new JButton("Acerca De");
@@ -66,23 +90,53 @@ public class MesasPanel extends JFrame {
 
         aboutButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Software de Gestión para Restaurante.\nVersión 1.0"));
         addUserButton.addActionListener(e -> new Registration(this));
-        // Agregar botones a la toolbar
+
+        Dimension buttonSize = new Dimension(150, 40); // Ancho x Alto
+
+// Agregar botones a la toolbar
         if (admin) {
             toolBar.add(toggleEdicionButton);
-        }
-        toolBar.add(verMenuCompletoButton);
-        toolBar.add(aboutButton);
-        if (admin){
+            toggleEdicionButton.setPreferredSize(buttonSize);
+
             toolBar.add(addUserButton);
+            addUserButton.setPreferredSize(buttonSize);
+            toolBar.add(verMenuCompletoButton);
+            verMenuCompletoButton.setPreferredSize(buttonSize);
         }
+
+        toolBar.add(aboutButton);
+        aboutButton.setPreferredSize(buttonSize);
+
+        toolBar.add(closeButton);
+        closeButton.setPreferredSize(buttonSize);
+        closeButton.setIcon(new ImageIcon("src/main/java/org/example/resource/cruz.png"));
+
         // Botón de confirmar edición
         confirmarCambios = new JButton("Confirmar Cambios");
         confirmarCambios.setVisible(false); // Inicialmente invisible
         confirmarCambios.setBackground(Color.CYAN);
         confirmarCambios.addActionListener(e -> {
-            mesaService.guardarMesasEnJson();
+            mesaService.guardarMesasYParedesJSON();
             modoEdicion = false; // Desactivar el modo de edición
             actualizarModoEdicion(); // Ocultar botones adicionales
+        });
+
+        //Boton de agregar pared
+        agregarParedButton = new JButton("Agregar Estructura");
+        agregarParedButton.setVisible(false);
+        agregarParedButton.setBackground(Color.YELLOW);
+        agregarParedButton.addActionListener(e -> {
+            agregarPared();
+            repaint();
+        });
+
+        //Boton de eliminar pared
+        eliminarParedButton = new JButton("Eliminar estructura");
+        eliminarParedButton.setVisible(false);
+        eliminarParedButton.setBackground(Color.PINK);
+        eliminarParedButton.addActionListener(e -> {
+            eliminarPared();
+            repaint();
         });
 
         // Botón de agregar mesa
@@ -97,21 +151,20 @@ public class MesasPanel extends JFrame {
         // Botón de eliminar mesa
         eliminarMesaButton = new JButton("Eliminar Mesa");
         eliminarMesaButton.setVisible(false); // Inicialmente invisible
-        eliminarMesaButton.setBackground(Color.red);
+        eliminarMesaButton.setBackground(Color.LIGHT_GRAY);
         eliminarMesaButton.addActionListener(e -> {
             eliminarMesa();
             repaint();
         });
 
-        // Crear un panel para las barras de herramientas
-        JPanel toolBarPanel = new JPanel(new BorderLayout());
-        toolBarPanel.add(toolBar, BorderLayout.NORTH);
-        toolBarPanel.add(edicionBar, BorderLayout.SOUTH);
-
-        // Crear panel principal que contiene la barra de herramientas y el panel principal con null layout
+// Crear panel principal que contiene la barra de herramientas y el panel principal con null layout
         JPanel containerPanel = new JPanel(new BorderLayout());
         containerPanel.add(toolBarPanel, BorderLayout.NORTH);
         containerPanel.add(mainPanel, BorderLayout.CENTER);
+        containerPanel.add(edicionBar, BorderLayout.SOUTH); // Agregar edicionBar en el sur
+
+// Agregar el panel contenedor al frame
+        add(containerPanel);
 
         // Agregar el panel contenedor al frame
         add(containerPanel);
@@ -121,59 +174,136 @@ public class MesasPanel extends JFrame {
 
     public void actualizarColorMesas() {
         for (Component comp : mainPanel.getComponents()) {
-            if (comp instanceof JButton) {
-                JButton button = (JButton) comp;
+            if (comp instanceof JButton button) {
                 String buttonText = button.getText();
-                int mesaId = Integer.parseInt(buttonText.split(" ")[1]);
-                Mesa mesa = mesaService.buscarMesa(mesaId);
-                if (mesa != null) {
-                    if (mesa.getEstado() == EstadoMesa.DISPONIBLE) {
-                        button.setBackground(Color.GREEN);
-                    } else {
-                        button.setBackground(Color.RED);
+
+                if (buttonText.startsWith("Mesa ")) {
+                    try {
+                        int mesaId = Integer.parseInt(buttonText.split(" ")[1]);
+                        Mesa mesa = mesaService.buscarMesa(mesaId);
+                        if (mesa != null) {
+                            if (mesa.getEstado() == EstadoMesa.DISPONIBLE) {
+                                button.setBackground(Color.GREEN);
+                            } else {
+                                button.setBackground(Color.RED);
+                            }
+                            button.repaint();
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error al convertir el ID de la mesa: " + e.getMessage());
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Formato de texto del botón incorrecto: " + buttonText);
                     }
-                    button.repaint();
                 }
             }
         }
     }
 
+
     private void actualizarModoEdicion() {
         agregarMesaButton.setVisible(modoEdicion);
         eliminarMesaButton.setVisible(modoEdicion);
         confirmarCambios.setVisible(modoEdicion);
+        agregarParedButton.setVisible(modoEdicion);
+        eliminarParedButton.setVisible(modoEdicion);
+        Dimension buttonSize = new Dimension(150, 40); // Ancho x Alto
+
 
         if (modoEdicion) {
+            agregarMesaButton.setPreferredSize(buttonSize);
             edicionBar.add(agregarMesaButton);
+
+            eliminarMesaButton.setPreferredSize(buttonSize);
             edicionBar.add(eliminarMesaButton);
-            edicionBar.add(Box.createHorizontalGlue()); // Empuja el siguiente botón a la derecha
+
+            agregarParedButton.setPreferredSize(buttonSize);
+            edicionBar.add(agregarParedButton);
+
+            eliminarParedButton.setPreferredSize(buttonSize);
+            edicionBar.add(eliminarParedButton);
+
+            confirmarCambios.setPreferredSize(buttonSize);
+//            edicionBar.add(Box.createHorizontalGlue()); // Empuja el siguiente botón a la derecha
             edicionBar.add(confirmarCambios);
+
+
         } else {
             edicionBar.remove(agregarMesaButton);
             edicionBar.remove(eliminarMesaButton);
             edicionBar.remove(confirmarCambios);
+            edicionBar.remove(agregarParedButton);
         }
         edicionBar.revalidate();
         edicionBar.repaint();
 
         // Habilitar/deshabilitar edición en botones de mesas
         for (Component comp : mainPanel.getComponents()) {
-            if (comp instanceof JButton) {
-                JButton button = (JButton) comp;
+            if (comp instanceof JButton button) {
                 for (MouseListener ml : button.getMouseListeners()) {
                     if (ml instanceof MesaButton) {
-                        ((MesaButton) ml).setEditable(modoEdicion);
+                        ((MesaButton<?>) ml).setEditable(modoEdicion);
                     }
                 }
             }
         }
     }
 
-    public void cargarCartaPanel(){
+    public void cargarCartaPanel() {
         cartaPanel.setVisible(true);
     }
 
     public void eliminarMesa() {
+        try {
+            if (!mesaService.getMesas().isEmpty()) {
+                // Obtener el ID de la última mesa
+                int id = mesaService.getMesas().size();
+
+                // Buscar y eliminar el botón correspondiente a la última mesa
+                for (Component comp : mainPanel.getComponents()) {
+                    if (comp instanceof JButton button && button.getText().equals("Mesa " + id)) {
+                        mesaService.eliminarUltimaMesa(); // Eliminar la mesa del servicio
+                        mainPanel.remove(button);
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
+                        break;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No hay mesas para eliminar.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar la mesa.");
+            e.printStackTrace();
+        }
+    }
+
+    public void eliminarPared() {
+        try {
+            if (!mesaService.getParedes().isEmpty()) {
+                // Obtener la última pared
+                int id = mesaService.getParedes().size();
+
+                // Buscar y eliminar el botón correspondiente a la última pared
+                for (Component comp : mainPanel.getComponents()) {
+                    if (comp instanceof JButton button && button.getText().equals("p")) {
+                        mesaService.eliminarUltimaPared(); // Eliminar la pared del servicio
+                        mainPanel.remove(button);
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
+                        break;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No hay paredes para eliminar.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar la pared.");
+            e.printStackTrace();
+        }
+    }
+
+/*
+    public void eliminarObjeto() {
         try {
             if (!mesaService.getMesas().isEmpty()) {
                 // Obtener el ID de la última mesa
@@ -189,6 +319,13 @@ public class MesasPanel extends JFrame {
                             mainPanel.repaint();
                             break;
                         }
+                        else if (button.getText().equals("p")){
+                            mesaService.eliminarUltimaPared();
+                            mainPanel.remove(button);
+                            mainPanel.revalidate();
+                            mainPanel.repaint();
+                            break;
+                        }
                     }
                 }
             } else {
@@ -198,7 +335,7 @@ public class MesasPanel extends JFrame {
             JOptionPane.showMessageDialog(this, "Error al eliminar la mesa.");
             e.printStackTrace();
         }
-    }
+    }*/
 
     public void agregarMesa() {
         Mesa nueva = mesaService.agregarMesa();
@@ -208,18 +345,63 @@ public class MesasPanel extends JFrame {
         actualizarColorMesas();
     }
 
-    public void crearBotonesDeMesas(List<Mesa> mesas) {
+    public void agregarPared() {
+        Pared nueva = mesaService.agregarPared();
+        JButton nuevaPared = crearPared(nueva);
+        mainPanel.add(nuevaPared);
+        nuevaPared.repaint();
+        actualizarColorMesas();
+    }
+
+    public void crearBotonesDeMesas(List<Mesa> mesas, List<Pared> paredes) {
+        System.out.println("Creando mesas:");
         for (Mesa mesa : mesas) {
+            System.out.println("Mesa ID: " + mesa.getNroMesa());
             JButton nuevaMesa = crearMesa(mesa);
             mainPanel.add(nuevaMesa);
         }
+
+        System.out.println("Creando paredes:");
+        for (Pared pared : paredes) {
+            System.out.println("Pared: " + pared);
+            JButton nuevaPared = crearPared(pared);
+            mainPanel.add(nuevaPared);
+        }
+    }
+
+
+    private JButton crearPared(Pared pared) {
+        JButton button = new JButton("p");
+        button.setBounds(pared.getX(), pared.getY(), pared.getAncho(), pared.getAlto());
+
+        button.setBackground(Color.BLACK);
+        button.setForeground(Color.BLACK);
+
+        // Deshabilitar el efecto de resaltado al pasar el cursor
+        button.setFocusPainted(false);
+        // Deshabilitar el efecto de presionado
+        button.setContentAreaFilled(false);
+        // Deshabilitar el efecto de enfoque
+        button.setFocusable(false);
+        // Deshabilitar el efecto de borde
+        button.setBorderPainted(false);
+
+        // Deshabilitar cualquier otro efecto visual que pueda estar presente
+        button.setOpaque(true); // Asegurar que el botón sea opaco
+
+
+        MesaButton<Pared> paredButton = new MesaButton<>(pared);
+        paredButton.setEditable(modoEdicion);
+        button.addMouseListener(paredButton);
+        button.addMouseMotionListener(paredButton);
+        return button;
     }
 
     private JButton crearMesa(Mesa nueva) {
-        JButton button = new JButton("Mesa " + nueva.getId());
+        JButton button = new JButton("Mesa " + nueva.getNroMesa());
         button.setBounds(nueva.getX(), nueva.getY(), nueva.getAncho(), nueva.getAlto()); // Tamaño y posición inicial
 
-        MesaButton mesaButton = new MesaButton(nueva);
+        MesaButton<Mesa> mesaButton = new MesaButton<>(nueva);
         mesaButton.setEditable(modoEdicion); // Establecer la editabilidad según el modo actual
         button.addMouseListener(mesaButton);
         button.addMouseMotionListener(mesaButton);
@@ -227,7 +409,7 @@ public class MesasPanel extends JFrame {
         button.addActionListener(e -> {
             if (!modoEdicion) { // Solo abrir PedidoPanel si no estamos en modo edición
                 int numeroMesa = Integer.parseInt(button.getText().split(" ")[1]);
-                PedidoPanel pedidoPanel = new PedidoPanel(mesaService.buscarMesa(numeroMesa), productoService,this);
+                PedidoPanel pedidoPanel = new PedidoPanel(mesaService.buscarMesa(numeroMesa), productoService, this);
 
                 // Cerrar el panel de pedido actual si existe
                 if (currentPedidoPanel != null) {
@@ -245,3 +427,4 @@ public class MesasPanel extends JFrame {
         return button;
     }
 }
+
