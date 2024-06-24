@@ -24,7 +24,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     private DefaultTableModel tableModel;
     private final ProductoService productoService;
     private ArrayList<Producto> comanda = new ArrayList<>();
-
+    private JLabel mesero;
     public PedidoPanel(Mesa mesa, ProductoService productoService,MesasPanel mesasPanel) {
         this.numero = mesa.getNroMesa();
         if (mesa.getPedido() == null) {
@@ -119,6 +119,9 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         buttonPanel.add(billButton);
         buttonPanel.add(botonComanda);
         add(buttonPanel, BorderLayout.SOUTH);
+        // Añadir la etiqueta del mesero al panel de botones
+        mesero = new JLabel("Mesero: " + (mesa.getMesero() != null ? mesa.getMesero().toString() : "No asignado"));
+        buttonPanel.add(mesero, BorderLayout.WEST);
 
         // Actualizar la lista de pedidos
         updateOrderList();
