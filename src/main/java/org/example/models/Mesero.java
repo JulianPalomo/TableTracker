@@ -10,6 +10,6 @@ public class Mesero extends Persona {
 
     @Override
     public String toString() {
-        return "Mesero{}";
+        return super.toString();
     }
 }

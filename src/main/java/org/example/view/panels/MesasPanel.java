@@ -2,8 +2,10 @@ package org.example.view.panels;
 
 import org.example.models.EstadoMesa;
 import org.example.models.Mesa;
+import org.example.models.Mesero;
 import org.example.models.Pared;
 import org.example.service.MesaService;
+import org.example.service.PersonaService;
 import org.example.service.ProductoService;
 import org.example.view.buttons.MesaButton;
 
@@ -31,7 +33,7 @@ public class MesasPanel extends JFrame {
     private JPanel edicionBar;
     private CartaPanel cartaPanel = new CartaPanel();
     private JPanel mainPanel;
-
+    private List<Mesero> waiters;
     public MesasPanel(String nombreComercio, boolean admin) {
 
         setTitle(nombreComercio);
@@ -41,6 +43,17 @@ public class MesasPanel extends JFrame {
         // Oculta la barra de título y otros elementos de decoración
         setUndecorated(true);
 
+        PersonaService personaService = new PersonaService();
+        personaService.loadFromJson();
+
+        // Cargar la lista de meseros
+        waiters = personaService.getListaMeseros();
+
+        // Verificar si waiters es null o está vacía
+        if (waiters == null || waiters.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay meseros disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         // Opcional: Si deseas abrir la ventana maximizada al iniciar
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         // Establecer la posición de la ventana
@@ -426,22 +439,46 @@ public class MesasPanel extends JFrame {
         button.addActionListener(e -> {
             if (!modoEdicion) { // Solo abrir PedidoPanel si no estamos en modo edición
                 int numeroMesa = Integer.parseInt(button.getText().split(" ")[1]);
-                PedidoPanel pedidoPanel = new PedidoPanel(mesaService.buscarMesa(numeroMesa), productoService, this);
+                Mesa mesa = mesaService.buscarMesa(numeroMesa);
 
-                // Cerrar el panel de pedido actual si existe
-                if (currentPedidoPanel != null) {
-                    currentPedidoPanel.setVisible(false);
-                    currentPedidoPanel.dispose(); // Liberar recursos del panel anterior
+                if (mesa.getMesero() == null) {
+                    // Mostrar la ventana para asignar mesero
+                    AsignarMesero asignarMeseroFrame = new AsignarMesero(mesa, waiters);
+                    asignarMeseroFrame.setVisible(true);
+
+                    // Añadir un listener para cuando se cierre la ventana de asignar mesero
+                    asignarMeseroFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                            // Verificar si se asignó un mesero y luego abrir el PedidoPanel
+                            if (mesa.getMesero() != null) {
+                                abrirPedidoPanel(mesa);
+                            }
+                        }
+                    });
+                } else {
+                    // Si ya tiene mesero asignado, abrir directamente el PedidoPanel
+                    abrirPedidoPanel(mesa);
                 }
-
-                // Actualizar la referencia al panel actual
-                currentPedidoPanel = pedidoPanel;
-
-                pedidoPanel.setVisible(true);
             }
         });
 
         return button;
+    }
+
+    private void abrirPedidoPanel(Mesa mesa) {
+        PedidoPanel pedidoPanel = new PedidoPanel(mesa, productoService, this);
+
+        // Cerrar el panel de pedido actual si existe
+        if (currentPedidoPanel != null) {
+            currentPedidoPanel.setVisible(false);
+            currentPedidoPanel.dispose(); // Liberar recursos del panel anterior
+        }
+
+        // Actualizar la referencia al panel actual
+        currentPedidoPanel = pedidoPanel;
+
+        pedidoPanel.setVisible(true);
     }
 }
 

@@ -21,4 +21,5 @@ public class Administrador extends Persona{
         }
         return false;
     }
+
 }

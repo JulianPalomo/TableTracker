@@ -8,7 +8,7 @@ public class Mesa extends Objeto {
     private Pedido pedido;
     private int nroMesa;
     private static int nroMesaAuto = 1;
-
+    private Mesero mesero;
     public Mesa() {
         super();
         this.estado = EstadoMesa.DISPONIBLE;
@@ -25,6 +25,14 @@ public class Mesa extends Objeto {
 
     public int getNroMesa(){
         return this.nroMesa;
+    }
+
+    public Mesero getMesero() {
+        return mesero;
+    }
+
+    public void asignarMesero(Mesero mesero) {
+        this.mesero = mesero;
     }
 
     public static void decrementarNumeroAuto() {

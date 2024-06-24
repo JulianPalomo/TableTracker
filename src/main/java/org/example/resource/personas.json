@@ -5,5 +5,24 @@
     "apellido": "admin",
     "dni": "123456789",
     "password": "admin123"
+  },
+  {
+    "type": "Mesero",
+    "nombre": "Carlos",
+    "apellido": "Pérez",
+    "dni": "12345678"
+
+  },
+  {
+    "type": "Mesero",
+    "nombre": "Ana",
+    "apellido": "López",
+    "dni": "87654321"
+  },
+  {
+    "type": "Mesero",
+    "nombre": "Luis",
+    "apellido": "Martínez",
+    "dni": "11223344"
   }
 ]

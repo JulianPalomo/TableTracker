@@ -50,5 +50,8 @@ public abstract class Persona {
         return Objects.hash(dni);
     }
 
-
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
