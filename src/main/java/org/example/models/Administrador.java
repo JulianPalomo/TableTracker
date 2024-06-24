@@ -1,35 +1,24 @@
 package org.example.models;
 
-public class Administrador extends Usuario {
+public class Administrador extends Persona{
 
+    private String password;
 
-    // Constructor por defecto
-    public Administrador() {
-        super();
+    public Administrador(String nombre, String apellido, String dni, String password) {
+        super(nombre, apellido, dni);
+        this.password = password;
     }
 
-    // Constructor con argumentos
-    public Administrador(String nombreUsuario, String contrasena, String nombre, String apellido, String email, TipoCuenta tipoCuenta) {
-        super(nombreUsuario, contrasena, nombre, apellido, email, tipoCuenta);
+    public String getPassword() {
+        return password;
     }
-    @Override
-    public String toString() {
-        return "Admin";
-    }
-/**
-    @Override
-    public boolean equals(Object o) {
-        if(this == o) {
+
+
+    public boolean login(String dni, String password) {
+        if(getDni().equals(getDni()) && this.password.equals(password))
+        {
             return true;
         }
-        if(o == null) {
-            return false;
-        }
-        if(!(o instanceof Administrador administrador)) {
-            return false;
-        }
-        return this.getNombreCompleto().equalsIgnoreCase(administrador.getNombreCompleto());
+        return false;
     }
-    **/
-    }
-
+}

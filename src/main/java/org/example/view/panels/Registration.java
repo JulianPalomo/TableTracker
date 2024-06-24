@@ -2,18 +2,13 @@ package org.example.view.panels;
 
 import org.example.models.Administrador;
 import org.example.models.Mesero;
-import org.example.models.TipoCuenta;
-import org.example.models.Usuario;
-import org.example.models.TipoCuenta;
-import org.example.service.UsuarioService;
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.List;
+/*
+
 public class Registration extends JDialog {
     private JTextField tfNombre;
     private JTextField tfEmail;
@@ -132,3 +127,5 @@ public class Registration extends JDialog {
         Registration dialog = new Registration(null);
     }
 }
+
+ */

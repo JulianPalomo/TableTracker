@@ -1,11 +1,9 @@
 package org.example.view.panels;
 
 
-import org.example.models.TipoCuenta;
-
 import javax.swing.*;
 import java.awt.*;
-
+/*
 public class Menu extends JFrame {
     public Menu(TipoCuenta tipoCuenta) {
         setTitle("Menú Principal");
@@ -43,3 +41,4 @@ public class Menu extends JFrame {
         SwingUtilities.invokeLater(() -> new Menu(TipoCuenta.ADMINISTRADOR));
     }
 }
+*/

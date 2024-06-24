@@ -1,0 +1,9 @@
+[
+  {
+    "type": "Administrador",
+    "nombre": "Admin",
+    "apellido": "admin",
+    "dni": "123456789",
+    "password": "admin123"
+  }
+]

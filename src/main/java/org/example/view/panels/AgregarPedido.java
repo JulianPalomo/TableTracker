@@ -2,12 +2,9 @@ package org.example.view.panels;
 
 import org.example.interfaces.PedidoListener;
 import org.example.models.Producto;
-import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +52,7 @@ public class AgregarPedido extends JFrame {
         add(confirmButton, BorderLayout.SOUTH);
     }
 
-    private @NotNull JButton getConfirmButton(PedidoListener listener) {
+    private JButton getConfirmButton(PedidoListener listener) {
         JButton confirmButton = new JButton("Confirmar Pedido");
 
         confirmButton.addActionListener(e -> {
@@ -71,7 +68,7 @@ public class AgregarPedido extends JFrame {
         return confirmButton;
     }
 
-    private @NotNull JButton getAddButton(Producto producto, JSpinner spinner, JTextField observacionField) {
+    private  JButton getAddButton(Producto producto, JSpinner spinner, JTextField observacionField) {
         JButton addButton = new JButton("Añadir");
 
         addButton.addActionListener(e -> {

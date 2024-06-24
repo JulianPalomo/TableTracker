@@ -1,80 +1,68 @@
 package org.example.view.panels;
 
-import org.example.models.TipoCuenta;
-import org.example.models.Usuario;
-import org.example.service.UsuarioService;
+import org.example.exceptions.LoginFailedException;
+import org.example.models.Persona;
+import org.example.service.PersonaService;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.List;
+
 
 public class Login extends JDialog {
-    private JTextField tfEmailOrUsername;
+    private JTextField tfDni;
     private JPasswordField tfContrasena;
     private JButton OKButton;
     private JButton cancelarButton;
     private JPanel loginPanel;
+    private JLabel lblDni;
+
+    private PersonaService personaService;
+    private boolean loginSuccessful;
 
     public Login(JFrame parent) {
         super(parent);
         setTitle("Inicio de Sesión");
 
-        // Inicializar el loginPanel con GridBagLayout
-        loginPanel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        // Crear y añadir componentes
-        JLabel lblEmailOrUsername = new JLabel("Email o Nombre de Usuario:");
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        loginPanel.add(lblEmailOrUsername, gbc);
-
-        tfEmailOrUsername = new JTextField();
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        loginPanel.add(tfEmailOrUsername, gbc);
-
+        // Inicializar el loginPanel
+        loginPanel = new JPanel();
+        loginPanel.setLayout(new GridLayout(3, 2));
+        lblDni = new JLabel("DNI:");
+        tfDni = new JTextField();
         JLabel lblContrasena = new JLabel("Contraseña:");
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        loginPanel.add(lblContrasena, gbc);
-
         tfContrasena = new JPasswordField();
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.gridwidth = 2;
-        loginPanel.add(tfContrasena, gbc);
-
         OKButton = new JButton("OK");
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        loginPanel.add(OKButton, gbc);
-
         cancelarButton = new JButton("Cancelar");
-        gbc.gridx = 2;
-        gbc.gridy = 2;
-        loginPanel.add(cancelarButton, gbc);
+
+        loginPanel.add(lblDni);
+        loginPanel.add(tfDni);
+        loginPanel.add(lblContrasena);
+        loginPanel.add(tfContrasena);
+        loginPanel.add(OKButton);
+        loginPanel.add(cancelarButton);
 
         // Configurar la ventana de diálogo
         setContentPane(loginPanel);
-        setMinimumSize(new Dimension(400, 200));
+        setMinimumSize(new Dimension(400, 300));
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        // Inicializar PersonaService
+        personaService = new PersonaService();
+
+        personaService.loadFromJson();
+
 
         OKButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     autenticarUsuario();
+                } catch (LoginFailedException ex) {
+                    JOptionPane.showMessageDialog(Login.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -84,6 +72,7 @@ public class Login extends JDialog {
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                loginSuccessful = false;
                 dispose();
             }
         });
@@ -91,26 +80,29 @@ public class Login extends JDialog {
         setVisible(true);
     }
 
-    private void autenticarUsuario() throws IOException {
-        String emailOrUsername = tfEmailOrUsername.getText();
+    private boolean autenticarUsuario() throws IOException, LoginFailedException {
+        String dni = tfDni.getText();
         String contraseña = new String(tfContrasena.getPassword());
 
-        List<Usuario> usuarios = UsuarioService.readUsuarios();
-        for (Usuario usuario : usuarios) {
-            if ((usuario.getEmail().equals(emailOrUsername) || usuario.getNombreUsuario().equals(emailOrUsername))
-                    && usuario.getContrasena().equals(contraseña)) {
-                JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                MesasPanel mesasPanel = new MesasPanel("TableTracker", usuario.getTipoCuenta() == TipoCuenta.ADMINISTRADOR);
-                mesasPanel.setVisible(true);
-                dispose();
-                return;
-            }
-        }
+        boolean isLoggedIn = personaService.adminLogin(dni, contraseña);
+        if (isLoggedIn) {
+            JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            loginSuccessful = true;
 
-        JOptionPane.showMessageDialog(this, "Usuario o contraseña inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        } else {
+            throw new LoginFailedException("Usuario o contraseña inválido.");
+        }
+    }
+
+    public boolean isLoginSuccessful() {
+        return loginSuccessful;
     }
 
     public static void main(String[] args) {
-        Login dialog = new Login(null);
+        JFrame frame = new JFrame();
+        Login loginDialog = new Login(frame);
+        boolean loggedIn = loginDialog.isLoginSuccessful();
+        System.out.println("Login successful: " + loggedIn);
     }
 }
