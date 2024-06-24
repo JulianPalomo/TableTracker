@@ -60,57 +60,49 @@ public class PedidoPanel extends JFrame implements PedidoListener {
             }
         });
 
-        addProductButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                agregarProducto(productoService.cargarCarta(), mesa.getNroMesa());
-                if (pedido != null) {
-                    mesa.ocuparMesa();
-                    mesasPanel.actualizarColorMesas(); // Notificar al MesasPanel para actualizar el color
-                }
+        addProductButton.addActionListener(e -> {
+            agregarProducto(productoService.cargarCarta(),mesa.getNroMesa());
+            if(pedido != null){
+                mesa.ocuparMesa();
+                mesasPanel.actualizarColorMesas(); // Notificar al MesasPanel para actualizar el color
             }
         });
 
-        removeProductButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int selectedRow = productTable.getSelectedRow();
-                if (selectedRow >= 0) {
-                    String productName = (String) tableModel.getValueAt(selectedRow, 0);
-                    double productPrice = (double) tableModel.getValueAt(selectedRow, 1);
-                    String productObservation = (String) tableModel.getValueAt(selectedRow, 2);
+        removeProductButton.addActionListener(e -> {
+            int selectedRow = productTable.getSelectedRow();
+            if (selectedRow >= 0) {
+                String productName = (String) tableModel.getValueAt(selectedRow, 0);
+                double productPrice = (double) tableModel.getValueAt(selectedRow, 1);
+                String productObservation = (String) tableModel.getValueAt(selectedRow, 2);
 
-                    // Buscar el producto en el pedido y eliminarlo
-                    for (Producto producto : pedido.getListaProductos()) {
-                        if (producto.getNombre().equals(productName) &&
-                                producto.getPrecio() == productPrice &&
-                                producto.getObservacion().equals(productObservation)) {
-                            pedido.getListaProductos().remove(producto);
-                            break;
-                        }
+                // Buscar el producto en el pedido y eliminarlo
+                for (Producto producto : pedido.getListaProductos()) {
+                    if (producto.getNombre().equals(productName) &&
+                            producto.getPrecio() == productPrice &&
+                            producto.getObservacion().equals(productObservation)) {
+                        pedido.getListaProductos().remove(producto);
+                        break;
                     }
-                    tableModel.removeRow(selectedRow);
-
-                    // Verificar si el pedido está vacío y liberar la mesa si es necesario
-                    if (pedido.getListaProductos().isEmpty()) {
-                        mesa.liberarMesa();
-                        mesasPanel.actualizarColorMesas();
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Selecciona un producto para eliminar.");
                 }
+                tableModel.removeRow(selectedRow);
+
+                // Verificar si el pedido está vacío y liberar la mesa si es necesario
+                if (pedido.getListaProductos().isEmpty()) {
+                    mesa.liberarMesa();
+                    mesasPanel.actualizarColorMesas();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecciona un producto para eliminar.");
             }
+
         });
 
-        botonComanda.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    comandar(comanda, mesa);
-                    JOptionPane.showMessageDialog(null, "Pedido comandado");
-                } catch (ProductosYaComandadosException ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                }
+        botonComanda.addActionListener(e -> {
+            try {
+                comandar(comanda, mesa.getNroMesa());
+                JOptionPane.showMessageDialog(null, "Pedido comandado");
+            } catch (ProductosYaComandadosException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             }
         });
 
@@ -194,13 +186,17 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         }
     }
 
-    private void actualizarNombreMesero(Mesa mesa) {
-        mesero.setText("Mesero: " + (mesa.getMesero() != null ? mesa.getMesero().toString() : "No asignado"));
-    }
-
     @Override
     public void onPedidoActualizado(ArrayList<Producto> nuevosProductos) {
         this.pedido.agregarProducto(nuevosProductos);
         updateOrderList();
     }
+/*
+    private void facturar(Pedido pedido) {
+        FacturaPanel facturaPanel = new FacturaPanel(pedido);
+    }
+
+ */
+
 }
+

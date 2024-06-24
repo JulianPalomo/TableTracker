@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MesasPanel extends JFrame {
 
-    private final MesaService mesaService = new MesaService();
+    private final MesaService mesaService = MesaService.getInstance();
     public boolean modoEdicion = false;
     private PedidoPanel currentPedidoPanel;
     private ProductoService productoService = new ProductoService();

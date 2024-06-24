@@ -18,7 +18,26 @@ public class MesaService {
     private static final String RUTA_PAREDES = "src/main/java/org/example/resource/paredes.json";
 
     private ArrayList<Mesa> mesas = new ArrayList<>();
-    private ArrayList<Pared> paredes  = new ArrayList<Pared>();
+    private ArrayList<Pared> paredes  = new ArrayList<>();
+
+    // Instancia única del Singleton
+    private static MesaService instancia;
+
+    // Constructor privado para evitar instanciación
+    private MesaService() {
+        cargarMesasYParedesJSON();
+    }
+    // Método público estático para obtener la instancia única
+    public static MesaService getInstance() {
+        if (instancia == null) {
+            synchronized (MesaService.class) {
+                if (instancia == null) {
+                    instancia = new MesaService();
+                }
+            }
+        }
+        return instancia;
+    }
 
     public ArrayList<Mesa> getMesas() {
         return this.mesas;

@@ -48,8 +48,39 @@
     "alto": 55
   },
   {
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
+    "pedido": {
+      "listaProductos": [
+        {
+          "id": 1,
+          "nombre": "Vino Tinto",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 5500.0,
+          "observacion": ""
+        },
+        {
+          "id": 2,
+          "nombre": "Whisky",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 8800.0,
+          "observacion": ""
+        },
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": ""
+        }
+      ],
+      "fecha": "2024-06-24"
+    },
     "nroMesa": 7,
+    "mesero": {
+      "nombre": "Luis",
+      "apellido": "Martínez",
+      "dni": "11223344"
+    },
     "x": 591,
     "y": 58,
     "ancho": 107,

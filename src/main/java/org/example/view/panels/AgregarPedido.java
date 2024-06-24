@@ -2,6 +2,7 @@ package org.example.view.panels;
 
 import org.example.interfaces.PedidoListener;
 import org.example.models.Producto;
+import org.example.service.MesaService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,6 +64,10 @@ public class AgregarPedido extends JFrame {
                 resumen.append(producto.getNombre()).append(" - ").append(producto.getPrecio()).append(" - Observación: ").append(producto.getObservacion()).append("\n");
             }
             JOptionPane.showMessageDialog(null, resumen.toString());
+
+            ///Guardo los datos en el JSON por si acaso.
+            MesaService.getInstance().guardarMesasYParedesJSON();
+
             dispose();
         });
         return confirmButton;
