@@ -25,7 +25,8 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     private final ProductoService productoService;
     private ArrayList<Producto> comanda = new ArrayList<>();
     private JLabel mesero;
-    public PedidoPanel(Mesa mesa, ProductoService productoService,MesasPanel mesasPanel) {
+
+    public PedidoPanel(Mesa mesa, ProductoService productoService, MesasPanel mesasPanel) {
         this.numero = mesa.getNroMesa();
         if (mesa.getPedido() == null) {
             mesa.setPedido(new Pedido());
@@ -62,8 +63,8 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         addProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                agregarProducto(productoService.cargarCarta(),mesa.getNroMesa());
-                if(pedido != null){
+                agregarProducto(productoService.cargarCarta(), mesa.getNroMesa());
+                if (pedido != null) {
                     mesa.ocuparMesa();
                     mesasPanel.actualizarColorMesas(); // Notificar al MesasPanel para actualizar el color
                 }
@@ -98,7 +99,6 @@ public class PedidoPanel extends JFrame implements PedidoListener {
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecciona un producto para eliminar.");
                 }
-
             }
         });
 
@@ -106,7 +106,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    comandar(comanda, mesa.getNroMesa());
+                    comandar(comanda, mesa);
                     JOptionPane.showMessageDialog(null, "Pedido comandado");
                 } catch (ProductosYaComandadosException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -118,15 +118,18 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         buttonPanel.add(removeProductButton);
         buttonPanel.add(billButton);
         buttonPanel.add(botonComanda);
-        add(buttonPanel, BorderLayout.SOUTH);
+
         // Añadir la etiqueta del mesero al panel de botones
         mesero = new JLabel("Mesero: " + (mesa.getMesero() != null ? mesa.getMesero().toString() : "No asignado"));
         buttonPanel.add(mesero, BorderLayout.WEST);
 
+        add(buttonPanel, BorderLayout.SOUTH);
+
         // Actualizar la lista de pedidos
         updateOrderList();
     }
-    public void comandar(ArrayList<Producto> comanda, int nroMesa) throws ProductosYaComandadosException {
+
+    public void comandar(ArrayList<Producto> comanda, Mesa mesa) throws ProductosYaComandadosException {
         // Crear un mapa para almacenar la cantidad de cada producto en el pedido
         Map<Producto, Integer> cantidadesPedido = new HashMap<>();
         for (Producto producto : pedido.getListaProductos()) {
@@ -165,7 +168,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         }
 
         // Si hay nuevos productos, generar el PDF y actualizar la comanda
-        productoService.imprimirComandaConCantidades(nuevosProductosConCantidades, nroMesa);
+        productoService.imprimirComandaConCantidades(nuevosProductosConCantidades, mesa.getNroMesa());
 
         for (Map.Entry<Producto, Integer> entry : nuevosProductosConCantidades.entrySet()) {
             Producto productoNuevo = entry.getKey();
@@ -174,11 +177,13 @@ public class PedidoPanel extends JFrame implements PedidoListener {
                 comanda.add(productoNuevo);
             }
         }
+
+        // Actualizar el nombre del mesero en la etiqueta correspondiente
+        actualizarNombreMesero(mesa);
     }
 
-    private void agregarProducto(Map<String, List<Producto>> menu,int nroMesa) {
-
-        AgregarPedido agregarPedido = new AgregarPedido(menu, this,nroMesa);
+    private void agregarProducto(Map<String, List<Producto>> menu, int nroMesa) {
+        AgregarPedido agregarPedido = new AgregarPedido(menu, this, nroMesa);
         agregarPedido.setVisible(true);
     }
 
@@ -189,17 +194,13 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         }
     }
 
+    private void actualizarNombreMesero(Mesa mesa) {
+        mesero.setText("Mesero: " + (mesa.getMesero() != null ? mesa.getMesero().toString() : "No asignado"));
+    }
+
     @Override
     public void onPedidoActualizado(ArrayList<Producto> nuevosProductos) {
         this.pedido.agregarProducto(nuevosProductos);
         updateOrderList();
     }
-/*
-    private void facturar(Pedido pedido) {
-        FacturaPanel facturaPanel = new FacturaPanel(pedido);
-    }
-
- */
-
 }
-
