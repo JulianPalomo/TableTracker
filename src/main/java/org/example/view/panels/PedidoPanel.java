@@ -23,7 +23,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     private Pedido pedido;
     private DefaultTableModel tableModel;
     private final ProductoService productoService;
-    private ArrayList<Producto> comanda = new ArrayList<>();
+    private Comanda comanda;
     private JLabel mesero;
 
     public PedidoPanel(Mesa mesa, ProductoService productoService, MesasPanel mesasPanel) {
@@ -33,6 +33,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         }
         this.pedido = mesa.getPedido();
         this.productoService = productoService;
+        comanda = new Comanda(productoService);
 
         setTitle("Mesa " + numero);
         setSize(700, 500);
@@ -50,14 +51,15 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         JButton removeProductButton = new JButton("Eliminar Producto");
         JButton billButton = new JButton("Facturar");
         JButton botonComanda = new JButton("Comandar");
+        JButton botonLiberarMesa = new JButton("Liberar Mesa");
 
-        billButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new FacturaPanel(pedido);
-                mesa.liberarMesa();
-                mesasPanel.actualizarColorMesas();
-            }
+        botonLiberarMesa.addActionListener(e -> {
+            mesa.liberarMesa();
+        });
+
+        billButton.addActionListener(e -> {
+            new FacturaPanel(mesa);
+            mesasPanel.actualizarColorMesas();
         });
 
         addProductButton.addActionListener(e -> {
@@ -99,7 +101,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
 
         botonComanda.addActionListener(e -> {
             try {
-                comandar(comanda, mesa);
+                comanda.comandar(mesa);
                 JOptionPane.showMessageDialog(null, "Pedido comandado");
             } catch (ProductosYaComandadosException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -110,6 +112,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         buttonPanel.add(removeProductButton);
         buttonPanel.add(billButton);
         buttonPanel.add(botonComanda);
+        buttonPanel.add(botonLiberarMesa);
 
         // Añadir la etiqueta del mesero al panel de botones
         mesero = new JLabel("Mesero: " + (mesa.getMesero() != null ? mesa.getMesero().toString() : "No asignado"));
@@ -119,66 +122,6 @@ public class PedidoPanel extends JFrame implements PedidoListener {
 
         // Actualizar la lista de pedidos
         updateOrderList();
-    }
-
-    public void comandar(ArrayList<Producto> comanda, Mesa mesa) throws ProductosYaComandadosException {
-        // Crear un mapa para almacenar la cantidad de cada producto en el pedido
-        Map<Producto, Integer> cantidadesPedido = new HashMap<>();
-        for (Producto producto : pedido.getListaProductos()) {
-            int cantidad = cantidadesPedido.getOrDefault(producto, 0) + 1;
-            cantidadesPedido.put(producto, cantidad);
-        }
-
-        // Crear un mapa para almacenar la cantidad de cada producto en la comanda
-        Map<Producto, Integer> cantidadesComanda = new HashMap<>();
-        for (Producto producto : comanda) {
-            int cantidad = cantidadesComanda.getOrDefault(producto, 0) + 1;
-            cantidadesComanda.put(producto, cantidad);
-        }
-
-        // Crear un mapa para los nuevos productos que necesitan ser comandados
-        Map<Producto, Integer> nuevosProductosConCantidades = new HashMap<>();
-
-        // Recorrer la lista de productos del pedido
-        for (Map.Entry<Producto, Integer> entry : cantidadesPedido.entrySet()) {
-            Producto productoPedido = entry.getKey();
-            int cantidadPedido = entry.getValue();
-
-            // Obtener la cantidad ya comandada de este producto
-            int cantidadComanda = cantidadesComanda.getOrDefault(productoPedido, 0);
-
-            // Calcular la cantidad de productos nuevos a comandar
-            int cantidadNuevos = cantidadPedido - cantidadComanda;
-
-            // Si hay nuevos productos para este producto, agregarlo al mapa
-            if (cantidadNuevos > 0) {
-                nuevosProductosConCantidades.put(productoPedido, cantidadNuevos);
-            }
-        }
-
-        // Si no hay nuevos productos por comandar, lanzar excepción
-        if (nuevosProductosConCantidades.isEmpty()) {
-            throw new ProductosYaComandadosException("Todos los productos del pedido ya han sido comandados.");
-        }
-
-        // Si hay nuevos productos, generar el PDF y actualizar la comanda
-        productoService.imprimirComandaConCantidades(nuevosProductosConCantidades, mesa.getNroMesa(), mesa.getMesero().getNombre());
-
-        // Actualizar la comanda con los nuevos productos
-        for (Map.Entry<Producto, Integer> entry : nuevosProductosConCantidades.entrySet()) {
-            Producto productoNuevo = entry.getKey();
-            int cantidadNueva = entry.getValue();
-            for (int i = 0; i < cantidadNueva; i++) {
-                comanda.add(productoNuevo);
-            }
-        }
-
-        // Actualizar el nombre del mesero en la etiqueta correspondiente
-        actualizarNombreMesero(mesa);
-    }
-
-    private void actualizarNombreMesero(Mesa mesa) {
-        mesero.setText("Mesero: " + (mesa.getMesero() != null ? mesa.getMesero().toString() : "No asignado"));
     }
 
     private void agregarProducto(Map<String, List<Producto>> menu, int nroMesa) {

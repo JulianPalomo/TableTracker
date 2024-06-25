@@ -2,12 +2,12 @@ package org.example.view.panels;
 
 import org.example.exceptions.LoginFailedException;
 import org.example.models.Persona;
-import org.example.service.PersonaService;
+import org.example.models.Usuario;
+import org.example.service.UsuarioSerializer;
+import org.example.service.UsuarioService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Login extends JDialog {
@@ -18,17 +18,14 @@ public class Login extends JDialog {
     private JPanel loginPanel;
     private JLabel lblDni;
 
-    private PersonaService personaService;
-    private boolean loginSuccessful;
+    private UsuarioService personaService;
+    private Usuario loginSuccessful;
 
     public Login(JFrame parent) {
         super(parent);
         setTitle("Inicio de Sesión");
 
-        // Inicializar loginSuccessful
-        loginSuccessful = false;
-
-        // Inicializar el loginPanel
+        loginSuccessful = null;
         loginPanel = new JPanel();
         loginPanel.setLayout(new GridLayout(3, 2));
         lblDni = new JLabel("DNI:");
@@ -45,58 +42,49 @@ public class Login extends JDialog {
         loginPanel.add(OKButton);
         loginPanel.add(cancelarButton);
 
-        // Configurar la ventana de diálogo
         setContentPane(loginPanel);
         setMinimumSize(new Dimension(400, 300));
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        // Inicializar PersonaService
-        personaService = new PersonaService();
-
+        personaService = new UsuarioService();
         personaService.loadFromJson();
 
-        OKButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    autenticarUsuario();
-                } catch (LoginFailedException ex) {
-                    JOptionPane.showMessageDialog(Login.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+        OKButton.addActionListener(e -> {
+            try {
+                autenticarUsuario();
+            } catch (LoginFailedException ex) {
+                JOptionPane.showMessageDialog(Login.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
-        cancelarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loginSuccessful = false;
-                dispose();
-            }
+        cancelarButton.addActionListener(e -> {
+            dispose();
         });
 
         setVisible(true);
     }
 
-    private boolean autenticarUsuario() throws IOException, LoginFailedException {
+    private Usuario autenticarUsuario() throws IOException, LoginFailedException {
         String dni = tfDni.getText();
         String contraseña = new String(tfContrasena.getPassword());
 
-        boolean isLoggedIn = personaService.adminLogin(dni, contraseña);
-        if (isLoggedIn) {
+        Usuario isLoggedIn = personaService.login(dni, contraseña);
+
+        if (isLoggedIn != null) {
             JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            loginSuccessful = true;
+            loginSuccessful = isLoggedIn;
             dispose();  // Cerrar el diálogo de login
-            return true;
+            return isLoggedIn;
         } else {
             throw new LoginFailedException("Usuario o contraseña inválido.");
         }
     }
 
-    public boolean isLoginSuccessful() {
+    public Usuario isLoginSuccessful() {
         return loginSuccessful;
     }
 }

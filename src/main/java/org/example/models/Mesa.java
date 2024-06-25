@@ -8,7 +8,8 @@ public class Mesa extends Objeto {
     private Pedido pedido;
     private int nroMesa;
     private static int nroMesaAuto = 1;
-    private Mesero mesero;
+    private Usuario mesero;
+
     public Mesa() {
         super();
         this.estado = EstadoMesa.DISPONIBLE;
@@ -22,6 +23,7 @@ public class Mesa extends Objeto {
         this.nroMesa = id;
         this.estado = EstadoMesa.DISPONIBLE;
         this.pedido = null;
+        this.mesero = null;
     }
 
     public Mesa(int x,int y, int ancho, int alto) {
@@ -34,11 +36,11 @@ public class Mesa extends Objeto {
         return this.nroMesa;
     }
 
-    public Mesero getMesero() {
+    public Usuario getMesero() {
         return mesero;
     }
 
-    public void asignarMesero(Mesero mesero) {
+    public void asignarMesero(Usuario mesero) {
         this.mesero = mesero;
     }
 
@@ -71,6 +73,7 @@ public class Mesa extends Objeto {
     public void liberarMesa() {
         this.pedido = null;
         this.estado = EstadoMesa.DISPONIBLE;
+        this.mesero = null;
     }
 
     @Override

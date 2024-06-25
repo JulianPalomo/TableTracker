@@ -1,9 +1,6 @@
 package org.example.view.panels;
 
-import org.example.models.Factura;
-import org.example.models.MetodosDePago;
-import org.example.models.Pedido;
-import org.example.models.Producto;
+import org.example.models.*;
 
 import javax.swing.*;
 
@@ -32,8 +29,8 @@ public class FacturaPanel extends JFrame {
 
     private FacturaService facturaService = new FacturaService();
 
-    public FacturaPanel(Pedido pedido) {
-        this.productos = pedido.getListaProductos();
+    public FacturaPanel(Mesa mesa) {
+        this.productos = mesa.getPedido().getListaProductos();
 
         setTitle("Lista de Productos");
         setSize(400, 400);
@@ -72,11 +69,11 @@ public class FacturaPanel extends JFrame {
 
         add(panel1);
 
-        subtotalLabel.setText("Subtotal: $" + pedido.getTotal());
+        subtotalLabel.setText("Subtotal: $" + mesa.getPedido().getTotal());
 
         botonFactura.addActionListener(e -> {
             try {
-                generarFactura(pedido);
+                generarFactura(mesa);
             } catch (DocumentException | FileNotFoundException ex) {
                 ex.printStackTrace();
             }
@@ -85,10 +82,14 @@ public class FacturaPanel extends JFrame {
         setVisible(true);
     }
 
-    private void generarFactura(Pedido pedido) throws DocumentException, FileNotFoundException {
-        Factura factura = new Factura(pedido, (MetodosDePago) mediosDePago.getSelectedItem());
+    private void generarFactura(Mesa mesa) throws DocumentException, FileNotFoundException {
+        Factura factura = new Factura(mesa.getPedido(), (MetodosDePago) mediosDePago.getSelectedItem());
         facturaService.generarFactura(factura);
         JOptionPane.showMessageDialog(this, "Factura generada correctamente.");
+
+        ///LIBERA LA MESA
+        mesa.liberarMesa();
+
         abrirArchivoPDF(factura.getNombreArchivo());
     }
 

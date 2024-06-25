@@ -2,6 +2,8 @@ package org.example.view.panels;
 
 import org.example.models.Mesa;
 import org.example.models.Mesero;
+import org.example.models.Persona;
+import org.example.models.Usuario;
 import org.example.service.MesaService;
 
 import javax.swing.*;
@@ -10,11 +12,11 @@ import java.util.List;
 
 public class AsignarMesero extends JFrame {
 
-    private JComboBox<Mesero> waiterComboBox;
+    private JComboBox<Usuario> waiterComboBox;
     private JButton assignButton;
     private Mesa mesa;
 
-    public AsignarMesero(Mesa mesa, List<Mesero> waiters) {
+    public AsignarMesero(Mesa mesa, List<Usuario> waiters) {
         if (waiters == null || waiters.isEmpty()) {
             throw new IllegalArgumentException("La lista de meseros no puede ser null o vacía");
         }
@@ -29,7 +31,7 @@ public class AsignarMesero extends JFrame {
 
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20));
 
-        waiterComboBox = new JComboBox<>(waiters.toArray(new Mesero[0]));
+        waiterComboBox = new JComboBox<>(waiters.toArray(new Usuario[0]));
         waiterComboBox.setPreferredSize(new Dimension(200, 30));
         panel.add(waiterComboBox);
 
@@ -37,7 +39,7 @@ public class AsignarMesero extends JFrame {
         assignButton.setPreferredSize(new Dimension(100, 30));
 
         assignButton.addActionListener(e -> {
-            Mesero mesero = (Mesero) waiterComboBox.getSelectedItem();
+            Usuario mesero = (Usuario) waiterComboBox.getSelectedItem();
             mesa.asignarMesero(mesero);
             dispose();
         });

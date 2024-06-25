@@ -1,12 +1,9 @@
 package org.example.view.panels;
 
-import org.example.models.EstadoMesa;
-import org.example.models.Mesa;
-import org.example.models.Mesero;
-import org.example.models.Pared;
+import org.example.models.*;
 import org.example.service.MesaService;
-import org.example.service.PersonaService;
 import org.example.service.ProductoService;
+import org.example.service.UsuarioService;
 import org.example.view.buttons.MesaButton;
 
 import javax.swing.*;
@@ -33,8 +30,8 @@ public class MesasPanel extends JFrame {
     private JPanel edicionBar;
     private CartaPanel cartaPanel = new CartaPanel();
     private JPanel mainPanel;
-    private List<Mesero> waiters;
-    public MesasPanel(String nombreComercio, boolean admin) {
+    private List<Usuario> waiters;
+    public MesasPanel(String nombreComercio, Credenciales credenciales) {
 
         setTitle(nombreComercio);
         setSize(800, 600);
@@ -43,11 +40,11 @@ public class MesasPanel extends JFrame {
         // Oculta la barra de título y otros elementos de decoración
         setUndecorated(true);
 
-        PersonaService personaService = new PersonaService();
-        personaService.loadFromJson();
+        UsuarioService usuarioService = new UsuarioService();
+        usuarioService.loadFromJson();
 
         // Cargar la lista de meseros
-        waiters = personaService.getListaMeseros();
+        waiters = usuarioService.getListaMeseros();
 
         // Verificar si waiters es null o está vacía
         if (waiters == null || waiters.isEmpty()) {
@@ -61,7 +58,8 @@ public class MesasPanel extends JFrame {
         cartaPanel.setVisible(false);
 
         mainPanel = new JPanel(null); // Panel principal con null layout
-        mainPanel.setBackground(Color.DARK_GRAY);
+        mainPanel.setBackground(new Color(219,180,119));
+
 
         mesaService.cargarMesasYParedesJSON();
 
@@ -101,35 +99,28 @@ public class MesasPanel extends JFrame {
 
         toggleEdicionButton.addActionListener(e -> {
             // Mostrar el cuadro de diálogo de inicio de sesión
-            Login loginDialog = new Login(this);
-
-            // Verificar si el inicio de sesión fue exitoso
-            if (loginDialog.isLoginSuccessful()) {
                 this.modoEdicion = !modoEdicion; // Alternar el modo de edición
                 String estado = modoEdicion ? "Activado" : "Desactivado";
                 JOptionPane.showMessageDialog(this, "Modo de edición " + estado);
                 actualizarModoEdicion();
                 edicionBar.setVisible(modoEdicion); // Mostrar/ocultar edicionBar según el modo de edición
-            } else {
-                JOptionPane.showMessageDialog(this, "No se pudo activar el modo de edición. Inicio de sesión fallido.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+
         });
 
         verMenuCompletoButton.addActionListener(e -> cargarCartaPanel());
 
         aboutButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Software de Gestión para Restaurante.\nVersión 1.0"));
 
-        //addUserButton.addActionListener(e -> new Registration(this));
-
         Dimension buttonSize = new Dimension(150, 40); // Ancho x Alto
 
 // Agregar botones a la toolbar
-        if (admin) {
+        if (credenciales == Credenciales.ADMINISTRADOR) {
             toolBar.add(toggleEdicionButton);
             toggleEdicionButton.setPreferredSize(buttonSize);
 
             toolBar.add(addUserButton);
             addUserButton.setPreferredSize(buttonSize);
+
             toolBar.add(verMenuCompletoButton);
             verMenuCompletoButton.setPreferredSize(buttonSize);
         }
@@ -335,41 +326,6 @@ public class MesasPanel extends JFrame {
             e.printStackTrace();
         }
     }
-
-/*
-    public void eliminarObjeto() {
-        try {
-            if (!mesaService.getMesas().isEmpty()) {
-                // Obtener el ID de la última mesa
-                int id = mesaService.getMesas().size();
-
-                // Buscar y eliminar el botón correspondiente a la última mesa
-                for (Component comp : mainPanel.getComponents()) {
-                    if (comp instanceof JButton button) {
-                        if (button.getText().equals("Mesa " + id)) {
-                            mesaService.eliminarUltimaMesa(); // Eliminar la mesa del servicio
-                            mainPanel.remove(button);
-                            mainPanel.revalidate();
-                            mainPanel.repaint();
-                            break;
-                        }
-                        else if (button.getText().equals("p")){
-                            mesaService.eliminarUltimaPared();
-                            mainPanel.remove(button);
-                            mainPanel.revalidate();
-                            mainPanel.repaint();
-                            break;
-                        }
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "No hay mesas para eliminar.");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al eliminar la mesa.");
-            e.printStackTrace();
-        }
-    }*/
 
     public void agregarMesa() {
         Mesa nueva = mesaService.agregarMesa();

@@ -1,12 +1,12 @@
 package org.example.service;
 
 import com.google.gson.*;
-import org.example.models.Administrador;
 import org.example.models.Persona;
+import org.example.models.Usuario;
 
 import java.lang.reflect.Type;
 
-public class PersonaSerializer implements JsonSerializer<Persona> {
+public class UsuarioSerializer implements JsonSerializer<Persona> {
     @Override
     public JsonElement serialize(Persona persona, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject jsonObject = new JsonObject();
@@ -17,8 +17,12 @@ public class PersonaSerializer implements JsonSerializer<Persona> {
         jsonObject.addProperty("apellido", persona.getApellido());
         jsonObject.addProperty("dni", persona.getDni());
 
-        if (persona instanceof Administrador) {
-            jsonObject.addProperty("password", ((Administrador) persona).getPassword());
+        if (((Usuario)persona).getPassword() != null) {
+            jsonObject.addProperty("password", ((Usuario)persona).getPassword());
+        }
+
+        if (((Usuario)persona).getCredenciales() != null) {
+            jsonObject.addProperty("credenciales", ((Usuario)persona).getCredenciales().name());
         }
 
         return jsonObject;

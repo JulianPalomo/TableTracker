@@ -15,7 +15,7 @@ public class Administrador extends Persona{
 
 
     public boolean login(String dni, String password) {
-        if(getDni().equals(getDni()) && this.password.equals(password))
+        if(getDni().equals(dni) && this.password.equals(password))
         {
             return true;
         }

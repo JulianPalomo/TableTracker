@@ -131,8 +131,4 @@ public class MesaService {
             throw new IllegalStateException("No hay paredes para eliminar");
         }
     }
-
-
-
-
 }

@@ -1,1 +1,38 @@
-[{"nombreUsuario":"alvaro","contrasena":"1234","nombre":"Alvaro","apellido":"Atue","email":"atuealvaro@gmail.com","tipoCuenta":"ADMINISTRADOR"},{"nombreUsuario":"mesero123","contrasena":"meseropass","nombre":"Mesero","apellido":"User","email":"mesero@example.com","tipoCuenta":"MESERO"},{"listaMesasAsignadas":[],"nombreUsuario":"pochi1","contrasena":"1234","nombre":"lucre","apellido":"martin","email":"lucre@gmail.com","tipoCuenta":"MESERO","isActivo":true},{"nombreUsuario":"belenush","contrasena":"1234","nombre":"belen","apellido":"videla","email":"belen@gmail.com","tipoCuenta":"ADMINISTRADOR","isActivo":true},{"listaMesasAsignadas":[],"nombreUsuario":"jnz","contrasena":"1234","nombre":"joaquin","apellido":"suarez","email":"jnz@gmail.com","tipoCuenta":"MESERO","isActivo":true}]
+[
+  {
+    "nombre": "Admin",
+    "apellido": "admin",
+    "dni": "123456789",
+    "password": "admin123",
+    "credenciales": "ADMINISTRADOR"
+  },
+  {
+    "nombre": "Carlos",
+    "apellido": "Pérez",
+    "dni": "12345678",
+    "password": "admin123",
+    "credenciales": "MESERO"
+  },
+  {
+    "nombre": "Ana",
+    "apellido": "López",
+    "dni": "87654321",
+    "password": "admin123",
+    "credenciales": "MESERO"
+  },
+  {
+    "nombre": "Luis",
+    "apellido": "Martínez",
+    "dni": "11223344",
+    "password": "admin123",
+    "credenciales": "MESERO"
+  }
+,
+  {
+    "nombre": "Luis",
+    "apellido": "Martínez",
+    "dni": "11223344",
+    "password": "admin123",
+    "credenciales": "MESERO"
+  }
+]

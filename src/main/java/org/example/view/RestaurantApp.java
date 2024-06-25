@@ -1,29 +1,34 @@
 package org.example.view;
-
-import org.example.models.Mesa;
-import org.example.models.Mesero;
-import org.example.models.SplashScreen;
-import org.example.service.MesaService;
-import org.example.service.PersonaService;
+import org.example.models.Usuario;
+import org.example.service.UsuarioService;
+import org.example.view.panels.Login;
 import org.example.view.panels.MesasPanel;
 
-import javax.swing.SwingUtilities;
-import java.util.List;
+import javax.swing.*;
 
 public class RestaurantApp {
     public static void main(String[] args) {
 
-        new SplashScreen("src/main/java/org/example/resource/lg.jpg", 3000);
 
+
+        // Asegurarse de que la GUI se ejecute en el hilo de despacho de eventos de Swing
         SwingUtilities.invokeLater(() -> {
-            PersonaService personaService = new PersonaService();
-            personaService.loadFromJson();
+            UsuarioService usuarioService = new UsuarioService();
+            usuarioService.loadFromJson();
+            // Crear el diálogo de login
+            Login login = new Login(null); // Pasar null como parámetro ya que no hay ventana principal todavía
 
-            // Obtener la lista de meseros
-            List<Mesero> waiters = personaService.getListaMeseros();
+            Usuario logeada = (Usuario)login.isLoginSuccessful();
 
-            MesasPanel layout = new MesasPanel("Juli's", true);
-            layout.setVisible(true);
+            // Verificar si el login fue exitoso
+            if (logeada != null) {
+                // Login exitoso, cargar el panel principal
+                MesasPanel mainFrame = new MesasPanel("Juli's", logeada.getCredenciales());
+                mainFrame.setVisible(true);
+            } else {
+                // Login fallido, salir de la aplicación
+                System.exit(0);
+            }
         });
     }
 }
