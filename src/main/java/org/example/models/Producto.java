@@ -71,12 +71,12 @@ public class Producto implements Cloneable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Producto producto = (Producto) o;
-        return id == producto.id && Objects.equals(nombre, producto.nombre);
+        return id == producto.id && Objects.equals(nombre, producto.nombre) && Objects.equals(observacion,producto.observacion);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre);
+        return Objects.hash(id, nombre, observacion);
     }
 
     @Override

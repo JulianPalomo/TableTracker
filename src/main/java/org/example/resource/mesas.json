@@ -1,32 +1,6 @@
 [
   {
-    "estado": "OCUPADA",
-    "pedido": {
-      "listaProductos": [
-        {
-          "id": 2,
-          "nombre": "Whisky",
-          "categoria": "BEBIDAS_ALCOHOLICAS",
-          "precio": 8800.0,
-          "observacion": ""
-        },
-        {
-          "id": 1,
-          "nombre": "Vino Tinto",
-          "categoria": "BEBIDAS_ALCOHOLICAS",
-          "precio": 5500.0,
-          "observacion": ""
-        },
-        {
-          "id": 0,
-          "nombre": "Cerveza",
-          "categoria": "BEBIDAS_ALCOHOLICAS",
-          "precio": 2200.0,
-          "observacion": ""
-        }
-      ],
-      "fecha": "2024-06-24"
-    },
+    "estado": "DISPONIBLE",
     "nroMesa": 1,
     "mesero": {
       "nombre": "Ana",
@@ -39,33 +13,7 @@
     "alto": 50
   },
   {
-    "estado": "OCUPADA",
-    "pedido": {
-      "listaProductos": [
-        {
-          "id": 0,
-          "nombre": "Cerveza",
-          "categoria": "BEBIDAS_ALCOHOLICAS",
-          "precio": 2200.0,
-          "observacion": ""
-        },
-        {
-          "id": 1,
-          "nombre": "Vino Tinto",
-          "categoria": "BEBIDAS_ALCOHOLICAS",
-          "precio": 5500.0,
-          "observacion": ""
-        },
-        {
-          "id": 2,
-          "nombre": "Whisky",
-          "categoria": "BEBIDAS_ALCOHOLICAS",
-          "precio": 8800.0,
-          "observacion": ""
-        }
-      ],
-      "fecha": "2024-06-24"
-    },
+    "estado": "DISPONIBLE",
     "nroMesa": 2,
     "mesero": {
       "nombre": "Carlos",
@@ -110,33 +58,7 @@
     "alto": 55
   },
   {
-    "estado": "OCUPADA",
-    "pedido": {
-      "listaProductos": [
-        {
-          "id": 1,
-          "nombre": "Vino Tinto",
-          "categoria": "BEBIDAS_ALCOHOLICAS",
-          "precio": 5500.0,
-          "observacion": ""
-        },
-        {
-          "id": 2,
-          "nombre": "Whisky",
-          "categoria": "BEBIDAS_ALCOHOLICAS",
-          "precio": 8800.0,
-          "observacion": ""
-        },
-        {
-          "id": 0,
-          "nombre": "Cerveza",
-          "categoria": "BEBIDAS_ALCOHOLICAS",
-          "precio": 2200.0,
-          "observacion": ""
-        }
-      ],
-      "fecha": "2024-06-24"
-    },
+    "estado": "DISPONIBLE",
     "nroMesa": 7,
     "mesero": {
       "nombre": "Luis",
@@ -151,6 +73,11 @@
   {
     "estado": "DISPONIBLE",
     "nroMesa": 8,
+    "mesero": {
+      "nombre": "Luis",
+      "apellido": "Martínez",
+      "dni": "11223344"
+    },
     "x": 277,
     "y": 54,
     "ancho": 111,
@@ -221,16 +148,141 @@
     "alto": 195
   },
   {
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
+    "pedido": {
+      "listaProductos": [
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": ""
+        },
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": "asdasd"
+        },
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": "uuuuuuu"
+        },
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": ""
+        },
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": ""
+        },
+        {
+          "id": 2,
+          "nombre": "Whisky",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 8800.0,
+          "observacion": ""
+        },
+        {
+          "id": 2,
+          "nombre": "Whisky",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 8800.0,
+          "observacion": ""
+        },
+        {
+          "id": 1,
+          "nombre": "Vino Tinto",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 5500.0,
+          "observacion": ""
+        },
+        {
+          "id": 1,
+          "nombre": "Vino Tinto",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 5500.0,
+          "observacion": ""
+        }
+      ],
+      "fecha": "2024-06-24"
+    },
     "nroMesa": 17,
+    "mesero": {
+      "nombre": "Luis",
+      "apellido": "Martínez",
+      "dni": "11223344"
+    },
     "x": 488,
     "y": 677,
     "ancho": 212,
     "alto": 192
   },
   {
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
+    "pedido": {
+      "listaProductos": [
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": ""
+        },
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": "asdasdasd"
+        },
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": ""
+        },
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": "rrrrrrrrrrr"
+        },
+        {
+          "id": 1,
+          "nombre": "Vino Tinto",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 5500.0,
+          "observacion": ""
+        },
+        {
+          "id": 1,
+          "nombre": "Vino Tinto",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 5500.0,
+          "observacion": ""
+        }
+      ],
+      "fecha": "2024-06-24"
+    },
     "nroMesa": 18,
+    "mesero": {
+      "nombre": "Luis",
+      "apellido": "Martínez",
+      "dni": "11223344"
+    },
     "x": 811,
     "y": 676,
     "ancho": 220,

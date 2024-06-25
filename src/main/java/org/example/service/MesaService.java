@@ -86,9 +86,9 @@ public class MesaService {
         }
     }
 
-
     public Mesa agregarMesa() {
-        Mesa nueva = new Mesa();
+        int nuevoNumeroMesa = mesas.isEmpty() ? 1 : mesas.get(mesas.size() - 1).getNroMesa() + 1;
+        Mesa nueva = new Mesa(nuevoNumeroMesa);
         this.mesas.add(nueva);
         return nueva;
     }
@@ -102,12 +102,13 @@ public class MesaService {
 
     public void eliminarUltimaMesa() {
         if (!mesas.isEmpty()) {
-            mesas.removeLast();
+            Mesa eliminada = mesas.removeLast();
             Mesa.decrementarNumeroAuto();
         } else {
             throw new IllegalStateException("No hay mesas para eliminar");
         }
     }
+
 
     public Pared agregarPared() {
         Pared nueva = new Pared();

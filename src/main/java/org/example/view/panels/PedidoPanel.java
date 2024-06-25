@@ -129,7 +129,14 @@ public class PedidoPanel extends JFrame implements PedidoListener {
             cantidadesPedido.put(producto, cantidad);
         }
 
-        // Crear una lista para almacenar los nuevos productos y sus cantidades
+        // Crear un mapa para almacenar la cantidad de cada producto en la comanda
+        Map<Producto, Integer> cantidadesComanda = new HashMap<>();
+        for (Producto producto : comanda) {
+            int cantidad = cantidadesComanda.getOrDefault(producto, 0) + 1;
+            cantidadesComanda.put(producto, cantidad);
+        }
+
+        // Crear un mapa para los nuevos productos que necesitan ser comandados
         Map<Producto, Integer> nuevosProductosConCantidades = new HashMap<>();
 
         // Recorrer la lista de productos del pedido
@@ -137,15 +144,10 @@ public class PedidoPanel extends JFrame implements PedidoListener {
             Producto productoPedido = entry.getKey();
             int cantidadPedido = entry.getValue();
 
-            // Verificar la cantidad del producto en la comanda
-            int cantidadComanda = 0;
-            for (Producto productoComanda : comanda) {
-                if (productoPedido.equals(productoComanda)) {
-                    cantidadComanda++;
-                }
-            }
+            // Obtener la cantidad ya comandada de este producto
+            int cantidadComanda = cantidadesComanda.getOrDefault(productoPedido, 0);
 
-            // Calcular la cantidad de productos nuevos
+            // Calcular la cantidad de productos nuevos a comandar
             int cantidadNuevos = cantidadPedido - cantidadComanda;
 
             // Si hay nuevos productos para este producto, agregarlo al mapa
@@ -160,8 +162,9 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         }
 
         // Si hay nuevos productos, generar el PDF y actualizar la comanda
-        productoService.imprimirComandaConCantidades(nuevosProductosConCantidades, mesa.getNroMesa(),mesa.getMesero().getNombre());
+        productoService.imprimirComandaConCantidades(nuevosProductosConCantidades, mesa.getNroMesa(), mesa.getMesero().getNombre());
 
+        // Actualizar la comanda con los nuevos productos
         for (Map.Entry<Producto, Integer> entry : nuevosProductosConCantidades.entrySet()) {
             Producto productoNuevo = entry.getKey();
             int cantidadNueva = entry.getValue();

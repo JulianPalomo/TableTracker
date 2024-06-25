@@ -17,6 +17,13 @@ public class Mesa extends Objeto {
         nroMesaAuto++;
     }
 
+    public Mesa(int id){
+        super();
+        this.nroMesa = id;
+        this.estado = EstadoMesa.DISPONIBLE;
+        this.pedido = null;
+    }
+
     public Mesa(int x,int y, int ancho, int alto) {
         super(x,y,ancho,alto);
         this.estado = EstadoMesa.DISPONIBLE;
@@ -78,5 +85,4 @@ public class Mesa extends Objeto {
     public int hashCode() {
         return Objects.hash(nroMesa);
     }
-
 }

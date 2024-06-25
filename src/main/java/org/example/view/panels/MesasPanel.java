@@ -293,8 +293,12 @@ public class MesasPanel extends JFrame {
                     if (comp instanceof JButton button && button.getText().equals("Mesa " + id)) {
                         mesaService.eliminarUltimaMesa(); // Eliminar la mesa del servicio
                         mainPanel.remove(button);
+                        actualizarColorMesas();
                         mainPanel.revalidate();
                         mainPanel.repaint();
+
+                        // Depuración
+                        System.out.println("Mesa visual eliminada: Mesa " + id);
                         break;
                     }
                 }
@@ -373,6 +377,8 @@ public class MesasPanel extends JFrame {
         mainPanel.add(nuevaMesa);
         nuevaMesa.repaint();
         actualizarColorMesas();
+
+        System.out.println("Mesa visual agregada: " + nueva);
     }
 
     public void agregarPared() {
