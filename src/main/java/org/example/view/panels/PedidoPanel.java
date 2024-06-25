@@ -3,6 +3,7 @@ package org.example.view.panels;
 import org.example.exceptions.ProductosYaComandadosException;
 import org.example.interfaces.PedidoListener;
 import org.example.models.*;
+import org.example.service.MesaService;
 import org.example.service.ProductoService;
 
 import javax.swing.*;
@@ -38,6 +39,8 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         this.productoService = productoService;
         comanda = new Comanda(productoService);
 
+        comandado = true;
+
         setTitle("Mesa " + numero);
         setSize(700, 500);
         setLayout(new BorderLayout());
@@ -58,6 +61,9 @@ public class PedidoPanel extends JFrame implements PedidoListener {
 
         botonLiberarMesa.addActionListener(e -> {
             mesa.liberarMesa();
+            mesasPanel.actualizarColorMesas();
+            MesaService.getInstance().guardarMesasYParedesJSON();
+            dispose();
         });
 
         billButton.addActionListener(e -> {
