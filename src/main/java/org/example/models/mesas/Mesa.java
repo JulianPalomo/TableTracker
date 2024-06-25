@@ -1,4 +1,7 @@
-package org.example.models;
+package org.example.models.mesas;
+
+import org.example.models.objetos.Objeto;
+import org.example.models.personas.Usuario;
 
 import java.util.Objects;
 

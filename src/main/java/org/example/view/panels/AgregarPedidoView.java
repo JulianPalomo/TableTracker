@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class AgregarPedido extends JFrame {
+public class AgregarPedidoView extends JFrame {
     private ArrayList<Producto> pedido;
 
-    public AgregarPedido(Map<String, List<Producto>> menu, PedidoListener listener, int nroMesa) {
+    public AgregarPedidoView(Map<String, List<Producto>> menu, PedidoListener listener, int nroMesa) {
         setTitle("Agregar productos a Mesa " + nroMesa);
         setSize(700, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

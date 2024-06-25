@@ -1,6 +1,6 @@
-package org.example.models;
+package org.example.models.personas;
 
-public class Usuario extends Persona{
+public class Usuario extends Persona {
 
     private String password;
     private Credenciales credenciales;

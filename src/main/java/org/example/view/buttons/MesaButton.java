@@ -1,6 +1,6 @@
 package org.example.view.buttons;
 
-import org.example.models.Objeto;
+import org.example.models.objetos.Objeto;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;

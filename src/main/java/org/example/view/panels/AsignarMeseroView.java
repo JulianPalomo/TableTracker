@@ -1,22 +1,19 @@
 package org.example.view.panels;
 
-import org.example.models.Mesa;
-import org.example.models.Mesero;
-import org.example.models.Persona;
-import org.example.models.Usuario;
-import org.example.service.MesaService;
+import org.example.models.mesas.Mesa;
+import org.example.models.personas.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class AsignarMesero extends JFrame {
+public class AsignarMeseroView extends JFrame {
 
     private JComboBox<Usuario> waiterComboBox;
     private JButton assignButton;
     private Mesa mesa;
 
-    public AsignarMesero(Mesa mesa, List<Usuario> waiters) {
+    public AsignarMeseroView(Mesa mesa, List<Usuario> waiters) {
         if (waiters == null || waiters.isEmpty()) {
             throw new IllegalArgumentException("La lista de meseros no puede ser null o vacía");
         }

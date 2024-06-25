@@ -1,10 +1,11 @@
-package org.example.models;
+package org.example.models.mesas;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.example.exceptions.ProductosYaComandadosException;
+import org.example.models.Producto;
 import org.example.service.ProductoService;
 
 import java.io.File;
@@ -16,14 +17,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.*;
-import java.io.FileOutputStream;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Map;
-import java.text.SimpleDateFormat;
 
 public class Comanda {
     private ArrayList<Producto> productos;
@@ -177,7 +171,6 @@ public class Comanda {
             document.add(totalArticulosParagraph);
 
             document.close();
-            System.out.println("Comanda generada correctamente.");
         } catch (Exception e) {
             e.printStackTrace();
         }

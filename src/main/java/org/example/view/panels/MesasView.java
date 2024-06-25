@@ -1,37 +1,36 @@
 package org.example.view.panels;
 
-import org.example.models.*;
+import org.example.models.mesas.EstadoMesa;
+import org.example.models.mesas.Mesa;
+import org.example.models.objetos.Pared;
+import org.example.models.personas.Credenciales;
+import org.example.models.personas.Usuario;
 import org.example.service.MesaService;
 import org.example.service.ProductoService;
-import org.example.service.UsuarioService;
+import org.example.service.Usuario.UsuarioService;
 import org.example.view.buttons.MesaButton;
 
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
-public class MesasPanel extends JFrame {
+public class MesasView extends JFrame {
 
     private final MesaService mesaService = MesaService.getInstance();
     public boolean modoEdicion = false;
-    private PedidoPanel currentPedidoPanel;
-    private ProductoService productoService = new ProductoService();
+    private PedidoView currentPedidoView;
+    private final ProductoService productoService = new ProductoService();
     private JButton confirmarCambios;
     private JButton agregarMesaButton;
     private JButton eliminarMesaButton;
     private JButton agregarParedButton;
     private JButton eliminarParedButton;
     private JPanel edicionBar;
-    private CartaPanel cartaPanel = new CartaPanel();
+    private final CartaView cartaView = new CartaView();
     private JPanel mainPanel;
-    private List<Usuario> waiters;
-    public MesasPanel(String nombreComercio, Credenciales credenciales) {
+    private final List<Usuario> waiters;
+    public MesasView(String nombreComercio, Credenciales credenciales) {
 
         setTitle(nombreComercio);
         setSize(800, 600);
@@ -55,7 +54,7 @@ public class MesasPanel extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         // Establecer la posición de la ventana
         setLocationRelativeTo(null);
-        cartaPanel.setVisible(false);
+        cartaView.setVisible(false);
 
         mainPanel = new JPanel(null); // Panel principal con null layout
         mainPanel.setBackground(new Color(219,180,119));
@@ -205,23 +204,33 @@ public class MesasPanel extends JFrame {
                         if (mesa != null) {
                             if (mesa.getEstado() == EstadoMesa.DISPONIBLE) {
                                 button.setBackground(Color.GREEN);
-                            } else if(mesa.getEstado() == EstadoMesa.OCUPADA){
+                            } else if (mesa.getEstado() == EstadoMesa.OCUPADA) {
                                 button.setBackground(Color.RED);
-                            }
-                            else {
+                            } else {
                                 button.setBackground(Color.PINK);
                             }
                             button.repaint();
                         }
                     } catch (NumberFormatException e) {
-                        System.out.println("Error al convertir el ID de la mesa: " + e.getMessage());
+                        JOptionPane.showMessageDialog(
+                                mainPanel,
+                                "Error al convertir el ID de la mesa: " + e.getMessage(),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Formato de texto del botón incorrecto: " + buttonText);
+                        JOptionPane.showMessageDialog(
+                                mainPanel,
+                                "Formato de texto del botón incorrecto: " + buttonText,
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
                     }
                 }
             }
         }
     }
+
 
 
     private void actualizarModoEdicion() {
@@ -273,7 +282,7 @@ public class MesasPanel extends JFrame {
     }
 
     public void cargarCartaPanel() {
-        cartaPanel.setVisible(true);
+        cartaView.setVisible(true);
     }
 
     public void eliminarMesa() {
@@ -291,8 +300,6 @@ public class MesasPanel extends JFrame {
                         mainPanel.revalidate();
                         mainPanel.repaint();
 
-                        // Depuración
-                        System.out.println("Mesa visual eliminada: Mesa " + id);
                         break;
                     }
                 }
@@ -308,9 +315,6 @@ public class MesasPanel extends JFrame {
     public void eliminarPared() {
         try {
             if (!mesaService.getParedes().isEmpty()) {
-                // Obtener la última pared
-                int id = mesaService.getParedes().size();
-
                 // Buscar y eliminar el botón correspondiente a la última pared
                 for (Component comp : mainPanel.getComponents()) {
                     if (comp instanceof JButton button && button.getText().equals("p")) {
@@ -401,11 +405,11 @@ public class MesasPanel extends JFrame {
 
                 if (mesa.getEstado() == EstadoMesa.DISPONIBLE) {
                     // Mostrar la ventana para asignar mesero
-                    AsignarMesero asignarMeseroFrame = new AsignarMesero(mesa, waiters);
-                    asignarMeseroFrame.setVisible(true);
+                    AsignarMeseroView asignarMeseroViewFrame = new AsignarMeseroView(mesa, waiters);
+                    asignarMeseroViewFrame.setVisible(true);
 
                     // Añadir un listener para cuando se cierre la ventana de asignar mesero
-                    asignarMeseroFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+                    asignarMeseroViewFrame.addWindowListener(new java.awt.event.WindowAdapter() {
                         @Override
                         public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                             // Verificar si se asignó un mesero y luego abrir el PedidoPanel
@@ -425,18 +429,18 @@ public class MesasPanel extends JFrame {
     }
 
     private void abrirPedidoPanel(Mesa mesa) {
-        PedidoPanel pedidoPanel = new PedidoPanel(mesa, productoService, this);
+        PedidoView pedidoView = new PedidoView(mesa, productoService, this);
 
         // Cerrar el panel de pedido actual si existe
-        if (currentPedidoPanel != null) {
-            currentPedidoPanel.setVisible(false);
-            currentPedidoPanel.dispose(); // Liberar recursos del panel anterior
+        if (currentPedidoView != null) {
+            currentPedidoView.setVisible(false);
+            currentPedidoView.dispose(); // Liberar recursos del panel anterior
         }
 
         // Actualizar la referencia al panel actual
-        currentPedidoPanel = pedidoPanel;
+        currentPedidoView = pedidoView;
 
-        pedidoPanel.setVisible(true);
+        pedidoView.setVisible(true);
     }
 }
 

@@ -1,15 +1,15 @@
 package org.example.view.panels;
 
 import org.example.exceptions.LoginFailedException;
-import org.example.models.Usuario;
-import org.example.service.UsuarioService;
+import org.example.models.personas.Usuario;
+import org.example.service.Usuario.UsuarioService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 
-public class Login extends JDialog {
+public class LoginView extends JDialog {
     private JTextField tfDni;
     private JPasswordField tfContrasena;
     private JButton OKButton;
@@ -22,7 +22,7 @@ public class Login extends JDialog {
     private UsuarioService personaService;
     private Usuario loginSuccessful;
 
-    public Login(JFrame parent) {
+    public LoginView(JFrame parent) {
         super(parent);
         setTitle("Inicio de Sesión");
         setUndecorated(true);
@@ -107,7 +107,7 @@ public class Login extends JDialog {
             try {
                 autenticarUsuario();
             } catch (LoginFailedException ex) {
-                JOptionPane.showMessageDialog(Login.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(LoginView.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }

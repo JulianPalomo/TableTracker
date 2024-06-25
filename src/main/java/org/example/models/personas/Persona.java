@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.models.personas;
 import java.util.Objects;
 
 public abstract class Persona {
