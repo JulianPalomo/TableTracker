@@ -10,7 +10,7 @@ import javax.swing.*;
 public class RestaurantApp {
     public static void main(String[] args) {
 
-        SplashScreen screen = new SplashScreen("src/main/java/org/example/resource/Logo.jpg",3000);
+//        SplashScreen screen = new SplashScreen("src/main/java/org/example/resource/Logo.jpg",3000);
 
         // Asegurarse de que la GUI se ejecute en el hilo de despacho de eventos de Swing
         SwingUtilities.invokeLater(() -> {

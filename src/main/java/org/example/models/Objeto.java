@@ -10,8 +10,8 @@ public abstract class Objeto {
     public Objeto() {
         this.x = 50;
         this.y = 50;
-        this.alto = 50;
-        this.ancho = 200;
+        this.alto = 90;
+        this.ancho = 90;
     }
 
     public Objeto(int x, int y, int ancho, int alto) {

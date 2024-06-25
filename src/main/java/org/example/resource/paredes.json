@@ -1,30 +1,23 @@
 [
   {
-    "nroPared": 1,
-    "x": 93,
-    "y": 268,
-    "ancho": 596,
-    "alto": 14
+    "nroPared": 5,
+    "x": 768,
+    "y": 215,
+    "ancho": 879,
+    "alto": 13
   },
   {
-    "nroPared": 2,
-    "x": 912,
-    "y": 40,
-    "ancho": 27,
-    "alto": 390
+    "nroPared": 6,
+    "x": 17,
+    "y": 67,
+    "ancho": 54,
+    "alto": 875
   },
   {
-    "nroPared": 3,
-    "x": 40,
-    "y": 569,
-    "ancho": 810,
-    "alto": 23
-  },
-  {
-    "nroPared": 4,
-    "x": 1004,
-    "y": 570,
-    "ancho": 820,
-    "alto": 24
+    "nroPared": 7,
+    "x": 755,
+    "y": 215,
+    "ancho": 15,
+    "alto": 477
   }
 ]

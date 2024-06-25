@@ -333,8 +333,6 @@ public class MesasPanel extends JFrame {
         mainPanel.add(nuevaMesa);
         nuevaMesa.repaint();
         actualizarColorMesas();
-
-        System.out.println("Mesa visual agregada: " + nueva);
     }
 
     public void agregarPared() {
@@ -346,21 +344,16 @@ public class MesasPanel extends JFrame {
     }
 
     public void crearBotonesDeMesas(List<Mesa> mesas, List<Pared> paredes) {
-        System.out.println("Creando mesas:");
         for (Mesa mesa : mesas) {
-            System.out.println("Mesa ID: " + mesa.getNroMesa());
             JButton nuevaMesa = crearMesa(mesa);
             mainPanel.add(nuevaMesa);
         }
 
-        System.out.println("Creando paredes:");
         for (Pared pared : paredes) {
-            System.out.println("Pared: " + pared);
             JButton nuevaPared = crearPared(pared);
             mainPanel.add(nuevaPared);
         }
     }
-
 
     private JButton crearPared(Pared pared) {
         JButton button = new JButton("p");
