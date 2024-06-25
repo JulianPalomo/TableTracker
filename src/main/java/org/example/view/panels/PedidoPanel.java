@@ -133,13 +133,14 @@ public class PedidoPanel extends JFrame implements PedidoListener {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!comandado) {
-                    botonComanda.setBackground(colorFlag ? Color.pink : null);
+                if (!comandado && !pedido.getListaProductos().isEmpty()) {
+                    botonComanda.setBackground(colorFlag ? new Color(255, 200, 200) : null);
                     colorFlag = !colorFlag;
                 }
             }
         });
-        timer.start(); // Iniciar el temporizador
+
+        // No iniciar el temporizador aquí, se iniciará al agregar un producto
 
         // Actualizar la lista de pedidos
         updateOrderList();
@@ -162,6 +163,10 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         this.pedido.agregarProducto(nuevosProductos);
         updateOrderList();
         comandado = false; // Resetear el estado cuando se actualiza el pedido
-        timer.start(); // Reiniciar el temporizador
+
+        // Iniciar el temporizador si hay productos en el pedido
+        if (!pedido.getListaProductos().isEmpty()) {
+            timer.start();
+        }
     }
 }
