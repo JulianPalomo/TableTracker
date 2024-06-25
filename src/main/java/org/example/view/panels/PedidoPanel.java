@@ -99,7 +99,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
 
         botonComanda.addActionListener(e -> {
             try {
-                comandar(comanda, mesa.getNroMesa());
+                comandar(comanda, mesa);
                 JOptionPane.showMessageDialog(null, "Pedido comandado");
             } catch (ProductosYaComandadosException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -160,7 +160,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         }
 
         // Si hay nuevos productos, generar el PDF y actualizar la comanda
-        productoService.imprimirComandaConCantidades(nuevosProductosConCantidades, mesa.getNroMesa());
+        productoService.imprimirComandaConCantidades(nuevosProductosConCantidades, mesa.getNroMesa(),mesa.getMesero().getNombre());
 
         for (Map.Entry<Producto, Integer> entry : nuevosProductosConCantidades.entrySet()) {
             Producto productoNuevo = entry.getKey();
@@ -172,6 +172,10 @@ public class PedidoPanel extends JFrame implements PedidoListener {
 
         // Actualizar el nombre del mesero en la etiqueta correspondiente
         actualizarNombreMesero(mesa);
+    }
+
+    private void actualizarNombreMesero(Mesa mesa) {
+        mesero.setText("Mesero: " + (mesa.getMesero() != null ? mesa.getMesero().toString() : "No asignado"));
     }
 
     private void agregarProducto(Map<String, List<Producto>> menu, int nroMesa) {

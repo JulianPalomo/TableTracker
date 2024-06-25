@@ -146,7 +146,7 @@ public class ProductoService {
         return new ArrayList<>(carta.getOrDefault(categoria, new ArrayList<>()));
     }
 
-    public void imprimirComandaConCantidades(Map<Producto, Integer> nuevosProductosConCantidades, int numeroMesa) {
+    public void imprimirComandaConCantidades(Map<Producto, Integer> nuevosProductosConCantidades, int numeroMesa,String mesero) {
         // Configurar tamaño de página personalizado
         Rectangle pageSize = new Rectangle(216, 720); // Tamaño personalizado (por ejemplo, recibo pequeño)
         Document document = new Document(pageSize, 10, 10, 10, 10);
@@ -168,7 +168,7 @@ public class ProductoService {
             String fechaHora = formatter.format(date);
 
             Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 10);
-            Paragraph mesaInfo = new Paragraph("Mesa: " + numeroMesa + "\nFecha y Hora: " + fechaHora, normalFont);
+            Paragraph mesaInfo = new Paragraph("Mesa: " + numeroMesa + "\nMesero: " +  mesero + "\nFecha y Hora: " + fechaHora, normalFont);
             mesaInfo.setAlignment(Element.ALIGN_LEFT);
             mesaInfo.setSpacingBefore(10);
             document.add(mesaInfo);

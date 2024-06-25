@@ -2,6 +2,7 @@ package org.example.view.panels;
 
 import org.example.models.Mesa;
 import org.example.models.Mesero;
+import org.example.service.MesaService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,9 +35,10 @@ public class AsignarMesero extends JFrame {
 
         assignButton = new JButton("Asignar");
         assignButton.setPreferredSize(new Dimension(100, 30));
+
         assignButton.addActionListener(e -> {
-            Mesero selectedWaiter = (Mesero) waiterComboBox.getSelectedItem();
-            mesa.asignarMesero(selectedWaiter);
+            Mesero mesero = (Mesero) waiterComboBox.getSelectedItem();
+            mesa.asignarMesero(mesero);
             dispose();
         });
         panel.add(assignButton);
