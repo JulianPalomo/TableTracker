@@ -25,6 +25,9 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     private final ProductoService productoService;
     private Comanda comanda;
     private JLabel mesero;
+    private Timer timer;
+    private boolean comandado;
+    private JButton botonComanda;
 
     public PedidoPanel(Mesa mesa, ProductoService productoService, MesasPanel mesasPanel) {
         this.numero = mesa.getNroMesa();
@@ -50,7 +53,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         JButton addProductButton = new JButton("Agregar Producto");
         JButton removeProductButton = new JButton("Eliminar Producto");
         JButton billButton = new JButton("Facturar");
-        JButton botonComanda = new JButton("Comandar");
+        botonComanda = new JButton("Comandar");
         JButton botonLiberarMesa = new JButton("Liberar Mesa");
 
         botonLiberarMesa.addActionListener(e -> {
@@ -63,8 +66,8 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         });
 
         addProductButton.addActionListener(e -> {
-            agregarProducto(productoService.cargarCarta(),mesa.getNroMesa());
-            if(pedido != null){
+            agregarProducto(productoService.cargarCarta(), mesa.getNroMesa());
+            if (pedido != null) {
                 mesa.ocuparMesa();
                 mesasPanel.actualizarColorMesas(); // Notificar al MesasPanel para actualizar el color
             }
@@ -103,6 +106,9 @@ public class PedidoPanel extends JFrame implements PedidoListener {
             try {
                 comanda.comandar(mesa);
                 JOptionPane.showMessageDialog(null, "Pedido comandado");
+                comandado = true;
+                timer.stop(); // Detener el temporizador cuando se comanda con éxito
+                botonComanda.setBackground(null); // Restaurar color del botón
             } catch (ProductosYaComandadosException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
@@ -119,6 +125,21 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         buttonPanel.add(mesero, BorderLayout.WEST);
 
         add(buttonPanel, BorderLayout.SOUTH);
+
+        // Inicializar el temporizador para verificar si hay productos sin comandar
+        comandado = false;
+        timer = new Timer(500, new ActionListener() {
+            private boolean colorFlag = false;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!comandado) {
+                    botonComanda.setBackground(colorFlag ? Color.pink : null);
+                    colorFlag = !colorFlag;
+                }
+            }
+        });
+        timer.start(); // Iniciar el temporizador
 
         // Actualizar la lista de pedidos
         updateOrderList();
@@ -140,13 +161,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     public void onPedidoActualizado(ArrayList<Producto> nuevosProductos) {
         this.pedido.agregarProducto(nuevosProductos);
         updateOrderList();
+        comandado = false; // Resetear el estado cuando se actualiza el pedido
+        timer.start(); // Reiniciar el temporizador
     }
-/*
-    private void facturar(Pedido pedido) {
-        FacturaPanel facturaPanel = new FacturaPanel(pedido);
-    }
-
- */
-
 }
-
