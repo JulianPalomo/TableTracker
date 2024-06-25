@@ -2,6 +2,7 @@ package org.example.view;
 
 import org.example.models.Mesa;
 import org.example.models.Mesero;
+import org.example.models.SplashScreen;
 import org.example.service.MesaService;
 import org.example.service.PersonaService;
 import org.example.view.panels.MesasPanel;
@@ -11,6 +12,9 @@ import java.util.List;
 
 public class RestaurantApp {
     public static void main(String[] args) {
+
+        new SplashScreen("src/main/java/org/example/resource/lg.jpg", 3000);
+
         SwingUtilities.invokeLater(() -> {
             PersonaService personaService = new PersonaService();
             personaService.loadFromJson();
