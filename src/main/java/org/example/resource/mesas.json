@@ -27,24 +27,81 @@
     "alto": 90
   },
   {
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
+    "pedido": {
+      "listaProductos": [
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": ""
+        }
+      ],
+      "fecha": "2024-06-25"
+    },
     "nroMesa": 2,
+    "mesero": {
+      "password": "admin123",
+      "credenciales": "MESERO",
+      "nombre": "Luis",
+      "apellido": "Martínez",
+      "dni": "11223344"
+    },
     "x": 1068,
     "y": 107,
     "ancho": 90,
     "alto": 90
   },
   {
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
+    "pedido": {
+      "listaProductos": [
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": ""
+        }
+      ],
+      "fecha": "2024-06-25"
+    },
     "nroMesa": 3,
+    "mesero": {
+      "password": "admin123",
+      "credenciales": "MESERO",
+      "nombre": "Luis",
+      "apellido": "Martínez",
+      "dni": "11223344"
+    },
     "x": 1221,
     "y": 108,
     "ancho": 90,
     "alto": 90
   },
   {
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
+    "pedido": {
+      "listaProductos": [
+        {
+          "id": 0,
+          "nombre": "Cerveza",
+          "categoria": "BEBIDAS_ALCOHOLICAS",
+          "precio": 2200.0,
+          "observacion": ""
+        }
+      ],
+      "fecha": "2024-06-25"
+    },
     "nroMesa": 4,
+    "mesero": {
+      "password": "admin123",
+      "credenciales": "MESERO",
+      "nombre": "Luis",
+      "apellido": "Martínez",
+      "dni": "11223344"
+    },
     "x": 1377,
     "y": 109,
     "ancho": 90,
