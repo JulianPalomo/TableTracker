@@ -205,8 +205,11 @@ public class MesasPanel extends JFrame {
                         if (mesa != null) {
                             if (mesa.getEstado() == EstadoMesa.DISPONIBLE) {
                                 button.setBackground(Color.GREEN);
-                            } else {
+                            } else if(mesa.getEstado() == EstadoMesa.OCUPADA){
                                 button.setBackground(Color.RED);
+                            }
+                            else {
+                                button.setBackground(Color.PINK);
                             }
                             button.repaint();
                         }
@@ -396,7 +399,7 @@ public class MesasPanel extends JFrame {
                 int numeroMesa = Integer.parseInt(button.getText().split(" ")[1]);
                 Mesa mesa = mesaService.buscarMesa(numeroMesa);
 
-                if (mesa.getMesero() == null) {
+                if (mesa.getEstado() == EstadoMesa.DISPONIBLE) {
                     // Mostrar la ventana para asignar mesero
                     AsignarMesero asignarMeseroFrame = new AsignarMesero(mesa, waiters);
                     asignarMeseroFrame.setVisible(true);

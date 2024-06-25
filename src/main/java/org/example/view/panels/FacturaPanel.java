@@ -16,7 +16,6 @@ import org.example.service.FacturaService;
 
 import javax.swing.table.DefaultTableModel;
 
-
 public class FacturaPanel extends JFrame {
 
     private JPanel panel1;
@@ -29,7 +28,7 @@ public class FacturaPanel extends JFrame {
 
     private FacturaService facturaService = new FacturaService();
 
-    public FacturaPanel(Mesa mesa) {
+    public FacturaPanel(Mesa mesa,MesasPanel mesasPanel) {
         this.productos = mesa.getPedido().getListaProductos();
 
         setTitle("Lista de Productos");
@@ -73,7 +72,7 @@ public class FacturaPanel extends JFrame {
 
         botonFactura.addActionListener(e -> {
             try {
-                generarFactura(mesa);
+                generarFactura(mesa,mesasPanel);
             } catch (DocumentException | FileNotFoundException ex) {
                 ex.printStackTrace();
             }
@@ -82,13 +81,15 @@ public class FacturaPanel extends JFrame {
         setVisible(true);
     }
 
-    private void generarFactura(Mesa mesa) throws DocumentException, FileNotFoundException {
+    private void generarFactura(Mesa mesa, MesasPanel mesasPanel) throws DocumentException, FileNotFoundException {
         Factura factura = new Factura(mesa.getPedido(), (MetodosDePago) mediosDePago.getSelectedItem());
         facturaService.generarFactura(factura);
         JOptionPane.showMessageDialog(this, "Factura generada correctamente.");
 
         ///LIBERA LA MESA
-        mesa.liberarMesa();
+        mesa.setMesaPagada();
+        mesasPanel.actualizarColorMesas();
+        dispose();
 
         abrirArchivoPDF(factura.getNombreArchivo());
     }

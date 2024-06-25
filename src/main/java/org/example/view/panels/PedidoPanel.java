@@ -70,7 +70,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
         });
 
         billButton.addActionListener(e -> {
-            new FacturaPanel(mesa);
+            new FacturaPanel(mesa,mesasPanel);
             mesasPanel.actualizarColorMesas();
             facturado = true;
             facturaTimer.stop(); // Detener el temporizador cuando se factura con éxito

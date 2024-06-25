@@ -80,7 +80,6 @@ public class MesaService {
             List<Pared> listaParedes = gson.fromJson(paredesReader, tipoListaParedes);
             paredes.clear();
             paredes.addAll(listaParedes);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -102,7 +101,7 @@ public class MesaService {
 
     public void eliminarUltimaMesa() {
         if (!mesas.isEmpty()) {
-            Mesa eliminada = mesas.removeLast();
+            mesas.removeLast();
             Mesa.decrementarNumeroAuto();
         } else {
             throw new IllegalStateException("No hay mesas para eliminar");

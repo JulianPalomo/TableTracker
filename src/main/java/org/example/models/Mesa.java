@@ -76,6 +76,12 @@ public class Mesa extends Objeto {
         this.mesero = null;
     }
 
+    public void setMesaPagada(){
+        this.estado = EstadoMesa.PAGADA;
+        this.pedido = null;
+        this.mesero = null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
