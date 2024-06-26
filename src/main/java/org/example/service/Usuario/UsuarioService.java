@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import org.example.models.personas.Credenciales;
+import org.example.models.personas.Persona;
 import org.example.models.personas.Usuario;
 
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class UsuarioService {
     private Gson gson;
 
     public UsuarioService() {
-        usuarios = new TreeSet<>((p1, p2) -> p1.getDni().compareTo(p2.getDni()));
+        usuarios = new TreeSet<>(Comparator.comparing(Persona::getDni));
         gson = new GsonBuilder()
                 .registerTypeAdapter(Usuario.class, new UsuarioDeserializer())
                 .registerTypeAdapter(Usuario.class, new UsuarioSerializer())
@@ -37,6 +38,7 @@ public class UsuarioService {
             gson.toJson(usuarios, writer);
         }
     }
+
     public boolean existeUsuario(String dni) {
         for (Usuario usuario : usuarios) {
             if (usuario.getDni().equals(dni)) {

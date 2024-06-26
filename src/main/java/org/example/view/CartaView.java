@@ -21,7 +21,6 @@ public class CartaView extends JFrame {
 
         // Inicializar componentes
         tabbedPane = new JTabbedPane();
-//        tabbedPane.setTabPlacement(JTabbedPane. LEFT);
         cargarProductosEnTabs();
 
         // Botones
@@ -106,8 +105,9 @@ public class CartaView extends JFrame {
             productoService.agregarProducto(nuevoProducto);
 
             repaint();
-//            // Check if the category tab exists, if not, add it
+
             List<String> categorias = productoService.obtenerCategorias();
+
             if(!categorias.contains(categoria)){
                 agregarNuevaCategoriaAlTabbedPane(categoria);
             }
@@ -128,7 +128,7 @@ public class CartaView extends JFrame {
                 JScrollPane scrollPane = (JScrollPane) tabbedPane.getComponentAt(i);
                 JTable table = (JTable) scrollPane.getViewport().getView();
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.addRow(new Object[]{nuevoProducto.getNombre(), nuevoProducto.getPrecio()});
+                model.addRow(new Object[]{nuevoProducto.getNombre(), (int)nuevoProducto.getPrecio()});
                 break;
             }
         }
@@ -143,7 +143,7 @@ public class CartaView extends JFrame {
             JTable table = new JTable(model);
             List<Producto> productos = productoService.filtrarProductosPorCategoria(categoria);
             for (Producto producto : productos) {
-                model.addRow(new Object[]{producto.getNombre(), producto.getPrecio()});
+                model.addRow(new Object[]{producto.getNombre(), (int)producto.getPrecio()});
             }
             JScrollPane scrollPane = new JScrollPane(table);
             tabbedPane.addTab(categoria, scrollPane);
@@ -216,4 +216,3 @@ public class CartaView extends JFrame {
     }
 
 }
-

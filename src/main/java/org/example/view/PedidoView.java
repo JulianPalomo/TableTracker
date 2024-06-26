@@ -6,6 +6,7 @@ import org.example.models.*;
 import org.example.models.mesas.Comanda;
 import org.example.models.mesas.Mesa;
 import org.example.models.mesas.Pedido;
+import org.example.models.personas.Credenciales;
 import org.example.service.MesaService;
 import org.example.service.ProductoService;
 
@@ -35,7 +36,7 @@ public class PedidoView extends JFrame implements PedidoListener {
     private JButton botonComanda;
     private JButton billButton;
 
-    public PedidoView(Mesa mesa, ProductoService productoService, MesasView mesasView) {
+    public PedidoView(Mesa mesa, ProductoService productoService, MesasView mesasView, Credenciales credenciales) {
         this.numero = mesa.getNroMesa();
         if (mesa.getPedido() == null) {
             mesa.setPedido(new Pedido());
@@ -129,7 +130,11 @@ public class PedidoView extends JFrame implements PedidoListener {
         });
 
         buttonPanel.add(addProductButton);
-        buttonPanel.add(removeProductButton);
+        if (credenciales == Credenciales.ADMINISTRADOR || credenciales == Credenciales.CAJERO) {
+            buttonPanel.add(removeProductButton);
+        }
+
+
         buttonPanel.add(billButton);
         buttonPanel.add(botonComanda);
         buttonPanel.add(botonLiberarMesa);

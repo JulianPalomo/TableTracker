@@ -30,6 +30,9 @@ public class MesasView extends JFrame {
     private final CartaView cartaView = new CartaView();
     private JPanel mainPanel;
     private final List<Usuario> waiters;
+    private Credenciales credenciales;
+
+
     public MesasView(String nombreComercio, Credenciales credenciales) {
 
         setTitle(nombreComercio);
@@ -38,6 +41,8 @@ public class MesasView extends JFrame {
         setLayout(new BorderLayout()); // Cambiar a BorderLayout para el JFrame
         // Oculta la barra de título y otros elementos de decoración
         setUndecorated(true);
+
+        this.credenciales = credenciales;
 
         UsuarioService usuarioService = new UsuarioService();
         usuarioService.loadFromJson();
@@ -94,8 +99,8 @@ public class MesasView extends JFrame {
         JButton toggleEdicionButton = new JButton("Editar Salón");
         JButton verMenuCompletoButton = new JButton("Carta");
         JButton aboutButton = new JButton("Acerca De");
-        JButton addUserButton = new JButton("Añadir Usuario");
         JButton balanceButton = new JButton("Balance de Ventas");
+        JButton listaDeUsuarios = new JButton("Usuarios");
 
         toggleEdicionButton.addActionListener(e -> {
             // Mostrar el cuadro de diálogo de inicio de sesión
@@ -109,6 +114,15 @@ public class MesasView extends JFrame {
 
         verMenuCompletoButton.addActionListener(e -> cargarCartaPanel());
 
+        listaDeUsuarios.addActionListener(e -> {
+            UsuariosView usuarios = new UsuariosView();
+            // Crear un JDialog para mostrar BalanceView
+            JDialog balanceDialog = new JDialog(this, "Usuarios", false); // false para modalidad no modal
+            balanceDialog.add(usuarios);
+            balanceDialog.pack();
+            balanceDialog.setVisible(true);
+        });
+
         balanceButton.addActionListener(e -> {
             BalanceView balanceView = new BalanceView();
 
@@ -119,8 +133,6 @@ public class MesasView extends JFrame {
             balanceDialog.setVisible(true);
         });
 
-        addUserButton.addActionListener(e -> new Registration(this));
-
         aboutButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Software de Gestión para Restaurante.\nVersión 1.0"));
 
         Dimension buttonSize = new Dimension(150, 40); // Ancho x Alto
@@ -130,15 +142,19 @@ public class MesasView extends JFrame {
             toolBar.add(toggleEdicionButton);
             toggleEdicionButton.setPreferredSize(buttonSize);
 
-            toolBar.add(addUserButton);
-            addUserButton.setPreferredSize(buttonSize);
-
             toolBar.add(verMenuCompletoButton);
             verMenuCompletoButton.setPreferredSize(buttonSize);
 
+
+            toolBar.add(listaDeUsuarios);
+            listaDeUsuarios.setPreferredSize(buttonSize);
+
+
+        }
+
+        if (credenciales == Credenciales.ADMINISTRADOR || credenciales == Credenciales.CAJERO) {
             toolBar.add(balanceButton);
             balanceButton.setPreferredSize(buttonSize);
-
         }
 
         toolBar.add(aboutButton);
@@ -444,7 +460,7 @@ public class MesasView extends JFrame {
     }
 
     private void abrirPedidoPanel(Mesa mesa) {
-        PedidoView pedidoView = new PedidoView(mesa, productoService, this);
+        PedidoView pedidoView = new PedidoView(mesa, productoService, this,credenciales);
 
         // Cerrar el panel de pedido actual si existe
         if (currentPedidoView != null) {
@@ -458,4 +474,3 @@ public class MesasView extends JFrame {
         pedidoView.setVisible(true);
     }
 }
-

@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
 import org.example.models.personas.Credenciales;
 import org.example.models.personas.Usuario;
 import org.example.service.Usuario.UsuarioService;
@@ -24,8 +23,7 @@ public class Registration extends JDialog {
     private JPanel registerPanel;
     private UsuarioService usuarioService;
 
-    public Registration(JFrame parent) {
-        super(parent);
+    public Registration() {
         setTitle("Registro de Usuario");
         usuarioService = new UsuarioService();
         usuarioService.loadFromJson();
@@ -70,7 +68,7 @@ public class Registration extends JDialog {
         setContentPane(registerPanel);
         setMinimumSize(new Dimension(450, 500));
         setModal(true);
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         btnRegistrar.addActionListener(new ActionListener() {
@@ -138,7 +136,9 @@ public class Registration extends JDialog {
         Usuario usuario = new Usuario(nombre, apellido, dni, contrasena, credenciales);
 
         usuarioService.addUsuario(usuario);
+
         usuarioService.saveToJson();
+        usuarioService.loadFromJson();
 
         JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         dispose();

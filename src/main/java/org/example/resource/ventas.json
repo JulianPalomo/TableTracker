@@ -579,5 +579,27 @@
     ],
     "total": 60000.0,
     "metodoPago": "EFECTIVO"
+  },
+  {
+    "fecha": "2024-06-26T17:09:21.170272700",
+    "mesero": "Luis",
+    "productosVendidos": [
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      }
+    ],
+    "total": 17600.0,
+    "metodoPago": "TRANSFERENCIA_BANCARIA"
   }
 ]

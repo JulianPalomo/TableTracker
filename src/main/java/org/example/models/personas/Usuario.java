@@ -24,5 +24,4 @@ public class Usuario extends Persona {
     public Credenciales getCredenciales() {
         return credenciales;
     }
-
 }

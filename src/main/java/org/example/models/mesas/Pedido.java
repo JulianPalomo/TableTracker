@@ -43,12 +43,4 @@ public class Pedido{
         }
         return total;
     }
-
-    public double getTotal() {
-        double total = 0.0;
-        for (Producto producto : listaProductos) {
-            total += producto.getPrecio();
-        }
-        return total;
-    }
 }
