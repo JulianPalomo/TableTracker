@@ -3,22 +3,18 @@ package org.example.view.panels;
 import org.example.models.mesas.EstadoMesa;
 import org.example.models.mesas.Mesa;
 import org.example.models.objetos.Pared;
-import org.example.models.pagos.MetodosDePago;
 import org.example.models.personas.Credenciales;
 import org.example.models.personas.Usuario;
 import org.example.service.MesaService;
 import org.example.service.ProductoService;
 import org.example.service.Usuario.UsuarioService;
-import org.example.service.VentaService;
 import org.example.view.BalanceView;
 import org.example.view.buttons.MesaButton;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
-import java.time.Month;
 import java.util.List;
-import java.util.Map;
 
 public class MesasView extends JFrame {
 
