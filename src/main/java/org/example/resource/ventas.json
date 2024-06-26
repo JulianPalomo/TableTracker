@@ -1,0 +1,583 @@
+[
+  {
+    "fecha": "2024-06-26T15:18:56.431695",
+    "mesero": "Luis",
+    "productosVendidos": [
+      {
+        "id": 1,
+        "nombre": "Vino Tinto",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 5500.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Cerveza",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 1,
+        "nombre": "Vino Tinto",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 5500.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Cerveza",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Cerveza",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 2200.0,
+        "observacion": ""
+      }
+    ],
+    "total": 26400.0,
+    "metodoPago": "EFECTIVO"
+  },
+  {
+    "fecha": "2024-06-26T15:19:12.206439400",
+    "mesero": "Carlos",
+    "productosVendidos": [
+      {
+        "id": 10,
+        "nombre": "Pollo al Curry",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 10,
+        "nombre": "Pollo al Curry",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 10,
+        "nombre": "Pollo al Curry",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 10,
+        "nombre": "Pollo al Curry",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 10,
+        "nombre": "Pollo al Curry",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 10,
+        "nombre": "Pollo al Curry",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 10,
+        "nombre": "Pollo al Curry",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      }
+    ],
+    "total": 42000.0,
+    "metodoPago": "EFECTIVO"
+  },
+  {
+    "fecha": "2024-06-26T15:23:49.075276700",
+    "mesero": "Luis",
+    "productosVendidos": [
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      }
+    ],
+    "total": 36000.0,
+    "metodoPago": "TARJETA_CREDITO"
+  },
+  {
+    "fecha": "2024-06-26T15:55:07.248406600",
+    "mesero": "Luis",
+    "productosVendidos": [
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      }
+    ],
+    "total": 70400.0,
+    "metodoPago": "EFECTIVO"
+  },
+  {
+    "fecha": "2024-06-26T15:55:29.716362100",
+    "mesero": "Luis",
+    "productosVendidos": [
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      },
+      {
+        "id": 0,
+        "nombre": "Torta negra",
+        "categoria": "FACTURAS",
+        "precio": 2200.0,
+        "observacion": ""
+      }
+    ],
+    "total": 44000.0,
+    "metodoPago": "TRANSFERENCIA_BANCARIA"
+  },
+  {
+    "fecha": "2024-06-26T15:59:59.770475200",
+    "mesero": "Ana",
+    "productosVendidos": [
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      },
+      {
+        "id": 2,
+        "nombre": "Whisky",
+        "categoria": "BEBIDAS_ALCOHOLICAS",
+        "precio": 8800.0,
+        "observacion": ""
+      }
+    ],
+    "total": 158400.0,
+    "metodoPago": "EFECTIVO"
+  },
+  {
+    "fecha": "2024-06-26T16:00:31.269884700",
+    "mesero": "Luis",
+    "productosVendidos": [
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Bistec con Papas",
+        "categoria": "PLATOS_PRINCIPALES",
+        "precio": 6000.0,
+        "observacion": ""
+      }
+    ],
+    "total": 60000.0,
+    "metodoPago": "EFECTIVO"
+  }
+]

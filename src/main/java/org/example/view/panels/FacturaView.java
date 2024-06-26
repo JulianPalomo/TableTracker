@@ -8,6 +8,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.itextpdf.text.DocumentException;
@@ -16,6 +17,7 @@ import org.example.models.mesas.Mesa;
 import org.example.models.pagos.Factura;
 import org.example.models.pagos.MetodosDePago;
 import org.example.service.FacturaService;
+import org.example.service.VentaService;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -28,11 +30,13 @@ public class FacturaView extends JFrame {
     private JButton botonFactura;
     private DefaultTableModel tablaModel;
     private ArrayList<Producto> productos;
+    private VentaService ventaService;
 
     private FacturaService facturaService = new FacturaService();
 
     public FacturaView(Mesa mesa, MesasView mesasView) {
         this.productos = mesa.getPedido().getListaProductos();
+        ventaService = new VentaService();
 
         setTitle("Lista de Productos");
         setSize(400, 400);
@@ -88,6 +92,14 @@ public class FacturaView extends JFrame {
         Factura factura = new Factura(mesa.getPedido(), (MetodosDePago) mediosDePago.getSelectedItem());
         facturaService.generarFactura(factura);
         JOptionPane.showMessageDialog(this, "Factura generada correctamente.");
+
+        ///GENERA LA VENTA
+        ventaService.registrarVenta(new Venta(LocalDateTime.now(),
+                mesa.getMesero().getNombre(),
+                mesa.getPedido().getListaProductos(),
+                mesa.getPedido().getTotal(),
+                (MetodosDePago) mediosDePago.getSelectedItem()
+                ));
 
         ///LIBERA LA MESA
         mesa.setMesaPagada();

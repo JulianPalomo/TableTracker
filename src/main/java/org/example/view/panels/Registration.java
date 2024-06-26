@@ -1,7 +1,5 @@
 package org.example.view.panels;
 
-import org.example.models.Administrador;
-import org.example.models.Mesero;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

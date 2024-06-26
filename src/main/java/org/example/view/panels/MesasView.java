@@ -3,17 +3,22 @@ package org.example.view.panels;
 import org.example.models.mesas.EstadoMesa;
 import org.example.models.mesas.Mesa;
 import org.example.models.objetos.Pared;
+import org.example.models.pagos.MetodosDePago;
 import org.example.models.personas.Credenciales;
 import org.example.models.personas.Usuario;
 import org.example.service.MesaService;
 import org.example.service.ProductoService;
 import org.example.service.Usuario.UsuarioService;
+import org.example.service.VentaService;
+import org.example.view.BalanceView;
 import org.example.view.buttons.MesaButton;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
+import java.time.Month;
 import java.util.List;
+import java.util.Map;
 
 public class MesasView extends JFrame {
 
@@ -95,6 +100,8 @@ public class MesasView extends JFrame {
         JButton verMenuCompletoButton = new JButton("Carta");
         JButton aboutButton = new JButton("Acerca De");
         JButton addUserButton = new JButton("Añadir Usuario");
+        JButton balanceButton = new JButton("Balance de Ventas");
+
 
         toggleEdicionButton.addActionListener(e -> {
             // Mostrar el cuadro de diálogo de inicio de sesión
@@ -110,6 +117,9 @@ public class MesasView extends JFrame {
 
         aboutButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Software de Gestión para Restaurante.\nVersión 1.0"));
 
+        balanceButton.addActionListener(e -> mostrarBalance());
+
+
         Dimension buttonSize = new Dimension(150, 40); // Ancho x Alto
 
 // Agregar botones a la toolbar
@@ -122,10 +132,19 @@ public class MesasView extends JFrame {
 
             toolBar.add(verMenuCompletoButton);
             verMenuCompletoButton.setPreferredSize(buttonSize);
+
+            toolBar.add(balanceButton);
+            balanceButton.setPreferredSize(buttonSize);
+
         }
 
         toolBar.add(aboutButton);
         aboutButton.setPreferredSize(buttonSize);
+
+
+
+
+
 
         toolBar.add(closeButton);
         closeButton.setPreferredSize(buttonSize);
@@ -192,6 +211,21 @@ public class MesasView extends JFrame {
         actualizarColorMesas();
     }
 
+    private void mostrarBalance() {
+        // Crear una instancia de BalanceView y pasarle el servicio de ventas
+        BalanceView balanceView = new BalanceView();
+
+        // Crear un nuevo JFrame para mostrar el BalanceView
+        JFrame balanceFrame = new JFrame("Balance de Ventas");
+        balanceFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        balanceFrame.setSize(400, 300);
+        balanceFrame.setLocationRelativeTo(this); // Centrar el frame respecto a la ventana principal
+        balanceFrame.add(balanceView);
+        balanceFrame.setVisible(true);
+    }
+    
+
+
     public void actualizarColorMesas() {
         for (Component comp : mainPanel.getComponents()) {
             if (comp instanceof JButton button) {
@@ -256,9 +290,8 @@ public class MesasView extends JFrame {
             edicionBar.add(eliminarParedButton);
 
             confirmarCambios.setPreferredSize(buttonSize);
-//            edicionBar.add(Box.createHorizontalGlue()); // Empuja el siguiente botón a la derecha
+            edicionBar.add(Box.createHorizontalGlue()); // Empuja el siguiente botón a la derecha
             edicionBar.add(confirmarCambios);
-
 
         } else {
             edicionBar.remove(agregarMesaButton);

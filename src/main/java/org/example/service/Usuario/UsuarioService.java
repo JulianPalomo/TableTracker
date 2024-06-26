@@ -58,7 +58,7 @@ public class UsuarioService {
     public Usuario login(String dni, String password) {
         for (Usuario persona : usuarios) {
             if (persona instanceof Usuario && ((Usuario) persona).login(dni, password)) {
-                return ((Usuario)persona); // Retorna el usuario encontrado
+                return persona; // Retorna el usuario encontrado
             }
         }
         return null; // Retorna null si no se encuentra ningún usuario con ese usuario y contraseña
@@ -72,7 +72,7 @@ public class UsuarioService {
     public List<Usuario> getListaMeseros() {
         List<Usuario> meseros = new ArrayList<>();
         for (Usuario persona : usuarios) {
-            if(((Usuario)persona).getCredenciales() == Credenciales.MESERO){
+            if(persona.getCredenciales() == Credenciales.MESERO){
                 meseros.add(persona);
             }
         }

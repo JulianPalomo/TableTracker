@@ -1,0 +1,66 @@
+[
+  {
+    "fecha": "2024-06-26T15:12:17.058046",
+    "mesero": "Carlos",
+    "productosVendidos": [
+      {
+        "id": 12,
+        "nombre": "Agua Mineral",
+        "categoria": "BEBIDAS_NO_ALCOHOLICAS",
+        "precio": 1100.0,
+        "observacion": ""
+      },
+      {
+        "id": 13,
+        "nombre": "Jugo de Naranja",
+        "categoria": "BEBIDAS_NO_ALCOHOLICAS",
+        "precio": 1650.275,
+        "observacion": ""
+      },
+      {
+        "id": 14,
+        "nombre": "Limonada",
+        "categoria": "BEBIDAS_NO_ALCOHOLICAS",
+        "precio": 1430.5500000000002,
+        "observacion": ""
+      },
+      {
+        "id": 14,
+        "nombre": "Limonada",
+        "categoria": "BEBIDAS_NO_ALCOHOLICAS",
+        "precio": 1430.5500000000002,
+        "observacion": ""
+      },
+      {
+        "id": 14,
+        "nombre": "Limonada",
+        "categoria": "BEBIDAS_NO_ALCOHOLICAS",
+        "precio": 1430.5500000000002,
+        "observacion": ""
+      },
+      {
+        "id": 14,
+        "nombre": "Limonada",
+        "categoria": "BEBIDAS_NO_ALCOHOLICAS",
+        "precio": 1430.5500000000002,
+        "observacion": ""
+      },
+      {
+        "id": 14,
+        "nombre": "Limonada",
+        "categoria": "BEBIDAS_NO_ALCOHOLICAS",
+        "precio": 1430.5500000000002,
+        "observacion": ""
+      },
+      {
+        "id": 14,
+        "nombre": "Limonada",
+        "categoria": "BEBIDAS_NO_ALCOHOLICAS",
+        "precio": 1430.5500000000002,
+        "observacion": ""
+      }
+    ],
+    "total": 11333.575,
+    "metodoPago": "TARJETA_CREDITO"
+  }
+]
