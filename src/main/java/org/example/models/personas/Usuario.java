@@ -1,5 +1,7 @@
 package org.example.models.personas;
 
+import java.util.Objects;
+
 public class Usuario extends Persona {
 
     private String password;
@@ -12,11 +14,7 @@ public class Usuario extends Persona {
     }
 
     public boolean login(String dni, String password) {
-        if(getDni().equals(dni) && this.password.equals(password))
-        {
-            return true;
-        }
-        return false;
+        return getDni().equals(dni) && this.password.equals(password);
     }
 
     public String getPassword() {
@@ -26,4 +24,5 @@ public class Usuario extends Persona {
     public Credenciales getCredenciales() {
         return credenciales;
     }
+
 }

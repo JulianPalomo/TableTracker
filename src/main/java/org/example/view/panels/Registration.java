@@ -22,15 +22,14 @@ public class Registration extends JDialog {
     private JButton btnCancel;
     private JComboBox<String> cbTipoCuenta;
     private JPanel registerPanel;
-    private UsuarioService usuarioService; // Add the UsuarioService instance
+    private UsuarioService usuarioService;
 
     public Registration(JFrame parent) {
         super(parent);
         setTitle("Registro de Usuario");
-        usuarioService = new UsuarioService(); // Initialize the UsuarioService instance
-        usuarioService.loadFromJson(); // Load existing users from JSON
+        usuarioService = new UsuarioService();
+        usuarioService.loadFromJson();
 
-        // Inicialización de componentes
         registerPanel = new JPanel();
         registerPanel.setLayout(new GridLayout(10, 2));
 
@@ -49,7 +48,6 @@ public class Registration extends JDialog {
         btnRegistrar = new JButton("Registrar");
         btnCancel = new JButton("Cancelar");
 
-        // Añadir componentes al panel
         registerPanel.add(new JLabel("Nombre:"));
         registerPanel.add(tfNombre);
         registerPanel.add(new JLabel("Apellido:"));
@@ -116,6 +114,12 @@ public class Registration extends JDialog {
             return;
         }
 
+        // Verificar si el DNI ya está registrado
+        if (usuarioService.existeUsuario(dni)) {
+            JOptionPane.showMessageDialog(this, "El DNI ingresado ya está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         Credenciales credenciales;
         switch (tipoCuentaStr) {
             case "ADMINISTRADOR":
@@ -134,11 +138,9 @@ public class Registration extends JDialog {
         Usuario usuario = new Usuario(nombre, apellido, dni, contrasena, credenciales);
 
         usuarioService.addUsuario(usuario);
-        usuarioService.saveToJson(); // Save the updated list of users to JSON
+        usuarioService.saveToJson();
 
         JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         dispose();
     }
-
 }
-

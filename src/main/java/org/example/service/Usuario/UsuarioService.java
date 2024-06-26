@@ -37,6 +37,14 @@ public class UsuarioService {
             gson.toJson(usuarios, writer);
         }
     }
+    public boolean existeUsuario(String dni) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getDni().equals(dni)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void loadFromJson() {
         try (FileReader reader = new FileReader(RUTA_JSON_PERSONAS)) {

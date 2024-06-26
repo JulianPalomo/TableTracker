@@ -100,6 +100,7 @@ public class MesasView extends JFrame {
         JButton verMenuCompletoButton = new JButton("Carta");
         JButton aboutButton = new JButton("Acerca De");
         JButton addUserButton = new JButton("Añadir Usuario");
+        
 
         toggleEdicionButton.addActionListener(e -> {
             // Mostrar el cuadro de diálogo de inicio de sesión
@@ -112,6 +113,8 @@ public class MesasView extends JFrame {
         });
 
         verMenuCompletoButton.addActionListener(e -> cargarCartaPanel());
+
+        addUserButton.addActionListener(e -> new Registration(this));
 
         aboutButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Software de Gestión para Restaurante.\nVersión 1.0"));
 
@@ -235,8 +238,6 @@ public class MesasView extends JFrame {
             }
         }
     }
-
-
 
     private void actualizarModoEdicion() {
         agregarMesaButton.setVisible(modoEdicion);
