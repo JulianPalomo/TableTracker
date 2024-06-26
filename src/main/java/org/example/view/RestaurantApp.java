@@ -2,8 +2,6 @@ package org.example.view;
 import org.example.models.SplashScreen;
 import org.example.models.personas.Usuario;
 import org.example.service.Usuario.UsuarioService;
-import org.example.view.panels.LoginView;
-import org.example.view.panels.MesasView;
 
 import javax.swing.*;
 

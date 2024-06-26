@@ -1,4 +1,4 @@
-package org.example.view.panels;
+package org.example.view;
 
 import org.example.models.mesas.EstadoMesa;
 import org.example.models.mesas.Mesa;
@@ -8,7 +8,6 @@ import org.example.models.personas.Usuario;
 import org.example.service.MesaService;
 import org.example.service.ProductoService;
 import org.example.service.Usuario.UsuarioService;
-import org.example.view.BalanceView;
 import org.example.view.buttons.MesaButton;
 
 import javax.swing.*;

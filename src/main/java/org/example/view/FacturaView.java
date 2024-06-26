@@ -1,4 +1,4 @@
-package org.example.view.panels;
+package org.example.view;
 
 import org.example.models.*;
 
