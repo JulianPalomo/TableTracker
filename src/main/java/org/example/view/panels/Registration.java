@@ -5,8 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.example.models.personas.Credenciales;
 import org.example.models.personas.Usuario;
@@ -106,9 +104,7 @@ public class Registration extends JDialog {
         String dni = tfDni.getText();
         String contrasena = new String(tfContraseña.getPassword());
         String confirmarContraseña = new String(tfConfirmarContraseña.getPassword());
-        String apellido = tfApellido.getText();
         String tipoCuentaStr = (String) cbTipoCuenta.getSelectedItem();
-        String nombreUsuario = tfNombreUsuario.getText();
 
         if (nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() || nombreUsuario.isEmpty() || dni.isEmpty() || contrasena.isEmpty() || confirmarContraseña.isEmpty() || tipoCuentaStr == null) {
             JOptionPane.showMessageDialog(this, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -144,9 +140,5 @@ public class Registration extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-        Registration dialog = new Registration(null);
-    }
 }
 
- */
