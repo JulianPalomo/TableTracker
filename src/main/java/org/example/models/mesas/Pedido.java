@@ -1,11 +1,11 @@
-package org.example.models;
+package org.example.models.mesas;
 
 
+
+import org.example.models.Producto;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class Pedido{
     private ArrayList<Producto> listaProductos;

@@ -31,7 +31,6 @@ public class ProductoService {
     private static final String RUTA_JSON = "src/main/java/org/example/resource/carta.json";
     private Map<String, List<Producto>> carta = new LinkedHashMap<>();
     private final CategoriaService categoriaService = new CategoriaService();
-    private Document documentoSwing;
 
     public ProductoService() {
         carta = cargarCarta();
@@ -84,12 +83,6 @@ public class ProductoService {
         }
     }
 
-    public List<Producto> obtenerTodosLosProductos() {
-        return carta.values().stream()
-                .flatMap(List::stream)
-                .toList();
-    }
-
     public Map<String, List<Producto>> cargarCarta() {
         Map<String, List<Producto>> cartaCargada = new LinkedHashMap<>();
         try (FileReader reader = new FileReader(RUTA_JSON)) {
@@ -106,12 +99,6 @@ public class ProductoService {
         return cartaCargada;
     }
 
-    public void agregarCategoria(String categoria) {
-        categoriaService.agregarCategoria(categoria);
-        carta.put(categoria, new ArrayList<>());
-        guardarCartaJson();
-    }
-
     public List<String> obtenerCategorias() {
         return categoriaService.getCategorias().stream().toList();
     }
@@ -119,28 +106,6 @@ public class ProductoService {
     public void eliminarCategoria(String categoria) {
         carta.remove(categoria);
         guardarCartaJson();
-    }
-
-
-    /////
-    public Producto buscarProductoPorNombre(String nombre) {
-        return carta.values().stream()
-                .flatMap(List::stream)
-                .filter(p -> p.getNombre().equalsIgnoreCase(nombre))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public List<Producto> buscarProductosPorNombre(String nombre) {
-        List<Producto> productosEncontrados = new ArrayList<>();
-        for (List<Producto> carta : carta.values()) {
-            for (Producto producto : carta) {
-                if (producto.getNombre().toLowerCase().contains(nombre.toLowerCase())) {
-                    productosEncontrados.add(producto);
-                }
-            }
-        }
-        return productosEncontrados;
     }
 
     public List<Producto> filtrarProductosPorCategoria(String categoria) {

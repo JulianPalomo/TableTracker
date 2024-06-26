@@ -4,11 +4,8 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import org.example.models.Factura;
-import org.example.models.Mesa;
+import org.example.models.pagos.Factura;
 
-import java.awt.*;
-import java.awt.Rectangle;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;

@@ -9,11 +9,11 @@ import java.awt.*;
 import java.util.List;
 
 
-public class CartaPanel extends JFrame {
+public class CartaView extends JFrame {
     private final ProductoService productoService = new ProductoService();
     private JTabbedPane tabbedPane;
 
-    public CartaPanel() {
+    public CartaView() {
         setTitle("Carta de Productos");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

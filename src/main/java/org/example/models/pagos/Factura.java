@@ -1,4 +1,6 @@
-package org.example.models;
+package org.example.models.pagos;
+
+import org.example.models.mesas.Pedido;
 
 public class Factura {
     private static int contador = 0;  // Variable estática para mantener el próximo ID disponible

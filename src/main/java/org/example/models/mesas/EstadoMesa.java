@@ -1,7 +1,7 @@
-package org.example.models;
+package org.example.models.mesas;
 
 public enum EstadoMesa {
     DISPONIBLE,
     OCUPADA,
-    EN_REPARACION;
+    PAGADA;
 }

@@ -1,10 +1,11 @@
-package org.example.service;
+package org.example.service.Usuario;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
-import org.example.models.*;
+import org.example.models.personas.Credenciales;
+import org.example.models.personas.Usuario;
 
 import javax.swing.*;
 import java.io.FileReader;
@@ -41,11 +42,6 @@ public class UsuarioService {
         try (FileReader reader = new FileReader(RUTA_JSON_PERSONAS)) {
             Type personaSetType = new TypeToken<Set<Usuario>>() {}.getType();
             Set<Usuario> loadedUsuarios = gson.fromJson(reader, personaSetType);
-
-            System.out.println("Datos cargados desde JSON:");
-            for (Usuario persona : loadedUsuarios) {
-                System.out.println(persona.toString());
-            }
 
             usuarios.clear();
             usuarios.addAll(loadedUsuarios);

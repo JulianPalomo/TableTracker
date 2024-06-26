@@ -1,4 +1,7 @@
-package org.example.models;
+package org.example.models.mesas;
+
+import org.example.models.objetos.Objeto;
+import org.example.models.personas.Usuario;
 
 import java.util.Objects;
 
@@ -73,6 +76,12 @@ public class Mesa extends Objeto {
     public void liberarMesa() {
         this.pedido = null;
         this.estado = EstadoMesa.DISPONIBLE;
+        this.mesero = null;
+    }
+
+    public void setMesaPagada(){
+        this.estado = EstadoMesa.PAGADA;
+        this.pedido = null;
         this.mesero = null;
     }
 

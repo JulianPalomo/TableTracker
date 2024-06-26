@@ -3,6 +3,9 @@ package org.example.view.panels;
 import org.example.exceptions.ProductosYaComandadosException;
 import org.example.interfaces.PedidoListener;
 import org.example.models.*;
+import org.example.models.mesas.Comanda;
+import org.example.models.mesas.Mesa;
+import org.example.models.mesas.Pedido;
 import org.example.service.MesaService;
 import org.example.service.ProductoService;
 
@@ -12,13 +15,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 ///Esta clase que es un PANEL se instancia cuando se presiona el boton mesa
 
-public class PedidoPanel extends JFrame implements PedidoListener {
+public class PedidoView extends JFrame implements PedidoListener {
 
     private int numero;
     private Pedido pedido;
@@ -33,7 +35,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     private JButton botonComanda;
     private JButton billButton;
 
-    public PedidoPanel(Mesa mesa, ProductoService productoService, MesasPanel mesasPanel) {
+    public PedidoView(Mesa mesa, ProductoService productoService, MesasView mesasView) {
         this.numero = mesa.getNroMesa();
         if (mesa.getPedido() == null) {
             mesa.setPedido(new Pedido());
@@ -64,14 +66,14 @@ public class PedidoPanel extends JFrame implements PedidoListener {
 
         botonLiberarMesa.addActionListener(e -> {
             mesa.liberarMesa();
-            mesasPanel.actualizarColorMesas();
+            mesasView.actualizarColorMesas();
             MesaService.getInstance().guardarMesasYParedesJSON();
             dispose();
         });
 
         billButton.addActionListener(e -> {
-            new FacturaPanel(mesa);
-            mesasPanel.actualizarColorMesas();
+            new FacturaView(mesa, mesasView);
+            mesasView.actualizarColorMesas();
             facturado = true;
             facturaTimer.stop(); // Detener el temporizador cuando se factura con éxito
             billButton.setBackground(null); // Restaurar color del botón
@@ -81,7 +83,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
             agregarProducto(productoService.cargarCarta(), mesa.getNroMesa());
             if (pedido != null) {
                 mesa.ocuparMesa();
-                mesasPanel.actualizarColorMesas(); // Notificar al MesasPanel para actualizar el color
+                mesasView.actualizarColorMesas(); // Notificar al MesasPanel para actualizar el color
             }
         });
 
@@ -106,7 +108,7 @@ public class PedidoPanel extends JFrame implements PedidoListener {
                 // Verificar si el pedido está vacío y liberar la mesa si es necesario
                 if (pedido.getListaProductos().isEmpty()) {
                     mesa.liberarMesa();
-                    mesasPanel.actualizarColorMesas();
+                    mesasView.actualizarColorMesas();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Selecciona un producto para eliminar.");
@@ -172,8 +174,8 @@ public class PedidoPanel extends JFrame implements PedidoListener {
     }
 
     private void agregarProducto(Map<String, List<Producto>> menu, int nroMesa) {
-        AgregarPedido agregarPedido = new AgregarPedido(menu, this, nroMesa);
-        agregarPedido.setVisible(true);
+        AgregarPedidoView agregarPedidoView = new AgregarPedidoView(menu, this, nroMesa);
+        agregarPedidoView.setVisible(true);
     }
 
     private void updateOrderList() {

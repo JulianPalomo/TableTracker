@@ -1,9 +1,9 @@
 package org.example.view;
 import org.example.models.SplashScreen;
-import org.example.models.Usuario;
-import org.example.service.UsuarioService;
-import org.example.view.panels.Login;
-import org.example.view.panels.MesasPanel;
+import org.example.models.personas.Usuario;
+import org.example.service.Usuario.UsuarioService;
+import org.example.view.panels.LoginView;
+import org.example.view.panels.MesasView;
 
 import javax.swing.*;
 
@@ -17,14 +17,14 @@ public class RestaurantApp {
             UsuarioService usuarioService = new UsuarioService();
             usuarioService.loadFromJson();
             // Crear el diálogo de login
-            Login login = new Login(null); // Pasar null como parámetro ya que no hay ventana principal todavía
+            LoginView loginView = new LoginView(null); // Pasar null como parámetro ya que no hay ventana principal todavía
 
-            Usuario logeada = (Usuario)login.isLoginSuccessful();
+            Usuario logeada = (Usuario) loginView.isLoginSuccessful();
 
             // Verificar si el login fue exitoso
             if (logeada != null) {
                 // Login exitoso, cargar el panel principal
-                MesasPanel mainFrame = new MesasPanel("Juli's", logeada.getCredenciales());
+                MesasView mainFrame = new MesasView("Juli's", logeada.getCredenciales());
                 mainFrame.setVisible(true);
             } else {
                 // Login fallido, salir de la aplicación

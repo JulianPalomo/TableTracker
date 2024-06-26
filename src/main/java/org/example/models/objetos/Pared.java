@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.models.objetos;
 
 public class Pared extends Objeto {
     private int nroPared;

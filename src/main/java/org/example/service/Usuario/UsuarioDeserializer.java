@@ -1,7 +1,9 @@
-package org.example.service;
+package org.example.service.Usuario;
 
 import com.google.gson.*;
-import org.example.models.*;
+import org.example.models.personas.Credenciales;
+import org.example.models.personas.Persona;
+import org.example.models.personas.Usuario;
 
 import java.lang.reflect.Type;
 

@@ -3,8 +3,8 @@ package org.example.service;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import org.example.Utils.LocalDateAdapter;
-import org.example.models.Mesa;
-import org.example.models.Pared;
+import org.example.models.mesas.Mesa;
+import org.example.models.objetos.Pared;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -80,7 +80,6 @@ public class MesaService {
             List<Pared> listaParedes = gson.fromJson(paredesReader, tipoListaParedes);
             paredes.clear();
             paredes.addAll(listaParedes);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -102,7 +101,7 @@ public class MesaService {
 
     public void eliminarUltimaMesa() {
         if (!mesas.isEmpty()) {
-            Mesa eliminada = mesas.removeLast();
+            mesas.removeLast();
             Mesa.decrementarNumeroAuto();
         } else {
             throw new IllegalStateException("No hay mesas para eliminar");
