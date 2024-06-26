@@ -30,7 +30,7 @@ public class MesasView extends JFrame {
     private final CartaView cartaView = new CartaView();
     private JPanel mainPanel;
     private final List<Usuario> waiters;
-    private Credenciales credenciales;
+    private final Credenciales credenciales;
 
 
     public MesasView(String nombreComercio, Credenciales credenciales) {
