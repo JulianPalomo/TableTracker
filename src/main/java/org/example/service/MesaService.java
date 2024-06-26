@@ -3,9 +3,9 @@ package org.example.service;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import org.example.Utils.LocalDateAdapter;
-import org.example.models.Mesa;
+import org.example.models.mesas.Mesa;
+import org.example.models.objetos.Pared;
 
-import javax.swing.*;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
@@ -14,11 +14,36 @@ import java.util.List;
 
 public class MesaService {
 
-    private static final String RUTA_JSON = "src/main/java/org/example/resource/mesas.json";
+    private static final String RUTA_MESAS = "src/main/java/org/example/resource/mesas.json";
+    private static final String RUTA_PAREDES = "src/main/java/org/example/resource/paredes.json";
+
     private ArrayList<Mesa> mesas = new ArrayList<>();
+    private ArrayList<Pared> paredes  = new ArrayList<>();
+
+    // Instancia única del Singleton
+    private static MesaService instancia;
+
+    // Constructor privado para evitar instanciación
+    private MesaService() {
+        cargarMesasYParedesJSON();
+    }
+    // Método público estático para obtener la instancia única
+    public static MesaService getInstance() {
+        if (instancia == null) {
+            synchronized (MesaService.class) {
+                if (instancia == null) {
+                    instancia = new MesaService();
+                }
+            }
+        }
+        return instancia;
+    }
 
     public ArrayList<Mesa> getMesas() {
         return this.mesas;
+    }
+    public ArrayList<Pared> getParedes() {
+        return this.paredes;
     }
 
     private Gson createGson() {
@@ -28,29 +53,41 @@ public class MesaService {
                 .create();
     }
 
-    public void guardarMesasEnJson() {
+    public void guardarMesasYParedesJSON() {
         Gson gson = createGson();
-        try (FileWriter writer = new FileWriter(RUTA_JSON)) {
-            gson.toJson(mesas, writer);
+        try (FileWriter mesasWriter = new FileWriter(RUTA_MESAS);
+             FileWriter paredesWriter = new FileWriter(RUTA_PAREDES)) {
+
+            gson.toJson(mesas, mesasWriter);
+            gson.toJson(paredes, paredesWriter);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void cargarMesasJson() {
+
+    public void cargarMesasYParedesJSON() {
         Gson gson = createGson();
-        try (BufferedReader reader = new BufferedReader(new FileReader(RUTA_JSON))) {
-            Type tipoLista = new TypeToken<List<Mesa>>() {}.getType();
-            List<Mesa> listaMesas = gson.fromJson(reader, tipoLista);
+        try (BufferedReader mesasReader = new BufferedReader(new FileReader(RUTA_MESAS));
+             BufferedReader paredesReader = new BufferedReader(new FileReader(RUTA_PAREDES))) {
+
+            Type tipoListaMesas = new TypeToken<List<Mesa>>() {}.getType();
+            List<Mesa> listaMesas = gson.fromJson(mesasReader, tipoListaMesas);
             mesas.clear();
             mesas.addAll(listaMesas);
+
+            Type tipoListaParedes = new TypeToken<List<Pared>>() {}.getType();
+            List<Pared> listaParedes = gson.fromJson(paredesReader, tipoListaParedes);
+            paredes.clear();
+            paredes.addAll(listaParedes);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
     public Mesa agregarMesa() {
-        Mesa nueva = new Mesa();
+        int nuevoNumeroMesa = mesas.isEmpty() ? 1 : mesas.get(mesas.size() - 1).getNroMesa() + 1;
+        Mesa nueva = new Mesa(nuevoNumeroMesa);
         this.mesas.add(nueva);
         return nueva;
     }
@@ -64,10 +101,33 @@ public class MesaService {
 
     public void eliminarUltimaMesa() {
         if (!mesas.isEmpty()) {
-            mesas.remove(mesas.size() - 1);
+            mesas.removeLast();
             Mesa.decrementarNumeroAuto();
         } else {
             throw new IllegalStateException("No hay mesas para eliminar");
+        }
+    }
+
+
+    public Pared agregarPared() {
+        Pared nueva = new Pared();
+        this.paredes.add(nueva);
+        return nueva;
+    }
+
+    public Pared buscarPared(int numeroPared) {
+        if (this.paredes != null && numeroPared <= this.paredes.size()) {
+            return paredes.get(numeroPared - 1);
+        }
+        return null;
+    }
+
+    public void eliminarUltimaPared() {
+        if (!paredes.isEmpty()) {
+            paredes.removeLast();
+            Pared.decrementarNumeroAuto();
+        } else {
+            throw new IllegalStateException("No hay paredes para eliminar");
         }
     }
 }

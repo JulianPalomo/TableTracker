@@ -1,42 +1,32 @@
 package org.example.view;
+import org.example.models.SplashScreen;
+import org.example.models.personas.Usuario;
+import org.example.service.Usuario.UsuarioService;
 
-
-import org.example.models.Mesa;
-import org.example.service.MesaService;
-import org.example.view.panels.MesasPanel;
-
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class RestaurantApp {
-
     public static void main(String[] args) {
 
-        SwingUtilities.invokeLater(() -> {
-            MesasPanel layout = new MesasPanel("Juli's", true);
-            layout.setVisible(true);
-
-        });
-        /*
-        MesaService mesaService = new MesaService();
-        mesaService.cargarMesasJson();
-        for (Mesa mesa : mesaService.getMesas()) {
-            System.out.println(mesa);
-        }
-
-        */
-
-    }
-
-/**
-    public static void main(String[] args) {
-        MenuLoader loader = new MenuLoader();
-        Map<String, List<Producto>> menu = loader.cargarMenu("src/main/java/org/example/productos.json");
+        new SplashScreen("src/main/java/org/example/resource/Logo.jpg", 3000);
 
         SwingUtilities.invokeLater(() -> {
-            Menu display = new Menu(menu);
-            display.setVisible(true);
+            UsuarioService usuarioService = new UsuarioService();
+            usuarioService.loadFromJson();
+
+            LoginView loginView = new LoginView(null); // Pasar null como parámetro ya que no hay ventana principal todavía
+
+            Usuario logeada = loginView.isLoginSuccessful();
+
+            // Verificar si el login fue exitoso
+            if (logeada != null) {
+                // Login exitoso, cargar el panel principal
+                MesasView mainFrame = new MesasView("Juli's", logeada.getCredenciales());
+                mainFrame.setVisible(true);
+            } else {
+                // Login fallido, salir de la aplicación
+                System.exit(0);
+            }
         });
     }
-    */
-
 }

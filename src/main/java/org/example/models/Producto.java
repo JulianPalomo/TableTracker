@@ -1,23 +1,24 @@
 package org.example.models;
 
-import org.example.interfaces.Buscable;
-import org.example.interfaces.Filtrable;
-
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicLongArray;
 
-public class Producto implements Filtrable<Categoria>, Buscable<String> {
+public class Producto implements Cloneable {
 
     private static int contador = 0;  // Variable estática para mantener el próximo ID disponible
     private int id;
     private String nombre;
-    private Categoria categoria;
+    private String categoria;
     private double precio;
+    private String observacion; // nuevo campo
 
-    public Producto( String nombre, Categoria Categoria, double precio) {
+
+    public Producto( String nombre, String Categoria, double precio) {
         this.id = contador++;
         this.nombre = nombre;
         this.categoria = Categoria;
         this.precio = precio;
+        this.observacion = "";
     }
 
     public String getNombre() {
@@ -28,11 +29,11 @@ public class Producto implements Filtrable<Categoria>, Buscable<String> {
         this.nombre = nombre;
     }
 
-    public Categoria getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria Categoria) {
+    public void setCategoria(String Categoria) {
         this.categoria = Categoria;
     }
 
@@ -47,30 +48,43 @@ public class Producto implements Filtrable<Categoria>, Buscable<String> {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-
-    @Override
-    public boolean cumpleFiltro(Categoria categoria) {
-        return this.categoria == categoria;
+    public String getObservacion() {
+        return observacion;
     }
-    @Override
-    public boolean cumpleCriterio(String criterio) {
-        // Verificar si el nombre del producto comienza con la secuencia ej: "sopa de "
-        return nombre.toLowerCase().startsWith(criterio.toLowerCase());
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+
     }
 
     @Override
+    public Producto clone() {
+        try {
+            return (Producto) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Error al clonar el producto", e);
+        }
+    }
+
+        @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Producto producto = (Producto) o;
-        return id == producto.id && Objects.equals(nombre, producto.nombre);
+        return id == producto.id && Objects.equals(nombre, producto.nombre) && Objects.equals(observacion,producto.observacion);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre);
+        return Objects.hash(id, nombre, observacion);
     }
 
+    @Override
+    public String toString() {
+        return
+                nombre + "     " +
+                 " $" + precio ;
 
+    }
 
 }

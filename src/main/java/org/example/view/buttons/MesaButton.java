@@ -1,68 +1,25 @@
 package org.example.view.buttons;
 
-import org.example.models.Mesa;
+import org.example.models.objetos.Objeto;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/*
 ///ES EL COMPONENTE "MESA", EL CUADRADO QUE SE GENERA AL AGREGAR UNA MESA
-public class MesaButton extends MouseAdapter {
-    private boolean editable;
-    private final Mesa mesa;
-    private boolean dragging = false;
-
-    public MesaButton(Mesa mesa) {
-        this.mesa = mesa;
-    }
-
-    public void setEditable(boolean editable) {
-        this.editable = editable;
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        if (!editable) {
-            return;
-        }
-        dragging = true;
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        if (!editable) {
-            return;
-        }
-        JButton button = (JButton) e.getSource();
-        button.setLocation(button.getX() + e.getX(), button.getY() + e.getY());
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        if (!editable) {
-            return;
-        }
-        dragging = false;
-    }
-}
-*/
-
-
-public class MesaButton extends MouseAdapter {
+public class MesaButton <T extends Objeto> extends MouseAdapter {
     private static final int DRAG = 1;
     private static final int RESIZE = 2;
     private Point clickInicial;
     private Component componente;
     private int mode;
     private Rectangle tamañoInicial;
-    private Mesa mesa;
+    private T objeto;
 
     private boolean editable;
 
-    public MesaButton(Mesa mesa) {
-        this.mesa = mesa;
+    public MesaButton(T objeto) {
+        this.objeto = objeto;
     }
 
     public void mousePressed(MouseEvent e) {
@@ -96,6 +53,7 @@ public class MesaButton extends MouseAdapter {
         int resizeMargin = 20;
         return p.x >= bounds.width - resizeMargin && p.y >= bounds.height - resizeMargin;
     }
+
     private void arrastrarMesa(MouseEvent e) {
         Point parentLocation = componente.getParent().getLocationOnScreen();
         Point mouseLocation = e.getLocationOnScreen();
@@ -106,8 +64,8 @@ public class MesaButton extends MouseAdapter {
         componente.setLocation(x, y);
 
         // Actualizar la posición en el objeto Mesa
-        mesa.setX(x);
-        mesa.setY(y);
+        objeto.setX(x);
+        objeto.setY(y);
     }
 
     private void redimensionarMesa(MouseEvent e) {
@@ -119,14 +77,11 @@ public class MesaButton extends MouseAdapter {
         componente.repaint();
 
         // Actualizar el tamaño en el objeto Mesa
-        mesa.setAncho(newWidth);
-        mesa.setAlto(newHeight);
+        objeto.setAncho(newWidth);
+        objeto.setAlto(newHeight);
     }
 
     public void setEditable(boolean editable) {
         this.editable = editable;
     }
-
 }
-
-
