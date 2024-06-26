@@ -111,6 +111,8 @@ public class MesasPanel extends JFrame {
 
         aboutButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Software de Gestión para Restaurante.\nVersión 1.0"));
 
+        addUserButton.addActionListener(e -> new Registration(this));
+
         Dimension buttonSize = new Dimension(150, 40); // Ancho x Alto
 
 // Agregar botones a la toolbar
