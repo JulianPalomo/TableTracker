@@ -100,7 +100,7 @@ public class MesasView extends JFrame {
         JButton verMenuCompletoButton = new JButton("Carta");
         JButton aboutButton = new JButton("Acerca De");
         JButton addUserButton = new JButton("Añadir Usuario");
-        
+        JButton balanceButton = new JButton("Balance de Ventas");
 
         toggleEdicionButton.addActionListener(e -> {
             // Mostrar el cuadro de diálogo de inicio de sesión
@@ -113,6 +113,16 @@ public class MesasView extends JFrame {
         });
 
         verMenuCompletoButton.addActionListener(e -> cargarCartaPanel());
+
+        balanceButton.addActionListener(e -> {
+            BalanceView balanceView = new BalanceView();
+
+            // Crear un JDialog para mostrar BalanceView
+            JDialog balanceDialog = new JDialog(this, "Balance de Ventas", false); // false para modalidad no modal
+            balanceDialog.add(balanceView);
+            balanceDialog.pack();
+            balanceDialog.setVisible(true);
+        });
 
         addUserButton.addActionListener(e -> new Registration(this));
 
@@ -130,6 +140,10 @@ public class MesasView extends JFrame {
 
             toolBar.add(verMenuCompletoButton);
             verMenuCompletoButton.setPreferredSize(buttonSize);
+
+            toolBar.add(balanceButton);
+            balanceButton.setPreferredSize(buttonSize);
+
         }
 
         toolBar.add(aboutButton);
