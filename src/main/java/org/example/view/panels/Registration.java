@@ -1,9 +1,9 @@
 package org.example.view.panels;
 
-import org.example.models.Administrador;
-import org.example.models.Credenciales;
-import org.example.models.Mesero;
-import org.example.models.Usuario;
+
+import org.example.models.personas.Credenciales;
+
+import org.example.models.personas.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.example.service.UsuarioService;
+
+import org.example.service.Usuario.UsuarioService;
 
 public class Registration extends JDialog {
     private JTextField tfNombre;
